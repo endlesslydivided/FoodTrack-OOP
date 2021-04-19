@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\back.avi" />
+    <None Remove="Resources\back.gif" />
+    <None Remove="Resources\BackGroundLogIn.webm" />
+    <None Remove="Resources\backPurple.jpg" />
+    <None Remove="Resources\foodTrack.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\BackGroundLogIn.webm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\back.avi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\back.gif" />
+    <Resource Include="Resources\backPurple.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\foodTrack.png" />
+  </ItemGroup>
+
+</Project>

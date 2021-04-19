@@ -1,0 +1,122 @@
+﻿<mah:MetroWindow
+    x:Class="FoodTrack.Views.Windows.LogInWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:FoodTrack.Views"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
+    Title="Вход"
+    Width="361"
+    Height="479"
+    BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+    GlowBrush="Black"
+    ResizeMode="CanMinimize"
+    ShowInTaskbar="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+  
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard AutoReverse="True" BeginTime="0">
+                    <DoubleAnimation
+                        AutoReverse="True"
+                        RepeatBehavior="Forever"
+                        Storyboard.TargetName="Green1"
+                        Storyboard.TargetProperty="Offset"
+                        From="0.1"
+                        To="0.3"
+                        Duration="0:0:0:1" />
+                    <DoubleAnimation
+                        AutoReverse="True"
+                        RepeatBehavior="Forever"
+                        Storyboard.TargetName="Green2"
+                        Storyboard.TargetProperty="Offset"
+                        From="0.9"
+                        To="0.7"
+                        Duration="0:0:0:1" />
+                    <ColorAnimation
+                        AutoReverse="True"
+                        RepeatBehavior="Forever"
+                        Storyboard.TargetName="Green1"
+                        Storyboard.TargetProperty="Color"
+                        From="#43e97b"
+                        To="#96e6a1"
+                        Duration="0:0:0:1" />
+                    <ColorAnimation
+                        AutoReverse="True"
+                        RepeatBehavior="Forever"
+                        Storyboard.TargetName="Green2"
+                        Storyboard.TargetProperty="Color"
+                        From="#96e6a1"
+                        To="#43e97b"
+                        Duration="0:0:0:1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+            <GradientStop x:Name="Green1" Offset="0.2" Color="#43e97b" />
+            <GradientStop x:Name="Green2" Offset="0.8" Color="#96e6a1" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconModern
+                        Width="22"
+                        Height="22"
+                        VerticalAlignment="Center"
+                        Kind="FoodApple" />
+                </StackPanel>
+            </Grid>
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,1,7,0"
+                        VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
+                        FontSize="14"
+                        Opacity="0.3"
+                        Text="FoodTrack" />
+                </StackPanel>
+            </Grid>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    <Grid>
+        <Image Margin="0,0,0,279" Source="../Resources/foodTrack.png">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="15" Opacity="0.25" />
+            </Image.Effect>
+        </Image>
+        <ContentControl x:Name="LogInRegisterCC" Margin="0,116,0,116"></ContentControl>
+        <TextBlock
+            Margin="0,300,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="Samsung Sharp Sans"
+            FontSize="14"
+            Foreground="White"
+            Text="Введите свой логин и пароль">
+            <TextBlock.Effect>
+                <DropShadowEffect
+                    BlurRadius="1"
+                    Opacity="0.25"
+                    ShadowDepth="0.5" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+
+    </Grid>
+
+</mah:MetroWindow>

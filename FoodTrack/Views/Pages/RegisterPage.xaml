@@ -1,0 +1,78 @@
+﻿<Page x:Class="FoodTrack.Views.Pages.RegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FoodTrack.Views"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+      
+      Title="RegisterPage">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect BlurRadius="15" Opacity="0.15" />
+            </StackPanel.Effect>
+            <Rectangle
+                Width="92"
+                Height="1"
+                Fill="White" />
+            <TextBlock
+                VerticalAlignment="Center"
+                FontFamily="Samsung Sharp Sans"
+                FontSize="22"
+                FontStyle="Normal"
+                FontWeight="Normal"
+                Foreground="White"><Run Text=" Регистрация " /></TextBlock>
+            <Rectangle
+                Width="92"
+                Height="1"
+                Fill="White" />
+        </StackPanel>
+        <StackPanel
+            Width="247"
+            Height="148"
+            Margin="0,25,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <StackPanel.Effect>
+                <DropShadowEffect BlurRadius="15" Opacity="0.1" />
+            </StackPanel.Effect>
+            <TextBlock
+                FontFamily="Samsung Sharp Sans"
+                FontSize="15"
+                FontStyle="Normal"
+                FontWeight="Normal"
+                Foreground="White"><Run Text="Логин" /></TextBlock>
+            <TextBox x:Name="LoginRegisterTB" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Логин" />
+            <TextBlock
+                Margin="0,10,0,0"
+                FontFamily="Samsung Sharp Sans"
+                FontSize="15"
+                FontStyle="Normal"
+                FontWeight="Normal"
+                Foreground="White"><Run Text="Пароль" /></TextBlock>
+            <PasswordBox x:Name="LoginPasswordTB" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Пароль" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="ReadyRegisterBTTN"
+                    Margin="10,10,0,0"
+                    Background="{DynamicResource MahApps.Brushes.Gray}"
+                    Content="Зарегистрироваться"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}" />
+                <Button x:Name="GoEntryBTTN"
+                    Width="83"
+                    Height="28"
+                    Margin="10,10,0,0"
+                    Background="{DynamicResource MahApps.Brushes.Gray}"
+                    Content="Вход"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
