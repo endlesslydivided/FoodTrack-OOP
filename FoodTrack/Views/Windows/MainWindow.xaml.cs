@@ -56,14 +56,9 @@ namespace FoodTrack.Views.Windows
                                                                 .OfType<ViewModels.MenuItem>()
                                                                 .FirstOrDefault(x => x.NavigationDestination == e.Uri);
 
-             this.HamburgerMenuControl.SelectedItem = this.HamburgerMenuControl
-                                                          .Items
-                                                          .OfType<ViewModels.MenuItem>()
-                                                          .FirstOrDefault(x => x.NavigationType == e.Content?.GetType());
-            this.HamburgerMenuControl.SelectedOptionsItem = this.HamburgerMenuControl
-                                                                .OptionsItems
-                                                                .OfType<ViewModels.MenuItem>()
-                                                                .FirstOrDefault(x => x.NavigationType == e.Content?.GetType());
+     
+
+
 
         }
 

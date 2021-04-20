@@ -14,7 +14,7 @@ namespace FoodTrack.ViewModels
         private Page CurrentPage;
         public LogInViewModel()
         {
-            CurrentPage = 
+             
         }
 
         #region Commands
@@ -41,6 +41,6 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
-
+        #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace FoodTrack.ViewModels
 
         public ShellViewModel()
         {
-            // Build the menu
+            // Строим меню
             this.Menu.Add(new MenuItem()
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.TrophySolid },
@@ -61,7 +61,7 @@ namespace FoodTrack.ViewModels
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolsSolid },
                 Label = "Настройки",
                 NavigationType = typeof(OptionsPage),
-                NavigationDestination = new Uri("Views/Pages/OptionsPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationDestination = new Uri("../Views/Pages/OptionsPage.xaml", UriKind.RelativeOrAbsolute)
             });
         }
     }
