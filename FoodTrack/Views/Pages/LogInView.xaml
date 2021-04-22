@@ -1,19 +1,14 @@
-﻿<Page
-    x:Class="FoodTrack.Views.Pages.LogInPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FoodTrack.Views"
-    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
-    Title="LogInPage"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="FoodTrack.Views.Pages.LogInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FoodTrack.Views.Pages"
+             mc:Ignorable="d" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:viewModels="clr-namespace:FoodTrack.ViewModels">
 
-    <Page.DataContext>
-        <viewModels:LogInViewModel/>
-    </Page.DataContext>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel
             HorizontalAlignment="Center"
@@ -77,8 +72,8 @@
                     Background="{DynamicResource MahApps.Brushes.Gray}"
                     Content="Регистрация"
                     Style="{DynamicResource MahApps.Styles.Button.Flat}"
-                    Command="{Binding GoToRegistration}"/>
+                    Command="{Binding UpdateViewCommand}" CommandParameter="RegisterPage" />
             </StackPanel>
         </StackPanel>
     </Grid>
-</Page>
+</UserControl>

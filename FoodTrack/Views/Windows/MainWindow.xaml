@@ -14,7 +14,7 @@
         Title="FoodTrack" Height="450" Width="800">
     
     <controls:MetroWindow.DataContext>
-        <viewModels:ShellViewModel />
+        <viewModels:ShellViewModel/>
     </controls:MetroWindow.DataContext>
     
     <controls:MetroWindow.Resources>

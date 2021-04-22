@@ -7,60 +7,57 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Pages\AboutAppPage.xaml.cs">
+    <Compile Update="Views\Pages\AboutAppView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\LogInPage.xaml.cs">
+    <Compile Update="Views\Pages\LogInView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\OptionsPage.xaml.cs">
+    <Compile Update="Views\Pages\OptionsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\ParamsPage.xaml.cs">
+    <Compile Update="Views\Pages\ParamsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\RegisterPage.xaml.cs">
+    <Compile Update="Views\Pages\RegisterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\StatisticPage.xaml.cs">
+    <Compile Update="Views\Pages\StatisticView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\TodayDietPage.xaml.cs">
+    <Compile Update="Views\Pages\TodayDietView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\TodayResultsPage.xaml.cs">
+    <Compile Update="Views\Pages\TodayResultsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Pages\AboutAppPage.xaml">
+    <Page Update="Views\Pages\AboutAppView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Pages\ParamsPage.xaml">
+    <Page Update="Views\Pages\LogInView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Pages\TodayResultsPage.xaml">
+    <Page Update="Views\Pages\OptionsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\ParamsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\RegisterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\StatisticView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\TodayDietView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\TodayResultsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Classic.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\LogInPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\OptionsPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\RegisterPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\StatisticPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\TodayDietPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -25,43 +25,43 @@ namespace FoodTrack.ViewModels
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.TrophySolid },
                 Label = "Результаты дня",
-                NavigationType = typeof(TodayResultsPage),
-                NavigationDestination = new Uri("Views/Pages/TodayResultsPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(TodayResultsView),
+                NavigationDestination = new Uri("Views/Pages/TodayResultsView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.AppleAltSolid },
                 Label = "Питание",
-                NavigationType = typeof(TodayDietPage),
-                NavigationDestination = new Uri("Views/Pages/TodayDietPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(TodayDietView),
+                NavigationDestination = new Uri("Views/Pages/TodayDietView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ChartBarRegular },
                 Label = "Статистика",
-                NavigationType = typeof(StatisticPage),
-                NavigationDestination = new Uri("Views/Pages/StatisticPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(StatisticView),
+                NavigationDestination = new Uri("Views/Pages/StatisticView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()
             {
                 Icon = new PackIconMaterial() { Kind = PackIconMaterialKind.Human },
                 Label = "Параметры тела",
-                NavigationType = typeof(ParamsPage),
-                NavigationDestination = new Uri("Views/Pages/ParamsPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(ParamsView),
+                NavigationDestination = new Uri("Views/Pages/ParamsView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.InfoCircleSolid },
                 Label = "О приложении",
-                NavigationType = typeof(AboutAppPage),
-                NavigationDestination = new Uri("Views/Pages/AboutAppPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(AboutAppView),
+                NavigationDestination = new Uri("Views/Pages/AboutAppView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolsSolid },
                 Label = "Настройки",
-                NavigationType = typeof(OptionsPage),
-                NavigationDestination = new Uri("../Views/Pages/OptionsPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationType = typeof(OptionsView),
+                NavigationDestination = new Uri("../Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
             });
         }
     }

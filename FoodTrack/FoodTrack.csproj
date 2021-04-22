@@ -33,7 +33,9 @@
     <Resource Include="Resources\backPurple.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\foodTrack.png" />
+    <Resource Include="Resources\foodTrack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

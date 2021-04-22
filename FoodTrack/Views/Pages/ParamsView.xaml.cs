@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FoodTrack.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TodayResultsPage.xaml
+    /// Логика взаимодействия для ParamsView.xaml
     /// </summary>
-    public partial class TodayResultsPage : Page
+    public partial class ParamsView : UserControl
     {
-        public TodayResultsPage()
+        public ParamsView()
         {
             InitializeComponent();
         }

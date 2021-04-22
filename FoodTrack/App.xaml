@@ -3,18 +3,25 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:FoodTrack"
-    StartupUri="../Views/Windows/MainWindow.xaml"
-    >
+    xmlns:my="clr-namespace:FoodTrack.UI"
+    xmlns:viewmodels="clr-namespace:FoodTrack.ViewModels"
+    xmlns:views="clr-namespace:FoodTrack.Views.Pages"
+    StartupUri="../Views/Windows/LogInWindow.xaml">
     <Application.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml" />
-
-
-
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodels:LogInPageViewModel}">
+                <views:LogInView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RegisterPageViewModel}">
+                <views:RegisterView/>
+            </DataTemplate>
         </ResourceDictionary>
+       
     </Application.Resources>
 </Application>

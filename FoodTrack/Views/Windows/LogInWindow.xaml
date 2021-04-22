@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:local="clr-namespace:FoodTrack.Views"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
@@ -18,7 +17,6 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-  
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
@@ -94,12 +92,15 @@
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
     <Grid>
-        <Image Margin="0,0,0,279" Source="../Resources/foodTrack.png">
+        <Image Margin="0,0,0,279" Source="../../Resources/foodTrack.png">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.25" />
             </Image.Effect>
         </Image>
-        <ContentControl x:Name="LogInRegisterCC" Margin="0,116,0,116"></ContentControl>
+        <ContentControl
+            x:Name="LogInRegisterCC"
+            Margin="0,116,0,116"
+            Content="{Binding SelectedViewModel}"/>
         <TextBlock
             Margin="0,300,0,0"
             HorizontalAlignment="Center"

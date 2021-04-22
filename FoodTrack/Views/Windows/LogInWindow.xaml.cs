@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using FoodTrack.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,9 +19,12 @@ namespace FoodTrack.Views.Windows
     /// </summary>
     public partial class LogInWindow
     {
+
         public LogInWindow()
         {
             InitializeComponent();
+            DataContext = new LogInViewModel();
+
         }
     }
 }
