@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FoodTrack.App" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodTrack.Commands.CommandManagerHelper" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Commands\DelegateCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodTrack.Navigation.FrameAnimator" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAEAAAAAACAAAAAAAAAAAAAAAAAAAQI=</HashCode>
+      <FileName>Navigation\FrameAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodTrack.Navigation.NavigationServiceEx" Collapsed="true">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAAACRAAABAAAIAEAAAAQgAABAAE=</HashCode>
+      <FileName>Navigation\NavigationServiceEx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodTrack.ViewModels.MenuItem">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAQAAAAAAAAAAAAAAAAAggAAAAAAAAAAABA=</HashCode>
+      <FileName>ViewModels\MenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodTrack.Views.Windows.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAQAAAAAAgAAAA=</HashCode>
+      <FileName>Views\Windows\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
