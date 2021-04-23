@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\CircularProgressBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\AboutAppView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UI\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\AboutAppView.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -77,18 +77,18 @@
             AutoGenerateColumns="False"
             ItemsSource="{Binding Albums}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="121,10,121,10" Grid.Row="1">
-            <Button  Margin="10,0,10,0" Content="❮" FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}" Width="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=6}" Background="Transparent" BorderBrush="Transparent"></Button>
+            <Button  Margin="10,0,10,0" Content="❮" FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}" Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=6}" Background="Transparent" BorderBrush="Transparent"></Button>
             <TextBlock
             x:Name="DateTBResults"
             Grid.Row="1"
             Grid.Column="1"
-            FontFamily="SamsungOne 400"
+            FontFamily="Samsung Sharp Sans"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=19}"
             Text="01.01.2021"
-            TextWrapping="Wrap" FontWeight="Bold" />
-            <Button  Background="Transparent" BorderBrush="Transparent" FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}" Width="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=6}"  Content="❯" Margin="10,0,10,0" ></Button>
+            TextWrapping="Wrap" FontWeight="Normal" />
+            <Button  Background="Transparent" BorderBrush="Transparent" FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}" Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=6}"  Content="❯" Margin="10,0,10,0" ></Button>
         </StackPanel>
 
     </Grid>

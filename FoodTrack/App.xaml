@@ -6,7 +6,7 @@
     xmlns:my="clr-namespace:FoodTrack.UI"
     xmlns:viewmodels="clr-namespace:FoodTrack.ViewModels"
     xmlns:views="clr-namespace:FoodTrack.Views.Pages"
-    StartupUri="../Views/Windows/LogInWindow.xaml">
+    StartupUri="../Views/Windows/MainWindow.xaml">
     <Application.Resources>
 
         <ResourceDictionary>
