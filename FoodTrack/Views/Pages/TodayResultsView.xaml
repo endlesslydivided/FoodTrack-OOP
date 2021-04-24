@@ -17,17 +17,18 @@
 
         <Style x:Key="TextBlocksResults" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Samsung Sharp Sans" />
-            <Setter Property="FontSize" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=75, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <Setter Property="FontSize" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=85, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </Style>
 
         <Style x:Key="TextBlocksResultsThick" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="SamsungOne 400" />
-            <Setter Property="FontSize" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=75, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <Setter Property="FontSize" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=85, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </Style>
 
         <Style x:Key="SPStyle" TargetType="StackPanel">
             <Setter Property="Width" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=4, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
-            <Setter Property="Height" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=1, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <Setter Property="Height" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=3, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
         <Style x:Key="WPStyle" TargetType="WrapPanel">
@@ -37,7 +38,7 @@
 
         <Style x:Key="GRStyle" TargetType="Grid">
             <Setter Property="Width" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=1, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
-            <Setter Property="Height" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=2, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <Setter Property="Height" Value="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=4.4, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </Style>
 
         <Style x:Key="CPStyle" TargetType="cpb:CircularProgressBar">
@@ -47,9 +48,10 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="0,0,-261,0">
+    <StackPanel Margin="0,0,0,0">
         <Grid
-            Margin="0,10,0,0"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Style="{StaticResource GRStyle}">
             <Grid.ColumnDefinitions>
@@ -70,7 +72,18 @@
                     Style="{StaticResource CPStyle}" />
                 <WrapPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых калорий: " />
-                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text="35" />
+                    <TextBlock
+                        x:Name="TBCcalResults"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
+                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество калорий: " />
+                    <TextBlock
+                        x:Name="TBCcalNeed"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
                     <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
                 </WrapPanel>
             </StackPanel>
@@ -86,7 +99,18 @@
                     Style="{StaticResource CPStyle}" />
                 <WrapPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых белков: " />
-                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text="35" />
+                    <TextBlock
+                        x:Name="TBProteinsResults"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
+                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество белков: " />
+                    <TextBlock
+                        x:Name="TBProteinsNeed"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
                     <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
                 </WrapPanel>
             </StackPanel>
@@ -102,10 +126,20 @@
                     Style="{StaticResource CPStyle}" />
                 <WrapPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых жиров: " />
-                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text="35" />
+                    <TextBlock
+                        x:Name="TBFatsResults"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
                     <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
                 </WrapPanel>
-
+                <WrapPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество жиров: " />
+                    <TextBlock
+                        x:Name="TBFatsNeed"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
+                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+                </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Column="3" Style="{StaticResource SPStyle}">
                 <TextBlock Style="{StaticResource TextBlocksResults}" Text="Углеводы" />
@@ -118,11 +152,52 @@
                     Style="{StaticResource CPStyle}" />
                 <WrapPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых углеводов: " />
-                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text="35" />
+                    <TextBlock
+                        x:Name="TBCarbohydratesResults"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
                     <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
                 </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество углеводов: " />
+                    <TextBlock
+                        x:Name="TBCarbohydratesNeed"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35" />
+                    <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+                </WrapPanel>
+
             </StackPanel>
         </Grid>
-    </Grid>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+            <Button
+                Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
+                Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
+                Margin="10,0,10,0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Content="❮"
+                FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=45}" />
+            <TextBlock
+                x:Name="DateTBResults"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="Samsung Sharp Sans"
+                FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=24}"
+                FontWeight="Normal"
+                Text="01.01.2021"
+                TextWrapping="Wrap" />
+            <Button
+                Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
+                Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
+                Margin="10,0,10,0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Content="❯"
+                FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=45}" />
+        </StackPanel>
+    </StackPanel>
 </UserControl>
 

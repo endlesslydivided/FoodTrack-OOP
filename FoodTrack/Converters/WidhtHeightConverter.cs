@@ -20,9 +20,12 @@ namespace FoodTrack.Converters
             {
                 string param = parameter.ToString();
                 double paramD = double.Parse(param, provider);
-                return System.Convert.ToDouble(value) / paramD;
+                double returned = System.Convert.ToDouble(value) / paramD;
+                if(returned <= 0)
+                { return 1; }
+                return returned;
             }
-            return value;
+            return 1;
 
 
         }
