@@ -11,7 +11,7 @@ namespace FoodTrack.Converters
 {
     class WidhtHeightConverter : IValueConverter
     {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
             {
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
@@ -21,19 +21,42 @@ namespace FoodTrack.Converters
                 string param = parameter.ToString();
                 double paramD = double.Parse(param, provider);
                 double returned = System.Convert.ToDouble(value) / paramD;
-                if(returned <= 0)
-                { return 1; }
                 return returned;
             }
             return 1;
-
-
-        }
+            }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 return DependencyProperty.UnsetValue;
             }
+    }
+
+    class FontConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ".";
+
+            if (parameter != null)
+            {
+                string param = parameter.ToString();
+                double paramD = double.Parse(param, provider);
+                double returned = System.Convert.ToDouble(value) / paramD;
+                if (returned <= 1)
+                {
+                    return 1;
+                }
+                return returned;
+            }
+            return 1;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
     }
 
     class TwoPartConverter : IValueConverter

@@ -57,6 +57,24 @@ namespace FoodTrack.UI
             set { SetValue(AngleProperty, value); }
         }
 
+        public double Text
+        {
+            get { return (double)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        public new double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        public double TextOpacity
+        {
+            get { return (double)GetValue(TextOpacityProperty); }
+            set { SetValue(TextOpacityProperty, value); }
+        }
+
         // Using a DependencyProperty as the backing store for Percentage.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PercentageProperty =
             DependencyProperty.Register("Percentage", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(65d, new PropertyChangedCallback(OnPercentageChanged)));
@@ -76,6 +94,15 @@ namespace FoodTrack.UI
         // Using a DependencyProperty as the backing store for Angle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AngleProperty =
             DependencyProperty.Register("Angle", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(120d, new PropertyChangedCallback(OnPropertyChanged)));
+
+        public static readonly DependencyProperty TextProperty =
+     DependencyProperty.Register("Text", typeof(string), typeof(CircularProgressBar), new PropertyMetadata("Text", new PropertyChangedCallback(OnPropertyChanged)));
+
+        public static readonly DependencyProperty TextOpacityProperty =
+    DependencyProperty.Register("TextOpacity", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(1.0, new PropertyChangedCallback(OnTextOpacityChanged)));
+
+        public static new readonly DependencyProperty FontSizeProperty =
+DependencyProperty.Register("FontSize", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(14.0, new PropertyChangedCallback(OnPropertyChanged)));
 
         private static void OnColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
@@ -100,6 +127,18 @@ namespace FoodTrack.UI
         {
             CircularProgressBar circle = sender as CircularProgressBar;
             circle.RenderArc();
+        }
+        
+
+          private static void OnTextOpacityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            CircularProgressBar circle = sender as CircularProgressBar;
+            circle.set_opacity((double)args.NewValue); 
+        }
+
+        public void set_opacity(double n)
+        {
+            Percents.Opacity = n;
         }
 
         public void set_tick(int n)

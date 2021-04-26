@@ -1,30 +1,77 @@
-﻿<UserControl x:Class="FoodTrack.UI.CircularProgressBar"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FoodTrack.UI"
-             mc:Ignorable="d" 
-             x:Name="userControl"
-            >
+﻿<UserControl
+    x:Class="FoodTrack.UI.CircularProgressBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FoodTrack.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="userControl"
+    mc:Ignorable="d">
+
     <Grid>
-        <Path x:Name="pathRoot" Stroke="{Binding SegmentColor, ElementName=userControl}" 
-          StrokeThickness="{Binding StrokeThickness, ElementName=userControl}" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Path.Data>
-                <PathGeometry>
-                    <PathGeometry.Figures>
-                        <PathFigureCollection>
-                            <PathFigure x:Name="pathFigure">
-                                <PathFigure.Segments>
-                                    <PathSegmentCollection>
-                                        <ArcSegment x:Name="arcSegment" SweepDirection="Clockwise" />
-                                    </PathSegmentCollection>
-                                </PathFigure.Segments>
-                            </PathFigure>
-                        </PathFigureCollection>
-                    </PathGeometry.Figures>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
+        <Grid>
+            <Path
+                x:Name="pathRoot"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Stroke="{Binding SegmentColor, ElementName=userControl}"
+                StrokeThickness="{Binding StrokeThickness, ElementName=userControl}">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigureCollection>
+                                <PathFigure x:Name="pathFigure">
+                                    <PathFigure.Segments>
+                                        <PathSegmentCollection>
+                                            <ArcSegment x:Name="arcSegment" SweepDirection="Clockwise" />
+                                        </PathSegmentCollection>
+                                    </PathFigure.Segments>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Grid>
+        <Grid>
+            <Path
+                x:Name="pathRoot2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Stroke="{Binding SegmentColor, ElementName=userControl}"
+                StrokeThickness="{Binding StrokeThickness, ElementName=userControl}">
+                <Path.Effect>
+                    <DropShadowEffect Color="Black"  Direction="-90" RenderingBias="Quality" ShadowDepth="2" ></DropShadowEffect>
+                </Path.Effect>
+                <Path.Data>
+                    <PathGeometry>
+                          
+                        <PathGeometry.Figures>
+                            <PathFigureCollection>
+                                <PathFigure x:Name="pathFigure2">
+                                 
+                                    <PathFigure.Segments>
+                                        <PathSegmentCollection>
+                                            <ArcSegment x:Name="arcSegment2" SweepDirection="Clockwise">
+                                                
+                                            </ArcSegment>
+                                        </PathSegmentCollection>
+                                    </PathFigure.Segments>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Grid>
+        <StackPanel
+            x:Name="Percents"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal"
+            Opacity="{Binding TextOpacity, ElementName=userControl}">
+            <TextBlock FontSize="{Binding FontSize, ElementName=userControl}" Text="{Binding Percentage, ElementName=userControl}" />
+            <TextBlock FontSize="{Binding FontSize, ElementName=userControl}" Text=" %" />
+        </StackPanel>
     </Grid>
 </UserControl>
