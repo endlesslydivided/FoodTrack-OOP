@@ -8,10 +8,8 @@
     xmlns:local="clr-namespace:FoodTrack.Views.Pages"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="userControl" 
-  
+    x:Name="userControl"
     HorizontalAlignment="Center"
-  
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:WidhtHeightConverter x:Key="MyWHConverter" />
@@ -61,279 +59,290 @@
 
     </UserControl.Resources>
 
-    <StackPanel Margin="0,0,0,0" >
+    <StackPanel Margin="5,5,5,0">
         <Border Background="GhostWhite" CornerRadius="25">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
             <Grid
-            Margin="5,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Style="{StaticResource GRStyle}" >
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Style="{StaticResource GRStyle}">
 
-            <Grid.ColumnDefinitions>
-                
-                <ColumnDefinition x:Name="Column1" Width="282*" />
-                <ColumnDefinition x:Name="Column2" Width="282*" />
-                <ColumnDefinition x:Name="Column3" Width="282*" />
-                <ColumnDefinition x:Name="Column4" Width="282*" />
-                
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
 
-                <GridSplitter Grid.Column="0" Width="5" HorizontalAlignment="Right" />
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Right" />
-                <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Right" />
+                    <ColumnDefinition x:Name="Column1" Width="282*" />
+                    <ColumnDefinition x:Name="Column2" Width="282*" />
+                    <ColumnDefinition x:Name="Column3" Width="282*" />
+                    <ColumnDefinition x:Name="Column4" Width="282*" />
+
+                </Grid.ColumnDefinitions>
+
+                <GridSplitter
+                    Grid.Column="0"
+                    Width="5"
+                    HorizontalAlignment="Right" />
+                <GridSplitter
+                    Grid.Column="1"
+                    Width="5"
+                    HorizontalAlignment="Right" />
+                <GridSplitter
+                    Grid.Column="2"
+                    Width="5"
+                    HorizontalAlignment="Right" />
 
 
                 <StackPanel Style="{StaticResource SPStyle}">
 
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Калории"  Margin="15,0,0,0" />
+                    <TextBlock
+                        Margin="15,0,0,0"
+                        Style="{StaticResource TextBlocksResults}"
+                        Text="Калории" />
 
                     <Grid>
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="100"
-                    TextOpacity="0"
-                    SegmentColor="LightGray"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}">
-
-
-                        </cpb:CircularProgressBar>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="100"
+                            SegmentColor="LightGray"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}"
+                            TextOpacity="0" />
 
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="95"
-                    
-                    SegmentColor="Green"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="95"
+                            SegmentColor="Green"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}" />
                     </Grid>
 
 
                     <WrapPanel Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых калорий: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBCcalResults"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35"
-                            TextWrapping="Wrap" />
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-                <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество калорий: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBCcalNeed"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-            </StackPanel>
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых калорий: " />
 
-            <StackPanel Grid.Column="1" Style="{StaticResource SPStyle}">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Белки" Margin="15,0,0,0" />
+                            <TextBlock
+                                x:Name="TBCcalResults"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35"
+                                TextWrapping="Wrap" />
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal">
+
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество калорий: " />
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBCcalNeed"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Style="{StaticResource SPStyle}">
+
+                    <TextBlock
+                        Margin="15,0,0,0"
+                        Style="{StaticResource TextBlocksResults}"
+                        Text="Белки" />
 
 
                     <Grid>
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="100"
-                    TextOpacity="0"
-                    SegmentColor="LightGray"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}">
-
-
-                        </cpb:CircularProgressBar>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="100"
+                            SegmentColor="LightGray"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}"
+                            TextOpacity="0" />
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="95"
-                    SegmentColor="Green"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="95"
+                            SegmentColor="Green"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}" />
                     </Grid>
                     <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых белков: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBProteinsResults"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-                <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество белков: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBProteinsNeed"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-            </StackPanel>
 
-            <StackPanel Grid.Column="2" Style="{StaticResource SPStyle}">
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых белков: " />
 
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Жиры" Margin="15,0,0,0" />
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBProteinsResults"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal">
+
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество белков: " />
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBProteinsNeed"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Style="{StaticResource SPStyle}">
+
+                    <TextBlock
+                        Margin="15,0,0,0"
+                        Style="{StaticResource TextBlocksResults}"
+                        Text="Жиры" />
 
                     <Grid>
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="100"
-                    TextOpacity="0"
-                    SegmentColor="LightGray"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}">
-
-
-                        </cpb:CircularProgressBar>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="100"
+                            SegmentColor="LightGray"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}"
+                            TextOpacity="0" />
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="95"
-                    SegmentColor="Green"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="95"
+                            SegmentColor="Green"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}" />
                     </Grid>
 
                     <WrapPanel Orientation="Horizontal">
 
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых жиров: " />
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых жиров: " />
 
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-                        <TextBlock
-                            x:Name="TBFatsResults"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
+                            <TextBlock
+                                x:Name="TBFatsResults"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
 
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
-                    </StackPanel>
+                        </StackPanel>
 
-                </WrapPanel>
-                
-                <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество жиров: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBFatsNeed"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-            </StackPanel>
+                    </WrapPanel>
 
-            <StackPanel Grid.Column="3" Style="{StaticResource SPStyle}">
+                    <WrapPanel Orientation="Horizontal">
 
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Углеводы" Margin="15,0,0,0" />
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество жиров: " />
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBFatsNeed"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Style="{StaticResource SPStyle}">
+
+                    <TextBlock
+                        Margin="15,0,0,0"
+                        Style="{StaticResource TextBlocksResults}"
+                        Text="Углеводы" />
 
                     <Grid>
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="100"
-                    TextOpacity="0"
-                    SegmentColor="LightGray"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}">
-
-
-                        </cpb:CircularProgressBar>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="100"
+                            SegmentColor="LightGray"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}"
+                            TextOpacity="0" />
                         <cpb:CircularProgressBar
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Percentage="95"
-                    SegmentColor="Green"
-                    StrokeThickness="15"
-                    Style="{StaticResource CPStyle}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Percentage="95"
+                            SegmentColor="Green"
+                            StrokeThickness="15"
+                            Style="{StaticResource CPStyle}" />
                     </Grid>
 
                     <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых углеводов: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBCarbohydratesResults"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
-                
-                <WrapPanel Orientation="Horizontal">
-                    
-                    <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество углеводов: " />
-                    
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        
-                        <TextBlock
-                            x:Name="TBCarbohydratesNeed"
-                            Style="{StaticResource TextBlocksResultsThick}"
-                            Text="35" />
-                        <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
-                        
-                    </StackPanel>
-                    
-                </WrapPanel>
 
-            </StackPanel>
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Количество потреблённых углеводов: " />
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBCarbohydratesResults"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal">
+
+                        <TextBlock Style="{StaticResource TextBlocksResults}" Text="Необходимое количество углеводов: " />
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock
+                                x:Name="TBCarbohydratesNeed"
+                                Style="{StaticResource TextBlocksResultsThick}"
+                                Text="35" />
+                            <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
+
+                        </StackPanel>
+
+                    </WrapPanel>
+
+                </StackPanel>
 
             </Grid>
         </Border>
 
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,15,0,15">
+        <StackPanel
+            Margin="0,15,0,15"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
 
             <Button
                 Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
@@ -343,7 +352,7 @@
                 BorderBrush="Transparent"
                 Content="❮"
                 FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}" />
-            
+
             <TextBlock
                 x:Name="DateTBResults"
                 HorizontalAlignment="Center"
@@ -353,7 +362,7 @@
                 FontWeight="Normal"
                 Text="01.01.2021"
                 TextWrapping="Wrap" />
-            
+
             <Button
                 Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                 Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
@@ -362,118 +371,123 @@
                 BorderBrush="Transparent"
                 Content="❯"
                 FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}" />
-            
+
         </StackPanel>
 
-        <Border Background="GhostWhite" CornerRadius="25" Margin="10,0,10,0">
+        <Border
+            Margin="10,0,10,0"
+            Background="GhostWhite"
+            CornerRadius="25">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
-        <StackPanel
-            Margin="0,10,0,10"
-            HorizontalAlignment="Left"
-            Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="Последнее изменение списка потреблённых продуктов: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="15:30 15.05.2021"
-                    TextWrapping="Wrap" />
+            <StackPanel
+                Margin="0,10,0,10"
+                HorizontalAlignment="Left"
+                Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="Последнее изменение списка потреблённых продуктов: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="15:30 15.05.2021"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="Основная категория потреблённых продуктов сегодня: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="Мясное"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="Ваш вес: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="35"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text=" кг"
+                        TextWrapping="Wrap" />
+
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="Ваш рост: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text="155"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontWeight="Normal"
+                        Style="{StaticResource TextBlocksResultsThick}"
+                        Text=" см"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="Основная категория потреблённых продуктов сегодня: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="Мясное"
-                    TextWrapping="Wrap" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="Ваш вес: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="35"
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text=" кг"
-                    TextWrapping="Wrap" />
-
-
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}" >
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="Ваш рост: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text="155"
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontWeight="Normal"
-                    Style="{StaticResource TextBlocksResultsThick}"
-                    Text=" см"
-                    TextWrapping="Wrap" />
-            </StackPanel>
-
-                
-            </StackPanel>
-            
-           </Border>
+        </Border>
         <StackPanel
             Margin="0,10,0,10"
             HorizontalAlignment="Center"
             Orientation="Vertical">
             <Button
-                    Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
-                    Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
-                    Style="{StaticResource MahApps.Styles.Button}" HorizontalAlignment="Center"
-                    >
-                <TextBlock Text="Добавить продукт в коллекцию" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=75}">
-                    
-                </TextBlock>
-                
+                Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=4}"
+                Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
+                HorizontalAlignment="Center"
+                Style="{StaticResource MahApps.Styles.Button}">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=75}"
+                    Text="Перейти на личную страницу"
+                    TextWrapping="Wrap" />
+
             </Button>
 
         </StackPanel>
