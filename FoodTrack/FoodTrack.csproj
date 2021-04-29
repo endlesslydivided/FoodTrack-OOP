@@ -11,7 +11,10 @@
     <None Remove="Resources\back.gif" />
     <None Remove="Resources\BackGroundLogIn.webm" />
     <None Remove="Resources\backPurple.jpg" />
+    <None Remove="Resources\copyright.png" />
     <None Remove="Resources\foodTrack.png" />
+    <None Remove="Resources\git.png" />
+    <None Remove="Resources\version.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,7 +36,16 @@
     <Resource Include="Resources\backPurple.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\copyright.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\foodTrack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\git.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\version.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
