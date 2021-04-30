@@ -6,8 +6,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
-    Title="Вход"
+    Title="Вход и регистрация"
     Width="361"
     Height="479"
     BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
@@ -100,15 +99,17 @@
         <ContentControl
             x:Name="LogInRegisterCC"
             Margin="0,116,0,116"
-            Content="{Binding SelectedViewModel}"/>
+            Content="{Binding SelectedViewModel}" />
         <TextBlock
             Margin="0,300,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            DataContext="{Binding SelectedViewModel}"
             FontFamily="Samsung Sharp Sans"
             FontSize="14"
             Foreground="White"
-            Text="Введите свой логин и пароль">
+            Text="{Binding Message}">
             <TextBlock.Effect>
                 <DropShadowEffect
                     BlurRadius="1"

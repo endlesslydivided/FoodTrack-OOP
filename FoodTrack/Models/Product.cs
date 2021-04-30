@@ -7,6 +7,7 @@ namespace FoodTrack.Models
 {
     public partial class Product
     {
+
         public int Id { get; set; }
         public int IdAdded { get; set; }
         public string ProductName { get; set; }

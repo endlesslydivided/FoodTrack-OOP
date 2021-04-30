@@ -39,7 +39,7 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<FoodCategory>(entity =>
             {
-                entity.HasIndex(e => e.CategoryName, "UQ__FoodCate__8517B2E0BC2D5C19")
+                entity.HasIndex(e => e.CategoryName, "UQ__FoodCate__8517B2E006DE4F2E")
                     .IsUnique();
 
                 entity.Property(e => e.CategoryName)
@@ -128,23 +128,27 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.UserPassword, "UQ__Users__5DF58B81EFBDE384")
+                entity.HasIndex(e => e.UserPassword, "UQ__Users__5DF58B81DFA38FB1")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserLogin, "UQ__Users__7F8E8D5E87CDD8F2")
+                entity.HasIndex(e => e.UserLogin, "UQ__Users__7F8E8D5EE5C60A53")
                     .IsUnique();
 
                 entity.Property(e => e.IsAdmin)
                     .IsRequired()
                     .HasDefaultValueSql("('0')");
 
-                entity.Property(e => e.UserLogin)
+                entity.Property(e => e.Salt)
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.UserLogin)
+                    .IsRequired()
+                    .HasMaxLength(25);
+
                 entity.Property(e => e.UserPassword)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(20);
             });
 
             modelBuilder.Entity<UsersDatum>(entity =>
