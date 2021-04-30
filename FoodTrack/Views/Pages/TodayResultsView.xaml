@@ -481,7 +481,7 @@
             Orientation="Vertical">
             <Button
                 Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=4}"
-                Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=10}"
+                Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=11}"
                 HorizontalAlignment="Center"
                 Style="{StaticResource MahApps.Styles.Button}">
                 <TextBlock
