@@ -34,6 +34,7 @@ namespace FoodTrack.Views.Windows
 
             // Navigate to the home page.
             this.Loaded += (sender, args) => this.navigationServiceEx.Navigate(new Uri("../Views/Pages/TodayResultsView.xaml", UriKind.RelativeOrAbsolute));
+            
         }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
@@ -55,11 +56,6 @@ namespace FoodTrack.Views.Windows
                                                                 .OptionsItems
                                                                 .OfType<ViewModels.MenuItem>()
                                                                 .FirstOrDefault(x => x.NavigationDestination == e.Uri);
-
-     
-
-
-
         }
 
     }

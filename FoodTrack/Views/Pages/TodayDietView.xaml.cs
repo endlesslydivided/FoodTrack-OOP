@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodTrack.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace FoodTrack.Views.Pages
         public TodayDietView()
         {
             InitializeComponent();
+            DataContext = new TodayDietViewModel();
         }
     }
 }

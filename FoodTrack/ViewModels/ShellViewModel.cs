@@ -33,6 +33,7 @@ namespace FoodTrack.ViewModels
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.AppleAltSolid },
                 Label = "Питание",
                 NavigationType = typeof(TodayDietView),
+                
                 NavigationDestination = new Uri("Views/Pages/TodayDietView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()

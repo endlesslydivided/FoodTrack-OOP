@@ -45,6 +45,7 @@ namespace FoodTrack.Commands
             {
                 logInViewModel.SelectedViewModel = new RegisterPageViewModel();
             }
+           
         }
     }
 }

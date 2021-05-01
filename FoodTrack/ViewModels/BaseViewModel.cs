@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FoodTrack.Models;
+using FoodTrack.XMLSerializer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace FoodTrack.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-
+        public User deserializedUser = XmlSerializeWrapper.Deserialize("../lastUser.xml");
         public event PropertyChangedEventHandler PropertyChanged;
 
 

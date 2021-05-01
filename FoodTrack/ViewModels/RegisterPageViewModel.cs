@@ -14,8 +14,7 @@ namespace FoodTrack.ViewModels
     public class RegisterPageViewModel :BaseViewModel
     {
         public User User = new User();
-        public string userPassword;
-        public string message;
+
 
         #region Properties
 
@@ -30,10 +29,10 @@ namespace FoodTrack.ViewModels
         }
         public string UserPassword
         {
-            get { return userPassword; }
+            get { return UserPassword; }
             set
             {
-                userPassword = value;
+                UserPassword = value;
                 OnPropertyChanged("UserPassword");
             }
         }
@@ -48,10 +47,10 @@ namespace FoodTrack.ViewModels
         }
         public string Message
         {
-            get { return message; }
+            get { return Message; }
             set
             {
-                message = value;
+                Message = value;
                 OnPropertyChanged("Message");
             }
         }
