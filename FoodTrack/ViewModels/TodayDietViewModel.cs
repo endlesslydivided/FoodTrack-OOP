@@ -18,7 +18,7 @@ namespace FoodTrack.ViewModels
 
         public TodayDietViewModel()
         {
-            DateToChoose = DateTime.Now;
+            DateToChoose = DateTime.Today;
         }
 
         #region Properties
@@ -105,7 +105,7 @@ namespace FoodTrack.ViewModels
 
         private void addDay()
         {
-           DateToChoose.AddDays(1);
+            DateToChoose = DateToChoose.AddDays(1);
         }
 
         #endregion
@@ -128,7 +128,7 @@ namespace FoodTrack.ViewModels
 
         private void removeDay()
         {
-            DateToChoose.AddDays(-1);
+            DateToChoose = DateToChoose.AddDays(-1);
         }
 
         #endregion
