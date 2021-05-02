@@ -56,7 +56,6 @@ namespace FoodTrack.ViewModels
             set
             {
                 searchText = value;
-                TextChangedCommand.ChangeCanExecute();
                 OnPropertyChanged("SearchText");
             }
         }

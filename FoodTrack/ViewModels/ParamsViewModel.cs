@@ -1,8 +1,12 @@
 ﻿using FoodTrack.Commands;
+using FoodTrack.Context.UnitOfWork;
+using FoodTrack.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,17 +14,89 @@ namespace FoodTrack.ViewModels
 {
     class ParamsViewModel : BaseViewModel
     {
+        private IEnumerable categoryCollection;
+        private decimal weight;
+        private int height;
+        private int calories;
+        private decimal proteins;
+        private decimal fats;
+        private decimal carbohydrates;
+
+        public ParamsViewModel()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                CategoryCollection = unit.FoodCategoryRepository.Get();
+            }
+            Proteins = default;
+            Carbohydrates = default;
+            Fats = default;
+            Calories = default;
+        }
 
         #region Properties
 
-
-        public string ExampleP
+        public IEnumerable CategoryCollection
         {
-            get { return ExampleP; }
+            get { return categoryCollection; }
             set
             {
-                ExampleP = value;
-                OnPropertyChanged("ExampleP");
+                categoryCollection = value;
+                OnPropertyChanged("CategoryCollection");
+            }
+        }
+        public decimal Weight
+        {
+            get { return weight; }
+            set
+            {
+                weight = value;
+                OnPropertyChanged("Weight");
+            }
+        }
+        public int Height
+        {
+            get { return height; }
+            set
+            {
+                height = value;
+                OnPropertyChanged("Height");
+            }
+        }
+        public decimal Proteins
+        {
+            get { return proteins; }
+            set
+            {
+                proteins = value;
+                OnPropertyChanged("Proteins");
+            }
+        }
+        public decimal Carbohydrates
+        {
+            get { return carbohydrates; }
+            set
+            {
+                carbohydrates = value;
+                OnPropertyChanged("Carbohydrates");
+            }
+        }
+        public decimal Fats
+        {
+            get { return fats; }
+            set
+            {
+                fats = value;
+                OnPropertyChanged("Fats");
+            }
+        }
+        public int  Calories
+        {
+            get { return calories; }
+            set
+            {
+                calories = value;
+                OnPropertyChanged("Calories");
             }
         }
 
@@ -28,25 +104,59 @@ namespace FoodTrack.ViewModels
 
         #region Commands
 
-        #region COMMAND1
+        #region Добавить отчёт по пользователю
 
-        private DelegateCommand exampleCommand;
+        private DelegateCommand addParamsReportCommand;
 
-        public ICommand ExampleCommand
+        public ICommand AddParamsReportCommand
         {
             get
             {
-                if (exampleCommand == null)
+                if (addParamsReportCommand == null)
                 {
-                    exampleCommand = new DelegateCommand(Example);
+                    addParamsReportCommand = new DelegateCommand(addParamsReport, canAddParamsReport);
                 }
-                return exampleCommand;
+                return addParamsReportCommand;
             }
         }
 
-        private void Example()
+        private void addParamsReport()
         {
+            if (!Regex.IsMatch(Weight.ToString(), "^[0-9]{1,3}([.][0-9]{1,2})?$"))
+            {
 
+            }
+            else if (!Regex.IsMatch(Height.ToString(), "^[1-9]{1}[0-9]{0,2}$"))
+            {
+
+            }
+            else
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    UsersParam usersParam = new UsersParam();
+                    usersParam.ParamsDate = DateTime.Now;
+                    usersParam.UserHeight = Height;
+                    usersParam.UserWeight = Weight;
+                    usersParam.IdParams = deserializedUser.Id;
+                    unit.UserParamRepository.Create(usersParam);
+                    unit.Save();
+                    Height = default;
+                    Weight = default;
+                }
+            }
+        }
+
+        private bool canAddParamsReport()
+        {
+            if (Weight != 0 && Height != 0 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

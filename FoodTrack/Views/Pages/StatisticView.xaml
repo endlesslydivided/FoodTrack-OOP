@@ -86,7 +86,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="15:30 15.05.2021"
+                        Text="{Binding LastReportDate}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
@@ -120,7 +120,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="35"
+                        Text="{Binding Weight}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -146,7 +146,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="155"
+                        Text="{Binding Height}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"

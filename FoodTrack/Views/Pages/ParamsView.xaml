@@ -1,70 +1,207 @@
-﻿<UserControl x:Class="FoodTrack.Views.Pages.ParamsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-             xmlns:local="clr-namespace:FoodTrack.Views.Pages"
-             mc:Ignorable="d" 
-            >
+﻿<UserControl
+    x:Class="FoodTrack.Views.Pages.ParamsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:FoodTrack.Views.Pages"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="TextBlocks" TargetType="TextBlock">
-            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+            <Setter Property="Margin" Value="10,10,10,10" />
         </Style>
         <Style x:Key="TextBoxes" TargetType="TextBox">
-            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+            <Setter Property="Margin" Value="10,10,10,10" />
         </Style>
     </UserControl.Resources>
-    <Border CornerRadius="25" Background="{StaticResource MahApps.Brushes.Gray10}" Opacity="0.9" Margin="10,10,10,10">
+    <Border
+        Margin="10,10,10,10"
+        Background="{StaticResource MahApps.Brushes.Gray10}"
+        CornerRadius="25"
+        Opacity="0.9">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="54*"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="55*"/>
+                <RowDefinition Height="54*" />
+                <RowDefinition Height="55*" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="52*" />
+                <RowDefinition Height="52*" />
+                <RowDefinition Height="52*" />
+                <RowDefinition Height="52*" />
+                <RowDefinition Height="52*" />
+                <RowDefinition Height="55*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="165*"/>
-                <ColumnDefinition Width="86*"/>
-                <ColumnDefinition Width="139*"/>
+                <ColumnDefinition Width="165*" />
+                <ColumnDefinition Width="86*" />
+                <ColumnDefinition Width="139*" />
             </Grid.ColumnDefinitions>
 
 
-            <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" Height="5" VerticalAlignment="Center" />
+            <GridSplitter
+                Grid.Row="2"
+                Grid.ColumnSpan="3"
+                Height="5"
+                VerticalAlignment="Center" />
 
 
-            <TextBlock Style="{StaticResource TextBlocks}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="34" Width="98" ><Run>Ваш вес:</Run></TextBlock>
-            <TextBox Margin="10,10,10,10" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Вес"  ></TextBox>
+            <TextBlock
+                Width="98"
+                Height="34"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run>Ваш вес:</Run></TextBlock>
+            <mah:NumericUpDown
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Вес"
+                Maximum="300"
+                Minimum="0"
+                Value ="{Binding Weight}"/>
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="1" Height="33" Width="110"  ><Run Text="Ваш рост:"/></TextBlock>
-            <TextBox Margin="10,10,10,10" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Рост"  Grid.Row="1"  />
+            <TextBlock
+                Grid.Row="1"
+                Width="110"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Text="Ваш рост:" /></TextBlock>
+            <mah:NumericUpDown
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Рост"
+                Maximum="300"
+                Minimum="0"
+                Value ="{Binding Height}"/>
 
-            <Button Margin="10,10,10,10" Grid.Column="2" Grid.RowSpan="2" Content="Добавить новую запись"/>
+            <Button
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Margin="10,10,10,10"
+                Content="Добавить новую запись"
+                Command="{Binding AddParamsReportCommand}"/>
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="3" Height="33" Width="226" ><Run Text="Название продукта:"/></TextBlock>
-            <TextBox Margin="10,10,10,4" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Название"  Grid.Row="3"  />
+            <TextBlock
+                Grid.Row="3"
+                Width="226"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Text="Название продукта:" /></TextBlock>
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="10,10,10,4"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Название" />
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="4" Height="33" Width="264"  ><Run Language="ru-ru" Text="Калорий на 100 грамм:"/></TextBlock>
-            <TextBox Margin="10,10,10,4" Grid.Column="1"  mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Грамм"  Grid.Row="4"  />
+            <TextBlock
+                Grid.Row="4"
+                Width="264"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Language="ru-ru" Text="Калорий на 100 грамм:" /></TextBlock>
+            <mah:NumericUpDown
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="10,10,10,4"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Грамм"
+                Maximum="300"
+                Minimum="0" />
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="5" Height="33" Width="246"   ><Run Language="ru-ru" Text="Белков на 100 грамм:"/></TextBlock>
-            <TextBox Margin="10,10,10,1" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Грамм"  Grid.Row="5"  />
+            <TextBlock
+                Grid.Row="5"
+                Width="246"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Language="ru-ru" Text="Белков на 100 грамм:" /></TextBlock>
+            <mah:NumericUpDown
+                Grid.Row="5"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Грамм"
+                Maximum="300"
+                Minimum="0" />
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="6" Height="33" Width="286"   ><Run Text="Углеводов на 100 грамм:"/></TextBlock>
-            <TextBox Margin="10,10,10,10" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Грамм"  Grid.Row="6"  />
+            <TextBlock
+                Grid.Row="6"
+                Width="286"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Text="Углеводов на 100 грамм:" /></TextBlock>
+            <mah:NumericUpDown
+                Grid.Row="6"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Грамм"
+                Maximum="300"
+                Minimum="0" />
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="7" Height="33" Width="244"   ><Run Text="Жиров на 100 грамм:"/></TextBlock>
-            <TextBox Margin="10,10,10,10" Grid.Column="1"   mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Грамм"  Grid.Row="7"  />
+            <TextBlock
+                Grid.Row="7"
+                Width="244"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Text="Жиров на 100 грамм:" /></TextBlock>
+            <mah:NumericUpDown
+                Grid.Row="7"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                mah:NumericInputMode="Decimal"
+                mah:ParsingNumberStyle="Float"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Грамм"
+                Maximum="300"
+                Minimum="0" />
 
-            <TextBlock Style="{StaticResource TextBlocks}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Row="8" Height="33" Width="122"   ><Run Language="ru-ru" Text="Категория:"/></TextBlock>
-            <ComboBox Margin="10,10,10,10" Grid.Column="1" Grid.Row="8"/>
-            <Button Margin="10,10,10,10" Grid.Column="2" Grid.RowSpan="6" Content="Добавить новый продукт" Grid.Row="3"/>
+            <TextBlock
+                Grid.Row="8"
+                Width="122"
+                Height="33"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Style="{StaticResource TextBlocks}"><Run Language="ru-ru" Text="Категория:" /></TextBlock>
+            <ComboBox
+                Grid.Row="8"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                ItemsSource="{Binding CategoryCollection}" />
+            <Button
+                Grid.Row="3"
+                Grid.RowSpan="6"
+                Grid.Column="2"
+                Margin="10,10,10,10"
+                Content="Добавить новый продукт" />
 
         </Grid>
     </Border>

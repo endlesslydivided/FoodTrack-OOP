@@ -20,7 +20,6 @@ namespace FoodTrack.Models
             UserLogin = default;
         }
 
-        [XmlIgnore]
         public int Id { get; set; }
         [XmlIgnore]
         public bool? IsAdmin { get; set; }

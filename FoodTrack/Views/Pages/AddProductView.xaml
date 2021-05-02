@@ -64,11 +64,12 @@
                     Grid.Row="1"
                     Grid.Column="2"
                     Margin="10,10,10,10"
+                    mah:NumericInputMode="Decimal"
+                    mah:ParsingNumberStyle="Float"
                     mah:TextBoxHelper.Watermark="Грамм"
                     FontFamily="SamsungOne 400"
-                    Value="{Binding GramValue}"
                     Minimum="0"
-                    mah:NumericInputMode="Decimal"  mah:ParsingNumberStyle="Float"/>
+                    Value="{Binding GramValue}" />
                 <ComboBox
                     Grid.Row="1"
                     Grid.Column="3"
@@ -95,7 +96,7 @@
                         <Grid>
                             <TextBlock x:Name="ProductName" FontFamily="Samsung Sharp Sans" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Калории:" />
+                                <TextBlock FontFamily="SamsungOne 400" Text="Калории:" />
                                 <TextBlock
                                     x:Name="Calories"
                                     FontFamily="SamsungOne 400"
@@ -103,7 +104,7 @@
                                 <TextBlock FontFamily="SamsungOne 400" Text=" ккал" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Белки:" />
+                                <TextBlock FontFamily="SamsungOne 400" Text="Белки:" />
                                 <TextBlock
                                     x:Name="Proteins"
                                     FontFamily="SamsungOne 400"
@@ -111,7 +112,7 @@
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Жиры:" />
+                                <TextBlock FontFamily="SamsungOne 400" Text="Жиры:" />
                                 <TextBlock
                                     x:Name="Fats"
                                     FontFamily="SamsungOne 400"
@@ -119,12 +120,19 @@
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Углеводы:" />
+                                <TextBlock FontFamily="SamsungOne 400" Text="Углеводы:" />
                                 <TextBlock
                                     x:Name="Carbohydrates"
                                     FontFamily="SamsungOne 400"
                                     Text="{Binding CaloriesValue}" />
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="SamsungOne 400" Text="Категория: " />
+                                <TextBlock
+                                    x:Name="Category"
+                                    FontFamily="SamsungOne 400"
+                                    Text="{Binding CaloriesValue}" />
                             </StackPanel>
                         </Grid>
                     </Border>
