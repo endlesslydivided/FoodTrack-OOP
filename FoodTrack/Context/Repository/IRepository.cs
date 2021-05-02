@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakeAtlas.Context.Repository
+namespace FoodTrack.Context.Repository
 {
     public interface IRepository<TEntity> where TEntity : class
     {

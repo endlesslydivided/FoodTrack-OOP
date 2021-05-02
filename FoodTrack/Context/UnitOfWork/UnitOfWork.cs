@@ -1,4 +1,4 @@
-﻿using FakeAtlas.Context.Repository;
+﻿using FoodTrack.Context.Repository;
 using FoodTrack.Context;
 using FoodTrack.Models;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakeAtlas.Context.UnitOfWork
+namespace FoodTrack.Context.UnitOfWork
 {
     public class UnitOfWork : IDisposable
     {

@@ -26,7 +26,7 @@ namespace FoodTrack.Commands
         {
 
         }
-        
+
 
         public event EventHandler CanExecuteChanged;
 
@@ -45,7 +45,6 @@ namespace FoodTrack.Commands
             {
                 logInViewModel.SelectedViewModel = new RegisterPageViewModel();
             }
-           
         }
     }
 }

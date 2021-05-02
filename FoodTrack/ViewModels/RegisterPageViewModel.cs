@@ -1,4 +1,4 @@
-﻿using FakeAtlas.Context.UnitOfWork;
+﻿using FoodTrack.Context.UnitOfWork;
 using FoodTrack.Commands;
 using FoodTrack.Models;
 using System;
@@ -8,12 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FoodTrack.Hash;
+using System.Windows;
 
 namespace FoodTrack.ViewModels
 {
     public class RegisterPageViewModel :BaseViewModel
     {
-        public User User = new User();
+        private User User = new User();
+        private string message = default;
+        private string userPassword = default;
+       
 
 
         #region Properties
@@ -27,12 +31,14 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("UserLogin");
             }
         }
+
+        
         public string UserPassword
         {
-            get { return UserPassword; }
+            get { return userPassword; }
             set
             {
-                UserPassword = value;
+                userPassword = value;
                 OnPropertyChanged("UserPassword");
             }
         }
@@ -47,10 +53,10 @@ namespace FoodTrack.ViewModels
         }
         public string Message
         {
-            get { return Message; }
+            get { return message; }
             set
             {
-                Message = value;
+                message = value;
                 OnPropertyChanged("Message");
             }
         }

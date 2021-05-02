@@ -17,15 +17,14 @@ using System.Windows.Shapes;
 namespace FoodTrack.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TodayDietView.xaml
+    /// Логика взаимодействия для AddProductView.xaml
     /// </summary>
-    public partial class TodayDietView : UserControl
+    public partial class AddProductView : UserControl
     {
-        public TodayDietView()
+        public AddProductView()
         {
             InitializeComponent();
-
-            DataContext = new TodayDietViewModel();
+            DataContext = new AddProductViewModel();
         }
     }
 }

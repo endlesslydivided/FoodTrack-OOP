@@ -1,4 +1,4 @@
-﻿using FakeAtlas.Context.UnitOfWork;
+﻿using FoodTrack.Context.UnitOfWork;
 using FoodTrack.Models;
 using FoodTrack.Views;
 using FoodTrack.Views.Windows;
@@ -25,16 +25,17 @@ namespace FoodTrack
             {
                 IEnumerable<User> resultUserFound = unit.UserRepository.Get(x => x.UserLogin == deserializedeUser.UserLogin);
 
-                if (resultUserFound.First<User>().UserPassword.SequenceEqual<byte>(deserializedeUser.UserPassword))
+                if (resultUserFound.Count() != 0)
                 {
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
+                    if (resultUserFound.First<User>().UserPassword.SequenceEqual<byte>(deserializedeUser.UserPassword))
+                    {
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+                        return;
+                    }
                 }
-                else
-                {
                     LogInWindow logInWindow = new LogInWindow();
                     logInWindow.Show();
-                }
             }
            
         }

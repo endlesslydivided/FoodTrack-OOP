@@ -32,9 +32,15 @@ namespace FoodTrack.ViewModels
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.AppleAltSolid },
                 Label = "Питание",
-                NavigationType = typeof(TodayDietView),
-                
+                NavigationType = typeof(TodayDietView),              
                 NavigationDestination = new Uri("Views/Pages/TodayDietView.xaml", UriKind.RelativeOrAbsolute)
+            });
+            this.Menu.Add(new MenuItem()
+            {
+                Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.PlusSolid },
+                Label = "Добавить продукт",
+                NavigationType = typeof(AddProductView),
+                NavigationDestination = new Uri("../Views/Pages/AddProductView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()
             {
@@ -64,6 +70,7 @@ namespace FoodTrack.ViewModels
                 NavigationType = typeof(OptionsView),
                 NavigationDestination = new Uri("../Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
             });
+
         }
     }
 }

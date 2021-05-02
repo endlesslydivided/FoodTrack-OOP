@@ -44,6 +44,10 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"

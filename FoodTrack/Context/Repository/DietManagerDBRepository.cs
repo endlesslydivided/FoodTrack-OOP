@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FakeAtlas.Context.Repository
+namespace FoodTrack.Context.Repository
 {
     public class DietManagerDBRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:FoodTrack.Views.Pages"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
     x:Name="page"
     Style="{DynamicResource Pagetyle}"
@@ -19,9 +20,10 @@
             <Setter Property="TitleFontSize" Value="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=11}" />
             <Setter Property="Width" Value="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" />
             <Setter Property="Height" Value="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5.55}" />
-
         </Style>
+
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="650*" />
@@ -47,32 +49,43 @@
                 x:Name="tile"
                 Title="Завтрак"
                 Command="{Binding TableChangeToBreakfastCommand}"
-                CommandParameter="Breakfast"
                 Style="{StaticResource TileStyle}">
                 <iconPacks:PackIconFeatherIcons
                     Width="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Height="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Kind="Sunrise" />
             </mah:Tile>
-            <mah:Tile Title="Ланч" Style="{StaticResource TileStyle}">
+            <mah:Tile
+                Title="Ланч"
+                Command="{Binding TableChangeToLunchCommand}"
+                Style="{StaticResource TileStyle}">
                 <iconPacks:PackIconFontAwesome
                     Width="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Height="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Kind="MugHotSolid" />
             </mah:Tile>
-            <mah:Tile Title="Обед" Style="{StaticResource TileStyle}">
+            <mah:Tile
+                Title="Обед"
+                Command="{Binding TableChangeToDinnerCommand}"
+                Style="{StaticResource TileStyle}">
                 <iconPacks:PackIconFeatherIcons
                     Width="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Height="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Kind="Sun" />
             </mah:Tile>
-            <mah:Tile Title="Полдник" Style="{StaticResource TileStyle}">
+            <mah:Tile
+                Title="Полдник"
+                Command="{Binding TableChangeToSnackCommand}"
+                Style="{StaticResource TileStyle}">
                 <iconPacks:PackIconFeatherIcons
                     Width="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Height="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Kind="Sunset" />
             </mah:Tile>
-            <mah:Tile Title="Ужин" Style="{StaticResource TileStyle}">
+            <mah:Tile
+                Title="Ужин"
+                Command="{Binding TableChangeToSupperCommand}"
+                Style="{StaticResource TileStyle}">
                 <iconPacks:PackIconMaterial
                     Width="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
                     Height="{Binding ActualWidth, ElementName=tile, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=5}"
@@ -86,7 +99,36 @@
             Grid.Column="1"
             Margin="10,15,10,18"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding TableToShow}" />
+            ItemsSource="{Binding TableToShow}"
+            SelectedItem="{Binding LastSelected, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Продукт" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Калории" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Белки" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Жиры" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Углеводы" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Border
             Grid.Row="1"
             Grid.Column="1"
@@ -102,7 +144,7 @@
                     Command="{Binding RemoveDayCommand}"
                     Content="❮"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
-                <DatePicker 
+                <DatePicker
                     x:Name="DateTBResults"
                     Grid.Row="1"
                     Grid.Column="1"
@@ -111,20 +153,19 @@
                     FontFamily="Samsung Sharp Sans"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
                     FontWeight="Normal"
-                    
-                    SelectedDate="{Binding DateToChoose, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                     />
+                    SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=12}"
                     Margin="1,0,1,0"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Content="❯"
                     Command="{Binding AddDayCommand}"
+                    Content="❯"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
                 <Button
                     Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
                     Margin="5,5,5,5"
+                    Command="{Binding UpdateViewCommand}" CommandParameter="AddProductPage"
                     Content="Добавить"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
                     Style="{StaticResource MahApps.Styles.Button}" />
@@ -137,11 +178,15 @@
                 <Button
                     Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
                     Margin="5,5,5,5"
+                    Command="{Binding RemoveRowCommand}"
                     Content="Удалить"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
                     Style="{StaticResource MahApps.Styles.Button}" />
 
             </StackPanel>
         </Border>
+        
+
     </Grid>
+
 </UserControl>

@@ -1,4 +1,4 @@
-﻿using FakeAtlas.Context.UnitOfWork;
+﻿using FoodTrack.Context.UnitOfWork;
 using FoodTrack.Commands;
 using FoodTrack.Models;
 using System;
@@ -7,22 +7,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using Xceed.Wpf.Toolkit;
 
 namespace FoodTrack.ViewModels
 {
-    class TodayDietViewModel : BaseViewModel
+    public class TodayDietViewModel : BaseViewModel
     {
         private IEnumerable tableToShow;
         private DateTime dateToChoose;
+        private Report lastSelected;
+        private Xceed.Wpf.Toolkit.WindowState addWindowState = Xceed.Wpf.Toolkit.WindowState.Closed;
+        public ICommand UpdateViewCommand { get; set; }
 
         public TodayDietViewModel()
         {
             DateToChoose = DateTime.Today;
+            tableChangeToBreakfast();
         }
 
         #region Properties
 
+        public Report LastSelected
+        {
+            get { return lastSelected; }
+            set
+            {
+                lastSelected = value;
+                OnPropertyChanged("LastSelected");
+            }
+        }
+
+        public Xceed.Wpf.Toolkit.WindowState AddWindowState
+        {
+            get { return addWindowState; }
+            set
+            {
+                addWindowState = value;
+                OnPropertyChanged("AddWindowState");
+            }
+        }
 
         public IEnumerable TableToShow
         {
@@ -86,6 +111,118 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
+        #region Изменить таблицу "ланч"
+
+        private DelegateCommand tableChangeToLunchCommand;
+
+        public ICommand TableChangeToLunchCommand
+        {
+            get
+            {
+                if (tableChangeToLunchCommand == null)
+                {
+                    tableChangeToLunchCommand = new DelegateCommand(tableChangeToLunch);
+                }
+                return tableChangeToLunchCommand;
+            }
+        }
+
+        private void tableChangeToLunch()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Lunch");
+                TableToShow = reports;
+            }
+
+        }
+
+        #endregion
+        #region Изменить таблицу "обед"
+
+        private DelegateCommand tableChangeToDinnerCommand;
+
+        public ICommand TableChangeToDinnerCommand
+        {
+            get
+            {
+                if (tableChangeToDinnerCommand == null)
+                {
+                    tableChangeToDinnerCommand = new DelegateCommand(tableChangeToDinner);
+                }
+                return tableChangeToDinnerCommand;
+            }
+        }
+
+        private void tableChangeToDinner()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Dinner");
+                TableToShow = reports;
+            }
+
+        }
+
+        #endregion
+        #region Изменить таблицу "полдник"
+
+        private DelegateCommand tableChangeToSnackCommand;
+
+        public ICommand TableChangeToSnackCommand
+        {
+            get
+            {
+                if (tableChangeToSnackCommand == null)
+                {
+                    tableChangeToSnackCommand = new DelegateCommand(tableChangeToSnack);
+                }
+                return tableChangeToSnackCommand;
+            }
+        }
+
+        private void tableChangeToSnack()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Snack");
+                TableToShow = reports;
+            }
+
+        }
+
+        #endregion
+        #region Изменить таблицу "ужин"
+
+        private DelegateCommand tableChangeToSupperCommand;
+
+        public ICommand TableChangeToSupperCommand
+        {
+            get
+            {
+                if (tableChangeToSupperCommand == null)
+                {
+                    tableChangeToSupperCommand = new DelegateCommand(tableChangeToSupper);
+                }
+                return tableChangeToSupperCommand;
+            }
+        }
+
+        private void tableChangeToSupper()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Supper");
+                TableToShow = reports;
+            }
+
+        }
+
+        #endregion
 
         #region Увеличить дату на день
 
@@ -109,7 +246,6 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
-
         #region Уменьшить дату на день
 
         private DelegateCommand removeDayCommand;
@@ -130,6 +266,59 @@ namespace FoodTrack.ViewModels
         {
             DateToChoose = DateToChoose.AddDays(-1);
         }
+
+        #endregion
+
+        #region Удалить строку таблицы
+
+        private DelegateCommand removeRowCommand;
+
+        public ICommand RemoveRowCommand
+        {
+            get
+            {
+                if (removeRowCommand == null)
+                {
+                    removeRowCommand = new DelegateCommand(removeRow);
+                }
+                return removeRowCommand;
+            }
+        }
+
+        private void removeRow()
+        {
+            if (LastSelected != null)
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    unit.ReportRepository.Remove(LastSelected);
+                    unit.Save();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Открыть окно добавления продукта
+
+        //private DelegateCommand openAddWindowCommand;
+
+        //public ICommand OpenAddWindowCommand
+        //{
+        //    get
+        //    {
+        //        if (openAddWindowCommand == null)
+        //        {
+        //            openAddWindowCommand = new DelegateCommand(openAddWindow);
+        //        }
+        //        return openAddWindowCommand;
+        //    }
+        //}
+
+        //private void openAddWindow()
+        //{
+        //    AddWindowVisibility = Visibility.Visible;
+        //}
 
         #endregion
 
