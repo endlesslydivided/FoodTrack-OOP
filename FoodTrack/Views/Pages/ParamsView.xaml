@@ -34,9 +34,9 @@
                 <RowDefinition Height="55*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="165*" />
-                <ColumnDefinition Width="86*" />
-                <ColumnDefinition Width="139*" />
+                <ColumnDefinition Width="325*" />
+                <ColumnDefinition Width="121*" />
+                <ColumnDefinition Width="179*" />
             </Grid.ColumnDefinitions>
 
 
@@ -105,7 +105,8 @@
                 Grid.Column="1"
                 Margin="10,10,10,4"
                 mah:TextBoxHelper.ClearTextButton="True"
-                mah:TextBoxHelper.Watermark="Название" />
+                mah:TextBoxHelper.Watermark="Название"
+                Text="{Binding ProductName}"/>
 
             <TextBlock
                 Grid.Row="4"
@@ -119,10 +120,11 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 Margin="10,10,10,4"
-                mah:NumericInputMode="Decimal"
-                mah:ParsingNumberStyle="Float"
+                mah:NumericInputMode="Numbers"
+                mah:ParsingNumberStyle="Integer"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
+                Value="{Binding Calories}"
                 Maximum="300"
                 Minimum="0" />
 
@@ -142,6 +144,7 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
+                Value="{Binding Proteins}"
                 Maximum="300"
                 Minimum="0" />
 
@@ -161,6 +164,7 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
+                Value="{Binding Carbohydrates}"
                 Maximum="300"
                 Minimum="0" />
 
@@ -180,6 +184,7 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
+                Value="{Binding Fats}"
                 Maximum="300"
                 Minimum="0" />
 
@@ -195,7 +200,8 @@
                 Grid.Row="8"
                 Grid.Column="1"
                 Margin="10,10,10,10"
-                ItemsSource="{Binding CategoryCollection}" />
+                ItemsSource="{Binding CategoryCollection}"
+                SelectedValue="{Binding SelectedCategory}"/>
             <Button
                 Grid.Row="3"
                 Grid.RowSpan="6"

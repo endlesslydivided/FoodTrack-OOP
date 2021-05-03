@@ -21,6 +21,8 @@ namespace FoodTrack.ViewModels
         private decimal proteins;
         private decimal fats;
         private decimal carbohydrates;
+        private string productName;
+        private string selectedCategory;
 
         public ParamsViewModel()
         {
@@ -28,10 +30,6 @@ namespace FoodTrack.ViewModels
             {
                 CategoryCollection = unit.FoodCategoryRepository.Get();
             }
-            Proteins = default;
-            Carbohydrates = default;
-            Fats = default;
-            Calories = default;
         }
 
         #region Properties
@@ -43,6 +41,25 @@ namespace FoodTrack.ViewModels
             {
                 categoryCollection = value;
                 OnPropertyChanged("CategoryCollection");
+            }
+        }
+
+        public string SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                selectedCategory = value;
+                OnPropertyChanged("SelectedCategory");
+            }
+        }
+        public string ProductName
+        {
+            get { return productName; }
+            set
+            {
+                productName = value;
+                OnPropertyChanged("ProductName");
             }
         }
         public decimal Weight
@@ -157,6 +174,52 @@ namespace FoodTrack.ViewModels
             {
                 return false;
             }
+        }
+
+        #endregion
+
+        #region Добавить продукт в коллекцию
+
+        private DelegateCommand addProductToCollectionCommand;
+
+        public ICommand AddProductToCollectionCommand
+        {
+            get 
+            {
+                if (addParamsReportCommand == null)
+                {
+                    addParamsReportCommand = new DelegateCommand(addProductToCollection, canAddProductToCollection);
+                }
+                return addParamsReportCommand;
+            }
+        }
+
+        private void addProductToCollection()
+        {    
+            /*▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬*/
+
+            if (!Regex.IsMatch(Weight.ToString(), "^[0-9]{1,3}([.][0-9]{1,2})?$"))
+            {
+
+            }
+            else if (!Regex.IsMatch(Height.ToString(), "^[1-9]{1}[0-9]{0,2}$"))
+            {
+
+            }
+            else
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                
+                }
+            }
+        }
+
+        private bool canAddProductToCollection()
+        {
+            /*▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬*/
+
+            return false;
         }
 
         #endregion
