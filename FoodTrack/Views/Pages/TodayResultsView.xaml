@@ -348,13 +348,13 @@
 
             Orientation="Horizontal">
                 <Button
-                    Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=18}"
+                    Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=18}"
                     Margin="1,0,1,0"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Command="{Binding RemoveDayCommand}"
                     Content="❮"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}" />
+                    FontSize="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}" />
                 <DatePicker
                     x:Name="DateTBResults"
                     Grid.Row="1"
@@ -362,17 +362,17 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Samsung Sharp Sans"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
+                    FontSize="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
                     FontWeight="Normal"
                     SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
-                    Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=18}"
+                    Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=18}"
                     Margin="1,0,1,0"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Command="{Binding AddDayCommand}"
                     Content="❯"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}"></Button>
+                    FontSize="{Binding ActualHeight, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}"></Button>
             </StackPanel>
         </Border>
 

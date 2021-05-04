@@ -20,6 +20,9 @@ namespace FoodTrack
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            SplashScreen splash = new SplashScreen("../Resources/foodTrackSplash.png");
+            splash.Show(autoClose: true, topMost: true);
+            splash.Close(TimeSpan.FromSeconds(4));
             User deserializedeUser = XmlSerializeWrapper.Deserialize("../lastUser.xml");
             using (UnitOfWork unit = new UnitOfWork())
             {
