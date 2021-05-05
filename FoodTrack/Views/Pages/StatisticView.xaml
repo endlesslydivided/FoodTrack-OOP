@@ -11,6 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    x:Name="StatisticWindow"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:WidhtHeightConverter x:Key="MyWHConverter" />
@@ -43,8 +44,8 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="57*"/>
-            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="57*" />
+            <ColumnDefinition Width="23*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*" />
@@ -52,10 +53,11 @@
         </Grid.RowDefinitions>
         <mah:FlipView
             x:Name="FlipView1st"
+            Grid.ColumnSpan="2"
             Margin="10,10,10,10"
             BannerOpacity="0"
             BannerText=""
-            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}" Grid.ColumnSpan="2">
+            Foreground="{DynamicResource MahApps.Brushes.ThemeBackground}">
             <mah:FlipView.Items>
                 <Grid Margin="10">
                     <charts:CartesianChart
@@ -182,11 +184,15 @@
 
         </Border>
         <DataGrid
+            Grid.Row="1"
             Grid.Column="1"
             Margin="10,10,10,10"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding WeightsTable}"
-            SelectedItem="{Binding LastSelected, Mode=TwoWay}" Grid.Row="1" CanUserAddRows="False" FontSize="12" FontFamily="Samsung Sharp Sans">
+            CanUserAddRows="False"
+            FontFamily="Samsung Sharp Sans"
+            FontSize="12"
+            ItemsSource="{Binding StatisticCollection}"
+            SelectedItem="{Binding LastSelected}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ParamsDate}" FontFamily="SamsungOne 400">
                     <DataGridTextColumn.Header>
@@ -200,11 +206,11 @@
                 </DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                        <TextBlock Text="Удаление"/>
+                        <TextBlock Text="Удаление" />
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>
+                            <Button Command="{Binding ElementName=StatisticWindow, Path=DataContext.DeleteWeightRowCommand}">
                                 <Button.Content>
                                     <iconPacks:PackIconRadixIcons Kind="Cross2" />
                                 </Button.Content>

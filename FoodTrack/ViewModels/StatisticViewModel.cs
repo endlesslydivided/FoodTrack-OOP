@@ -6,9 +6,11 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -16,14 +18,14 @@ namespace FoodTrack.ViewModels
 {
     class StatisticViewModel : BaseViewModel
     {
-        private IEnumerable<UsersParam> statisticCollection;
 
-        private List<UsersParam> weightsTable;
+        private IEnumerable<UsersParam> statisticCollection;
 
         private decimal weight;
         private int height;
         private string lastReportDate;
         private string mostCategory;
+        private UsersParam lastSelected;
 
         public SeriesCollection seriesCollection;
         private string[] labels;
@@ -32,6 +34,8 @@ namespace FoodTrack.ViewModels
         {
             using(UnitOfWork unit = new UnitOfWork())
             {
+                LastSelected = default;
+
                 StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
                 IEnumerable<Report> report = unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
 
@@ -52,6 +56,7 @@ namespace FoodTrack.ViewModels
 
                     ChartValues<decimal> weights = new ChartValues<decimal>(StatisticCollection.Select(x => x.UserWeight));
                     List<string> labels = new List<string>();
+
                     foreach(DateTime x in StatisticCollection.Select(x => x.ParamsDate))
                     {
                         labels.Add(x.ToString("d"));
@@ -73,32 +78,28 @@ namespace FoodTrack.ViewModels
                         Fill = Brushes.Transparent
                     });
 
-                    WeightsTable = StatisticCollection.Select(x => x).ToList();
                 }
                 else
                 {
                     Height = 0;
                     Weight = 0;
-                }
-
-                
+                }                
             }
         }
-
+        
         #region Properties
 
         public Func<double, string> YFormatter { get; set; }
 
-        public List<UsersParam> WeightsTable
+        public UsersParam LastSelected
         {
-            get { return weightsTable; }
+            get { return lastSelected; }
             set
             {
-                weightsTable = value;
-                OnPropertyChanged("WeightsTable");
+                lastSelected = value;
+                OnPropertyChanged("LastSelected");
             }
         }
-
 
         public string[] Labels
         {
@@ -129,15 +130,6 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("MostCategory");
             }
         }
-        public IEnumerable<UsersParam> StatisticCollection
-        {
-            get { return statisticCollection; }
-            set
-            {
-                statisticCollection = value;
-                OnPropertyChanged("StatisticCollection");
-            }
-        }
         public decimal Weight
         {
             get { return weight; }
@@ -166,35 +158,90 @@ namespace FoodTrack.ViewModels
             }
         }
 
+        public IEnumerable<UsersParam> StatisticCollection
+        {
+            get { return statisticCollection; }
+            set
+            {
+                statisticCollection = value;
+                OnPropertyChanged("StatisticCollection");
+            }
+        }
         #endregion
 
         #region Commands
 
-        #region COMMAND1
+        #region Удалить запись в таблице вес
 
-        private DelegateCommand exampleCommand;
+        private DelegateCommand deleteWeightRowCommand;
 
-        public ICommand ExampleCommand
+        public ICommand DeleteWeightRowCommand
         {
             get
             {
-                if (exampleCommand == null)
+                if (deleteWeightRowCommand == null)
                 {
-                    exampleCommand = new DelegateCommand(Example);
+                    deleteWeightRowCommand = new DelegateCommand(deleteWeightRow, canDeleteWeightRow);
                 }
-                return exampleCommand;
+                return deleteWeightRowCommand;
             }
         }
 
-        private void Example()
-        {
 
+        private void deleteWeightRow()
+        {
+            if (LastSelected != null)
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    UsersParam toDelete = unit.UserParamRepository.Get(x => x.ParamsDate == lastSelected.ParamsDate && x.IdParams == deserializedUser.Id).First();
+                    unit.UserParamRepository.Remove(toDelete);
+                    unit.Save();
+
+                    StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
+                }
+
+                SeriesCollection.Clear();
+
+                ChartValues<decimal> weights = new ChartValues<decimal>(StatisticCollection.Select(x => x.UserWeight));
+                List<string> labels = new List<string>();
+
+                foreach (DateTime x in StatisticCollection.Select(x => x.ParamsDate))
+                {
+                    labels.Add(x.ToString("d"));
+                }
+
+                Labels = labels.ToArray();
+                SeriesCollection.Add(new LineSeries
+                {
+                    Title = "Вес",
+                    Values = weights,
+                    LineSmoothness = 0,
+                    PointGeometrySize = 15,
+                    PointForeground = Brushes.Coral,
+                    Stroke = Brushes.Coral,
+                    Fill = Brushes.Transparent
+                });
+
+
+            }
+        }
+        private bool canDeleteWeightRow()
+        {
+            if(StatisticCollection.Count() >1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        #endregion
+            #endregion
 
 
-        #endregion
+            #endregion
 
-    }
+        }
 }
