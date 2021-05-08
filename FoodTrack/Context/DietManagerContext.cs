@@ -39,7 +39,7 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<FoodCategory>(entity =>
             {
-                entity.HasIndex(e => e.CategoryName, "UQ__FoodCate__8517B2E006DE4F2E")
+                entity.HasIndex(e => e.CategoryName, "UQ__FoodCate__8517B2E0AC031A4F")
                     .IsUnique();
 
                 entity.Property(e => e.CategoryName)
@@ -49,6 +49,9 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<Product>(entity =>
             {
+                entity.HasIndex(e => e.ProductName, "UQ__Products__DD5A978A7933351E")
+                    .IsUnique();
+
                 entity.Property(e => e.CaloriesGram)
                     .HasColumnType("decimal(7, 2)")
                     .HasDefaultValueSql("('0')");
@@ -87,19 +90,7 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<Report>(entity =>
             {
-                entity.Property(e => e.DayCalories)
-                    .HasColumnType("decimal(7, 2)")
-                    .HasDefaultValueSql("('0')");
-
-                entity.Property(e => e.DayCarbohydrates)
-                    .HasColumnType("decimal(7, 2)")
-                    .HasDefaultValueSql("('0')");
-
-                entity.Property(e => e.DayFats)
-                    .HasColumnType("decimal(7, 2)")
-                    .HasDefaultValueSql("('0')");
-
-                entity.Property(e => e.DayProteins)
+                entity.Property(e => e.DayGram)
                     .HasColumnType("decimal(7, 2)")
                     .HasDefaultValueSql("('0')");
 
@@ -110,6 +101,11 @@ namespace FoodTrack.Context
                     .IsFixedLength(true);
 
                 entity.Property(e => e.MostCategory).HasMaxLength(50);
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ReportDate).HasColumnType("datetime");
 
@@ -124,14 +120,21 @@ namespace FoodTrack.Context
                     .HasPrincipalKey(p => p.CategoryName)
                     .HasForeignKey(d => d.MostCategory)
                     .HasConstraintName("FK_REPORTS_FCATEGORY");
+
+                entity.HasOne(d => d.ProductNameNavigation)
+                    .WithMany(p => p.Reports)
+                    .HasPrincipalKey(p => p.ProductName)
+                    .HasForeignKey(d => d.ProductName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_REPORTS_PRODUCTS");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.UserPassword, "UQ__Users__5DF58B81DFA38FB1")
+                entity.HasIndex(e => e.UserPassword, "UQ__Users__5DF58B810168D2FC")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserLogin, "UQ__Users__7F8E8D5EE5C60A53")
+                entity.HasIndex(e => e.UserLogin, "UQ__Users__7F8E8D5E4C0693EE")
                     .IsUnique();
 
                 entity.Property(e => e.IsAdmin)
@@ -153,8 +156,6 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<UsersDatum>(entity =>
             {
-                entity.Property(e => e.Age).HasDefaultValueSql("('0')");
-
                 entity.Property(e => e.Birthday).HasColumnType("date");
 
                 entity.Property(e => e.FullName)

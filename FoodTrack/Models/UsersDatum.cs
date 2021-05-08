@@ -11,7 +11,6 @@ namespace FoodTrack.Models
         public int IdData { get; set; }
         public string FullName { get; set; }
         public DateTime Birthday { get; set; }
-        public int Age { get; set; }
 
         public virtual User IdDataNavigation { get; set; }
     }

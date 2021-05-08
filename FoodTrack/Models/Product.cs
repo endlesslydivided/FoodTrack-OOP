@@ -7,6 +7,10 @@ namespace FoodTrack.Models
 {
     public partial class Product
     {
+        public Product()
+        {
+            Reports = new HashSet<Report>();
+        }
 
         public int Id { get; set; }
         public int IdAdded { get; set; }
@@ -19,5 +23,6 @@ namespace FoodTrack.Models
 
         public virtual FoodCategory FoodCategoryNavigation { get; set; }
         public virtual User IdAddedNavigation { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

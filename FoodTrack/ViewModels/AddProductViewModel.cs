@@ -16,12 +16,16 @@ namespace FoodTrack.ViewModels
     {
         private string searchText;
         private IEnumerable collectionOfProducts;
-        private decimal gramValue;
         private Product selectedProduct;
+        private DateTime dateToChoose;
+
+        private Report report;
 
 
         public AddProductViewModel()
         {
+            report = new Report();
+            report.IdReport = deserializedUser.Id;
             SearchText = default; 
             CollectionOfProducts = default;
             GramValue = default;
@@ -32,10 +36,10 @@ namespace FoodTrack.ViewModels
 
         public decimal GramValue
         {
-            get { return gramValue; }
+            get { return report.DayGram; }
             set
             {
-                gramValue = value;
+                report.DayGram = value;
                 OnPropertyChanged("GramValue");
             }
         }
@@ -68,6 +72,16 @@ namespace FoodTrack.ViewModels
             {
                 collectionOfProducts = value;
                 OnPropertyChanged("CollectionOfProducts");
+            }
+        }
+
+        public DateTime DateToChoose
+        {
+            get { return dateToChoose; }
+            set
+            {
+                dateToChoose = value;
+                OnPropertyChanged("DateToChoose");
             }
         }
 
@@ -145,6 +159,7 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
+
         #region Добавить продукт
 
         private DelegateCommand addProductCommand;
@@ -165,17 +180,13 @@ namespace FoodTrack.ViewModels
         {
             using (UnitOfWork unit = new UnitOfWork())
             {
-                if (SearchText != "")
-                {
-                    IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "%" + SearchText + "$"));
-                    CollectionOfProducts = products;
-
-                }
-                else if (SearchText == "")
-                {
-                    IEnumerable products = unit.ProductRepository.Get();
-                    CollectionOfProducts = products;
-                }
+                report.DayGram = GramValue;
+                report.ProductName = SelectedProduct.ProductName;
+                report.ReportDate = DateToChoose;
+                report.MostCategory = SelectedProduct.FoodCategory;
+                
+                unit.ReportRepository.Create(report);
+                unit.Save();
             }
         }
 
@@ -192,6 +203,52 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
+
+        #region Увеличить дату на день
+
+        private DelegateCommand addDayCommand;
+
+        public ICommand AddDayCommand
+        {
+            get
+            {
+                if (addDayCommand == null)
+                {
+                    addDayCommand = new DelegateCommand(addDay);
+                }
+                return addDayCommand;
+            }
+        }
+
+        private void addDay()
+        {
+            DateToChoose = DateToChoose.AddDays(1);
+        }
+
+        #endregion
+        #region Уменьшить дату на день
+
+        private DelegateCommand removeDayCommand;
+
+        public ICommand RemoveDayCommand
+        {
+            get
+            {
+                if (removeDayCommand == null)
+                {
+                    removeDayCommand = new DelegateCommand(removeDay);
+                }
+                return removeDayCommand;
+            }
+        }
+
+        private void removeDay()
+        {
+            DateToChoose = DateToChoose.AddDays(-1);
+        }
+
+        #endregion
+
         #endregion
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Xceed.Wpf.Toolkit;
+using FoodTrack.Views.Windows;
 
 namespace FoodTrack.ViewModels
 {
@@ -18,7 +19,6 @@ namespace FoodTrack.ViewModels
         private IEnumerable tableToShow;
         private DateTime dateToChoose;
         private Report lastSelected;
-        private Xceed.Wpf.Toolkit.WindowState addWindowState = Xceed.Wpf.Toolkit.WindowState.Closed;
         public ICommand UpdateViewCommand { get; set; }
 
         public TodayDietViewModel()
@@ -36,16 +36,6 @@ namespace FoodTrack.ViewModels
             {
                 lastSelected = value;
                 OnPropertyChanged("LastSelected");
-            }
-        }
-
-        public Xceed.Wpf.Toolkit.WindowState AddWindowState
-        {
-            get { return addWindowState; }
-            set
-            {
-                addWindowState = value;
-                OnPropertyChanged("AddWindowState");
             }
         }
 
@@ -69,15 +59,6 @@ namespace FoodTrack.ViewModels
             }
         }
 
-        public string ExampleP
-        {
-            get { return ExampleP; }
-            set
-            {
-                ExampleP = value;
-                OnPropertyChanged("ExampleP");
-            }
-        }
 
         #endregion
 
@@ -299,26 +280,28 @@ namespace FoodTrack.ViewModels
 
         #endregion
 
-        #region Открыть окно добавления продукта
 
-        //private DelegateCommand openAddWindowCommand;
 
-        //public ICommand OpenAddWindowCommand
-        //{
-        //    get
-        //    {
-        //        if (openAddWindowCommand == null)
-        //        {
-        //            openAddWindowCommand = new DelegateCommand(openAddWindow);
-        //        }
-        //        return openAddWindowCommand;
-        //    }
-        //}
+        #region Открыть окно изменения продукта
 
-        //private void openAddWindow()
-        //{
-        //    AddWindowVisibility = Visibility.Visible;
-        //}
+        private DelegateCommand openChangeProductWindowCommand;
+
+        public ICommand OpenChangeProductWindowCommand
+        {
+            get
+            {
+                if (openChangeProductWindowCommand == null)
+                {
+                    openChangeProductWindowCommand = new DelegateCommand(openChangeProductWindow);
+                }
+                return openChangeProductWindowCommand;
+            }
+        }
+
+        private void openChangeProductWindow()
+        {
+            ChangeProductModalWindow window = new(LastSelected);
+        }
 
         #endregion
 

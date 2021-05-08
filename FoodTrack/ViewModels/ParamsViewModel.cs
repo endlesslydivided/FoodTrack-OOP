@@ -17,15 +17,12 @@ namespace FoodTrack.ViewModels
         private IEnumerable categoryCollection;
         private decimal weight;
         private int height;
-        private int calories;
-        private decimal proteins;
-        private decimal fats;
-        private decimal carbohydrates;
-        private string productName;
-        private string selectedCategory;
+
+        private Product product;
 
         public ParamsViewModel()
         {
+            product = new Product();
             using (UnitOfWork unit = new UnitOfWork())
             {
                 CategoryCollection = unit.FoodCategoryRepository.Get();
@@ -46,19 +43,19 @@ namespace FoodTrack.ViewModels
 
         public string SelectedCategory
         {
-            get { return selectedCategory; }
+            get { return product.FoodCategory; }
             set
             {
-                selectedCategory = value;
+                product.FoodCategory = value;
                 OnPropertyChanged("SelectedCategory");
             }
         }
         public string ProductName
         {
-            get { return productName; }
+            get { return product.ProductName; }
             set
             {
-                productName = value;
+                product.ProductName = value;
                 OnPropertyChanged("ProductName");
             }
         }
@@ -82,37 +79,37 @@ namespace FoodTrack.ViewModels
         }
         public decimal Proteins
         {
-            get { return proteins; }
+            get { return product.ProteinsGram; }
             set
             {
-                proteins = value;
+                product.ProteinsGram = value;
                 OnPropertyChanged("Proteins");
             }
         }
         public decimal Carbohydrates
         {
-            get { return carbohydrates; }
+            get { return product.CarbohydratesGram; }
             set
             {
-                carbohydrates = value;
+                product.CarbohydratesGram = value;
                 OnPropertyChanged("Carbohydrates");
             }
         }
         public decimal Fats
         {
-            get { return fats; }
+            get { return product.FatsGram; }
             set
             {
-                fats = value;
+                product.FatsGram = value;
                 OnPropertyChanged("Fats");
             }
         }
-        public int  Calories
+        public decimal  Calories
         {
-            get { return calories; }
+            get { return product.CaloriesGram; }
             set
             {
-                calories = value;
+                product.CaloriesGram = value;
                 OnPropertyChanged("Calories");
             }
         }
@@ -186,40 +183,32 @@ namespace FoodTrack.ViewModels
         {
             get 
             {
-                if (addParamsReportCommand == null)
+                if (addProductToCollectionCommand == null)
                 {
-                    addParamsReportCommand = new DelegateCommand(addProductToCollection, canAddProductToCollection);
+                    addProductToCollectionCommand = new DelegateCommand(addProductToCollection, canAddProductToCollection);
                 }
-                return addParamsReportCommand;
+                return addProductToCollectionCommand;
             }
         }
 
         private void addProductToCollection()
         {    
-            /*▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬*/
-
-            if (!Regex.IsMatch(Weight.ToString(), "^[0-9]{1,3}([.][0-9]{1,2})?$"))
+            using (UnitOfWork unit = new UnitOfWork())
             {
-
-            }
-            else if (!Regex.IsMatch(Height.ToString(), "^[1-9]{1}[0-9]{0,2}$"))
-            {
-
-            }
-            else
-            {
-                using (UnitOfWork unit = new UnitOfWork())
-                {
                 
-                }
             }
         }
 
         private bool canAddProductToCollection()
         {
-            /*▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬*/
-
-            return false;
+            if (ProductName.Length == 0 || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #endregion

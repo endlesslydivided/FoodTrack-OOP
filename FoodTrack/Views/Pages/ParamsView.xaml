@@ -207,7 +207,7 @@
                 Grid.RowSpan="6"
                 Grid.Column="2"
                 Margin="10,10,10,10"
-                Content="Добавить новый продукт" />
+                Content="Добавить новый продукт" Command="{Binding AddProductToCollectionCommand}" />
 
         </Grid>
     </Border>

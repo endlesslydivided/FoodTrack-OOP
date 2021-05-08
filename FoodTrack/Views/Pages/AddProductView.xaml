@@ -43,7 +43,7 @@
 
                 <TextBox
                     x:Name="SearchTB"
-                    Grid.ColumnSpan="4"
+                    Grid.ColumnSpan="2"
                     Margin="10,10,10,10"
                     mah:TextBoxHelper.Watermark="Название продукта"
                     FontFamily="SamsungOne 400"
@@ -81,6 +81,34 @@
                     <ComboBoxItem Content="Полдник" />
                     <ComboBoxItem Content="Ужин" />
                 </ComboBox>
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="2">
+                    <Button
+                    Margin="1,0,1,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding RemoveDayCommand}"
+                    Content="❮"
+                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                    <DatePicker
+                    x:Name="DateTBResults"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Samsung Sharp Sans"
+                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
+                    FontWeight="Normal"
+                    SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                    Margin="1,0,1,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding AddDayCommand}"
+                    Content="❯"
+                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+
+                </StackPanel>
             </Grid>
 
         </Border>
@@ -89,7 +117,8 @@
             Grid.Row="1"
             Margin="10,10,10,5"
             ItemsSource="{Binding CollectionOfProducts}"
-            SelectedItem="{Binding SelectedProduct}">
+            SelectedItem="{Binding SelectedProduct}"
+            >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border>

@@ -99,6 +99,7 @@
             Grid.Column="1"
             Margin="10,15,10,18"
             AutoGenerateColumns="False"
+            CanUserAddRows="False"
             ItemsSource="{Binding TableToShow}"
             SelectedItem="{Binding LastSelected, Mode=TwoWay}">
             <DataGrid.Columns>
@@ -127,6 +128,21 @@
                         <TextBlock Text="Углеводы" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="Удаление" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ElementName=StatisticWindow, Path=DataContext.RemoveRowCommand}">
+                                <Button.Content>
+                                    <iconPacks:PackIconRadixIcons Kind="Cross2" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
         <Border
@@ -165,27 +181,14 @@
                 <Button
                     Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
                     Margin="5,5,5,5"
-                    Command="{Binding UpdateViewCommand}" CommandParameter="AddProductPage"
-                    Content="Добавить"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
-                    Style="{StaticResource MahApps.Styles.Button}" />
-                <Button
-                    Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
-                    Margin="5,5,5,5"
                     Content="Изменить"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
-                    Style="{StaticResource MahApps.Styles.Button}" />
-                <Button
-                    Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
-                    Margin="5,5,5,5"
-                    Command="{Binding RemoveRowCommand}"
-                    Content="Удалить"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
-                    Style="{StaticResource MahApps.Styles.Button}" />
+                    Style="{StaticResource MahApps.Styles.Button}"
+                    Command="{Binding OpenChangeProductWindowCommand}"/>
 
             </StackPanel>
         </Border>
-        
+
 
     </Grid>
 

@@ -34,10 +34,8 @@
         </StackPanel>
         <StackPanel
             Width="247"
-            Height="148"
             Margin="0,25,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top"
             Orientation="Vertical">
             <StackPanel.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.1" />
@@ -54,7 +52,7 @@
                 mah:TextBoxHelper.Watermark="Логин"
                 Text="{Binding UserLogin}" />
             <TextBlock
-                Margin="0,10,0,0"
+                Margin="0,2,0,0"
                 FontFamily="Samsung Sharp Sans"
                 FontSize="15"
                 FontStyle="Normal"
@@ -65,10 +63,62 @@
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Пароль"
                 Text="{Binding UserPassword}" />
+            <StackPanel
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="5,10,5,10"
+                    FontFamily="Samsung Sharp Sans"
+                    FontSize="15"
+                    FontStyle="Normal"
+                    FontWeight="Normal"
+                    Foreground="White"><Run Text="Вес:" /></TextBlock>
+                <TextBox
+                    Margin="10,5,10,5"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Вес"
+                    Text="{Binding UserWeight}" />
+                <TextBlock
+                    Margin="5,10,5,10"
+                    FontFamily="Samsung Sharp Sans"
+                    FontSize="15"
+                    FontStyle="Normal"
+                    FontWeight="Normal"
+                    Foreground="White"><Run Text="Рост:" /></TextBlock>
+                <TextBox
+                    Margin="10,5,10,5"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Рост"
+                    Text="{Binding UserHeight}" />
+            </StackPanel>
+            <StackPanel
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="5,10,5,10"
+                    FontFamily="Samsung Sharp Sans"
+                    FontSize="15"
+                    FontStyle="Normal"
+                    FontWeight="Normal"
+                    Foreground="White"><Run Text="Дата рождения:" /></TextBlock>
+                <DatePicker
+                    x:Name="DateTBResults"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Samsung Sharp Sans"
+                    FontWeight="Normal"
+                    SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     x:Name="ReadyRegisterBTTN"
-                    Margin="10,10,0,0"
+                    Margin="0,10,0,0"
                     Background="{DynamicResource MahApps.Brushes.Gray}"
                     Command="{Binding RegisterCommand}"
                     Content="Зарегистрироваться"
