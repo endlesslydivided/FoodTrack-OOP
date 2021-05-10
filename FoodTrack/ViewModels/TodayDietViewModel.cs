@@ -85,7 +85,7 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
-                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Breakfast");
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Завтрак");
                 TableToShow = reports;
             }
 

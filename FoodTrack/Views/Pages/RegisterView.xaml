@@ -33,7 +33,7 @@
                 Fill="White" />
         </StackPanel>
         <StackPanel
-            Width="247"
+            Width="319"
             Margin="0,25,0,0"
             HorizontalAlignment="Center"
             Orientation="Vertical">
@@ -75,11 +75,11 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="White"><Run Text="Вес:" /></TextBlock>
-                <TextBox
+                <mah:NumericUpDown
+                    Width="81"
                     Margin="10,5,10,5"
-                    mah:TextBoxHelper.ClearTextButton="True"
                     mah:TextBoxHelper.Watermark="Вес"
-                    Text="{Binding UserWeight}" />
+                    Value="{Binding UserWeight}" Minimum="10" Maximum="300"  />
                 <TextBlock
                     Margin="5,10,5,10"
                     FontFamily="Samsung Sharp Sans"
@@ -87,11 +87,11 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="White"><Run Text="Рост:" /></TextBlock>
-                <TextBox
+                <mah:NumericUpDown
+                    Width="89"
                     Margin="10,5,10,5"
-                    mah:TextBoxHelper.ClearTextButton="True"
                     mah:TextBoxHelper.Watermark="Рост"
-                    Text="{Binding UserHeight}" />
+                    Value="{Binding UserHeight}" Minimum="50" Maximum="250"/>
             </StackPanel>
             <StackPanel
                 Margin="0,2,0,0"
@@ -114,6 +114,30 @@
                     FontFamily="Samsung Sharp Sans"
                     FontWeight="Normal"
                     SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel
+                Margin="0,2,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBox
+                    Width="94"
+                    Margin="5,5,5,5"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Имя"
+                    Text="{Binding UserName}" />
+                <TextBox
+                    Width="94"
+                    Margin="5,5,5,5"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Фамилия"
+                    Text="{Binding UserSurname}" />
+                <TextBox
+                    Width="94"
+                    Margin="5,5,5,5"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Отчество"
+                    Text="{Binding UserLastname}" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button

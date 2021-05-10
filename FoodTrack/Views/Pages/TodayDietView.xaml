@@ -181,10 +181,10 @@
                 <Button
                     Width="{Binding ActualWidth, ElementName=page, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=9}"
                     Margin="5,5,5,5"
+                    Command="{Binding OpenChangeProductWindowCommand}"
                     Content="Изменить"
                     FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=45}"
-                    Style="{StaticResource MahApps.Styles.Button}"
-                    Command="{Binding OpenChangeProductWindowCommand}"/>
+                    Style="{StaticResource MahApps.Styles.Button}" />
 
             </StackPanel>
         </Border>

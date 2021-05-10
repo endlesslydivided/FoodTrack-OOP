@@ -14,7 +14,7 @@ namespace FoodTrack.ViewModels
 {
     class ParamsViewModel : BaseViewModel
     {
-        private IEnumerable categoryCollection;
+        private List<string> categoryCollection;
         private decimal weight;
         private int height;
 
@@ -23,15 +23,22 @@ namespace FoodTrack.ViewModels
         public ParamsViewModel()
         {
             product = new Product();
+            ProductName = default;
             using (UnitOfWork unit = new UnitOfWork())
             {
-                CategoryCollection = unit.FoodCategoryRepository.Get();
+                IEnumerable categories = unit.FoodCategoryRepository.Get();
+                CategoryCollection = new List<string>();
+                foreach (FoodCategory x in categories)
+                {
+                    CategoryCollection.Add(x.CategoryName);
+                }
             }
+            SelectedCategory = categoryCollection.First();
         }
 
         #region Properties
 
-        public IEnumerable CategoryCollection
+        public List<string> CategoryCollection
         {
             get { return categoryCollection; }
             set
@@ -195,13 +202,17 @@ namespace FoodTrack.ViewModels
         {    
             using (UnitOfWork unit = new UnitOfWork())
             {
-                
+                product.IdAdded = deserializedUser.Id;
+                product.FoodCategory = SelectedCategory;
+
+                unit.ProductRepository.Create(product);
+                unit.Save();
             }
         }
 
         private bool canAddProductToCollection()
         {
-            if (ProductName.Length == 0 || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "")
+            if (ProductName == "" || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "")
             {
                 return false;
             }

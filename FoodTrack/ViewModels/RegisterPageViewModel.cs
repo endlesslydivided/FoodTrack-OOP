@@ -18,34 +18,51 @@ namespace FoodTrack.ViewModels
         private string userLogin;
         private string message;
         private string userPassword;
-        private decimal userWeight;
-        private int userHeight;
 
+        private string userName;
+        private string userSurname;
+        private string userLastname;
+
+
+        private UsersParam usersParam;
         private UsersDatum usersDatum;
+
+
+        public RegisterPageViewModel()
+        {
+            UpdateViewCommand = new UpdateViewCommand(this);
+            Message = "Придумайте логин(от 5 до 20 символов) и пароль(от 8 до 20 символов). Логин и пароль могут содержать латинские символы и цифры";
+            usersDatum = new UsersDatum();
+            usersParam = new UsersParam();
+            usersParam.ParamsDate = DateTime.Now;
+            usersDatum.Birthday = DateTime.Now;
+
+            UserLastname = default;
+            UserSurname = default;
+            UserName = default;
+        }
 
 
         #region Properties
 
         public decimal UserWeight
         {
-            get { return userWeight; }
+            get { return usersParam.UserWeight; }
             set
             {
-                userWeight = value;
+                usersParam.UserWeight = value;
                 OnPropertyChanged("UserWeight");
             }
         }
-
         public int UserHeight
         {
-            get { return userHeight; }
+            get { return usersParam.UserHeight; }
             set
             {
-                userHeight = value;
+                usersParam.UserHeight = value;
                 OnPropertyChanged("UserHeight");
             }
         }
-
         public string UserLogin
         {
             get { return userLogin; }
@@ -54,9 +71,7 @@ namespace FoodTrack.ViewModels
                 userLogin = value;
                 OnPropertyChanged("UserLogin");
             }
-        }
-
-        
+        }       
         public string UserPassword
         {
             get { return userPassword; }
@@ -75,7 +90,33 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("Message");
             }
         }
-
+        public string UserName
+        {
+            get { return userName; }
+            set
+            {
+                userName = value;
+                OnPropertyChanged("UserName");
+            }
+        }
+        public string UserSurname
+        {
+            get { return userSurname; }
+            set
+            {
+                userSurname = value;
+                OnPropertyChanged("UserSurname");
+            }
+        }
+        public string UserLastname
+        {
+            get { return userLastname; }
+            set
+            {
+                userLastname = value;
+                OnPropertyChanged("UserLastname");
+            }
+        }
         public DateTime DateToChoose
         {
             get { return usersDatum.Birthday; }
@@ -85,6 +126,7 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("DateToChoose");
             }
         }
+
         #endregion 
 
         #region Commands
@@ -93,13 +135,6 @@ namespace FoodTrack.ViewModels
 
         public ICommand UpdateViewCommand { get; set; }
 
-        public RegisterPageViewModel()
-        {
-            UpdateViewCommand = new UpdateViewCommand(this);
-            Message = "Придумайте логин(от 5 до 20 символов) и пароль(от 8 до 20 символов). Логин и пароль могут содержать латинские символы и цифры";
-            usersDatum = new UsersDatum();
-            usersDatum.Birthday = new DateTime();
-        }
 
         #endregion
 
@@ -131,28 +166,48 @@ namespace FoodTrack.ViewModels
                 }
                 else
                 {
-                    User RegUser = new User();
-                    RegUser.Salt = PasswordHash.GenerateSaltForPassword().ToString();
-                    RegUser.UserPassword = PasswordHash.ComputePasswordHash(UserPassword, int.Parse(RegUser.Salt));
-                    RegUser.UserLogin = UserLogin;
-                    unit.UserRepository.Create(RegUser);
+                    User regUser = new User();
+                    regUser.Salt = PasswordHash.GenerateSaltForPassword().ToString();
+                    regUser.UserPassword = PasswordHash.ComputePasswordHash(UserPassword, int.Parse(regUser.Salt));
+                    regUser.UserLogin = UserLogin;
+
+                    unit.UserRepository.Create(regUser);
                     unit.Save();
 
-                   
+                    User foundUser = unit.UserRepository.Get(x => x.UserLogin == regUser.UserLogin).First();
+
+                    usersDatum.IdData = foundUser.Id;
+                    usersDatum.FullName = UserSurname + " " + UserName + " " + UserLastname;
+
+                    unit.UserDatumRepository.Create(usersDatum);
+                    unit.Save();
+
+                    usersParam.IdParams = foundUser.Id;
+
+                    unit.UserParamRepository.Create(usersParam);
+                    unit.Save();
 
                     Message = "Регистрация прошла успешно! Введите логин и пароль";
-                    UpdateViewCommand = new UpdateViewCommand(new LogInViewModel());
+                     UpdateViewCommand.Execute("LogInPage");
                 }
             }
         }
 
         private bool CanRegister()
         {
-           if(UserLogin == "" || UserPassword == "" || UserWeight == 0 || UserHeight == 0)
+           if(UserLogin == "" || UserPassword == "" || UserWeight == 0 || UserHeight == 0 || UserName == "" || UserLastname == "" || UserSurname == "")
            {
                 return false;
            }
-           else if (!Regex.IsMatch(UserLogin, "^([a-z]|[A-Z]|[0-9]){5,20}$") || !Regex.IsMatch(UserPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
+           else if(DateToChoose.CompareTo(DateTime.Today.Date) >= 0 )
+           {
+                return false;
+           }
+            else if (!Regex.IsMatch(UserLogin, "^([a-z]|[A-Z]|[0-9]){5,20}$") || 
+                !Regex.IsMatch(UserPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$")||
+                !Regex.IsMatch(UserName, "^[А-Я]{1}[а-я]{1,99}$") ||
+                !Regex.IsMatch(UserLastname, "^[А-Я]{1}[а-я]{1,99}$") ||
+                !Regex.IsMatch(UserSurname, "^[А-Я]{1}[а-я]{1,99}$"))
            {
                 return false;
            }

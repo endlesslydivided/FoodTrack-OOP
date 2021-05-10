@@ -24,7 +24,6 @@ namespace FoodTrack.Views.Windows
         {
             InitializeComponent();
             DataContext = new LogInViewModel();
-
         }
     }
 }

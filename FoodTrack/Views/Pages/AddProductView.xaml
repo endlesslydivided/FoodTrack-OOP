@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:FoodTrack.Views.Pages"
+    xmlns:models="clr-namespace:FoodTrack.Models"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -74,7 +76,7 @@
                     Grid.Row="1"
                     Grid.Column="3"
                     Margin="10,10,10,10"
-                    FontFamily="SamsungOne 400">
+                    FontFamily="SamsungOne 400" SelectedItem="{Binding SelectedPeriod}">
                     <ComboBoxItem Content="Завтрак" IsSelected="True" />
                     <ComboBoxItem Content="Ланч" />
                     <ComboBoxItem Content="Обед" />
@@ -89,7 +91,7 @@
                     BorderBrush="Transparent"
                     Command="{Binding RemoveDayCommand}"
                     Content="❮"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
                     <DatePicker
                     x:Name="DateTBResults"
                     Grid.Row="1"
@@ -97,7 +99,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Samsung Sharp Sans"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
+                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
                     FontWeight="Normal"
                     SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
@@ -106,7 +108,7 @@
                     BorderBrush="Transparent"
                     Command="{Binding AddDayCommand}"
                     Content="❯"
-                    FontSize="{Binding ActualHeight, ElementName=page, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
 
                 </StackPanel>
             </Grid>
@@ -117,19 +119,19 @@
             Grid.Row="1"
             Margin="10,10,10,5"
             ItemsSource="{Binding CollectionOfProducts}"
-            SelectedItem="{Binding SelectedProduct}"
+            SelectedItem="{Binding SelectedProduct}" 
             >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border>
-                        <Grid>
-                            <TextBlock x:Name="ProductName" FontFamily="Samsung Sharp Sans" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock x:Name="ProductName" Text="{Binding ProductName}" FontFamily="Samsung Sharp Sans" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="SamsungOne 400" Text="Калории:" />
                                 <TextBlock
                                     x:Name="Calories"
                                     FontFamily="SamsungOne 400"
-                                    Text="{Binding CaloriesValue}" />
+                                    Text="{Binding CaloriesGram}" />
                                 <TextBlock FontFamily="SamsungOne 400" Text=" ккал" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -137,7 +139,7 @@
                                 <TextBlock
                                     x:Name="Proteins"
                                     FontFamily="SamsungOne 400"
-                                    Text="{Binding CaloriesValue}" />
+                                    Text="{Binding ProteinsGram}" />
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -145,7 +147,7 @@
                                 <TextBlock
                                     x:Name="Fats"
                                     FontFamily="SamsungOne 400"
-                                    Text="{Binding CaloriesValue}" />
+                                    Text="{Binding FatsGram}" />
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -153,7 +155,7 @@
                                 <TextBlock
                                     x:Name="Carbohydrates"
                                     FontFamily="SamsungOne 400"
-                                    Text="{Binding CaloriesValue}" />
+                                    Text="{Binding CarbohydratesGram}" />
                                 <TextBlock FontFamily="SamsungOne 400" Text=" г" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -161,9 +163,9 @@
                                 <TextBlock
                                     x:Name="Category"
                                     FontFamily="SamsungOne 400"
-                                    Text="{Binding CaloriesValue}" />
+                                    Text="{Binding FoodCategory}" />
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>

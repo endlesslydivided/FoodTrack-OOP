@@ -21,15 +21,20 @@ namespace FoodTrack.ViewModels
 
         private Report report;
 
-
         public AddProductViewModel()
         {
             report = new Report();
             report.IdReport = deserializedUser.Id;
-            SearchText = default; 
-            CollectionOfProducts = default;
+            SearchText = default;
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                IEnumerable products = unit.ProductRepository.Get();
+                CollectionOfProducts = products;
+            }
+            DateToChoose = DateTime.Now;
             GramValue = default;
             SelectedProduct = default;
+            SelectedPeriod = "Завтрак";
         }
 
         #region Properties
@@ -74,7 +79,7 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("CollectionOfProducts");
             }
         }
-
+        
         public DateTime DateToChoose
         {
             get { return dateToChoose; }
@@ -82,6 +87,16 @@ namespace FoodTrack.ViewModels
             {
                 dateToChoose = value;
                 OnPropertyChanged("DateToChoose");
+            }
+        }
+
+        public string SelectedPeriod
+        {
+            get { return report.EatPeriod; }
+            set
+            {
+                report.EatPeriod = value;
+                OnPropertyChanged("SelectedPeriod");
             }
         }
 

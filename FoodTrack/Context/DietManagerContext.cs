@@ -97,8 +97,7 @@ namespace FoodTrack.Context
                 entity.Property(e => e.EatPeriod)
                     .IsRequired()
                     .HasMaxLength(8)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                    .IsUnicode(false);
 
                 entity.Property(e => e.MostCategory).HasMaxLength(50);
 
