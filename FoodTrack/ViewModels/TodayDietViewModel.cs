@@ -16,7 +16,7 @@ namespace FoodTrack.ViewModels
 {
     public class TodayDietViewModel : BaseViewModel
     {
-        private IEnumerable tableToShow;
+        private IEnumerable<Report> tableToShow;
         private DateTime dateToChoose;
         private Report lastSelected;
         public ICommand UpdateViewCommand { get; set; }
@@ -29,6 +29,10 @@ namespace FoodTrack.ViewModels
 
         #region Properties
 
+       
+
+        public string LastSelectedTable { get; set; }
+
         public Report LastSelected
         {
             get { return lastSelected; }
@@ -39,7 +43,7 @@ namespace FoodTrack.ViewModels
             }
         }
 
-        public IEnumerable TableToShow
+        public IEnumerable<Report> TableToShow
         {
             get { return tableToShow; }
             set
@@ -87,6 +91,7 @@ namespace FoodTrack.ViewModels
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Завтрак");
                 TableToShow = reports;
+                LastSelectedTable = "Завтрак";
             }
 
         }
@@ -113,10 +118,10 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
-                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Lunch");
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ланч");
                 TableToShow = reports;
+                LastSelectedTable = "Ланч";
             }
-
         }
 
         #endregion
@@ -141,8 +146,9 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
-                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Dinner");
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Обед");
                 TableToShow = reports;
+                LastSelectedTable = "Обед";
             }
 
         }
@@ -169,8 +175,9 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
-                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Snack");
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Полдник");
                 TableToShow = reports;
+                LastSelectedTable = "Полдинк";
             }
 
         }
@@ -197,10 +204,10 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
-                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate == DateToChoose && x.IdReport == foundUser.Id && x.EatPeriod == "Supper");
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ужин");
                 TableToShow = reports;
+                LastSelectedTable = "Ужин";
             }
-
         }
 
         #endregion
@@ -224,6 +231,7 @@ namespace FoodTrack.ViewModels
         private void addDay()
         {
             DateToChoose = DateToChoose.AddDays(1);
+            refreshTable();
         }
 
         #endregion
@@ -246,6 +254,7 @@ namespace FoodTrack.ViewModels
         private void removeDay()
         {
             DateToChoose = DateToChoose.AddDays(-1);
+            refreshTable();
         }
 
         #endregion
@@ -275,11 +284,11 @@ namespace FoodTrack.ViewModels
                     unit.ReportRepository.Remove(LastSelected);
                     unit.Save();
                 }
+                refreshTable();
             }
         }
 
         #endregion
-
 
 
         #region Открыть окно изменения продукта
@@ -292,7 +301,7 @@ namespace FoodTrack.ViewModels
             {
                 if (openChangeProductWindowCommand == null)
                 {
-                    openChangeProductWindowCommand = new DelegateCommand(openChangeProductWindow);
+                    openChangeProductWindowCommand = new DelegateCommand(openChangeProductWindow,canOpenChangeProductWindow);
                 }
                 return openChangeProductWindowCommand;
             }
@@ -301,10 +310,39 @@ namespace FoodTrack.ViewModels
         private void openChangeProductWindow()
         {
             ChangeProductModalWindow window = new(LastSelected);
+            if(window.ShowDialog() == true)
+            {
+                refreshTable();
+            }
+
         }
+
+        private bool canOpenChangeProductWindow()
+        {
+            if (LastSelected == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
 
         #endregion
 
+        #region Открытые методы
+
+        public void refreshTable()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == LastSelectedTable);              
+                TableToShow = reports;
+            }
+        }
         #endregion
 
     }

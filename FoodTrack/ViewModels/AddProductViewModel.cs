@@ -14,6 +14,7 @@ namespace FoodTrack.ViewModels
 {
     public class AddProductViewModel : BaseViewModel
     {
+        private const decimal V = 0.01M;
         private string searchText;
         private IEnumerable collectionOfProducts;
         private Product selectedProduct;
@@ -196,18 +197,29 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new UnitOfWork())
             {
                 report.DayGram = GramValue;
+
+                report.DayCarbohydrates = SelectedProduct.CarbohydratesGram * GramValue * V;
+                report.DayCalories = SelectedProduct.CaloriesGram * GramValue * V;
+                report.DayFats= SelectedProduct.FatsGram * GramValue * V;
+                report.DayProteins = SelectedProduct.ProteinsGram * GramValue * V;
+
                 report.ProductName = SelectedProduct.ProductName;
                 report.ReportDate = DateToChoose;
                 report.MostCategory = SelectedProduct.FoodCategory;
                 
                 unit.ReportRepository.Create(report);
                 unit.Save();
+
+                report = new Report();
+                report.IdReport = deserializedUser.Id;
+                GramValue = default;
+                SelectedProduct = default;
             }
         }
 
         private bool canAddProduct()
         {
-            if (SelectedProduct == null || GramValue == 0)
+            if (SelectedProduct == null || GramValue == 0 || DateToChoose.Date.CompareTo(DateTime.Now.Date) > 0 )
             {
                 return false;
             }

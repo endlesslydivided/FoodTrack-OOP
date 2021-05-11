@@ -32,12 +32,6 @@ namespace FoodTrack.Views.Windows
             InitializeComponent();
             DataContext = new ChangeProductViewModel(LastSelected);
         }
-        
-
-        private void Accept_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-        }
 
     }
 }

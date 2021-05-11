@@ -11,7 +11,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:FoodTrack.ViewModels"
     x:Name="page"
-    Style="{DynamicResource Pagetyle}"
+   
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:WidhtHeightConverter x:Key="MyWHConverter" />
@@ -101,40 +101,41 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             ItemsSource="{Binding TableToShow}"
-            SelectedItem="{Binding LastSelected, Mode=TwoWay}">
+            SelectedItem="{Binding LastSelected, Mode=TwoWay}" CanUserSortColumns="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ProductName}">
+                    
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Продукт" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DayCalories}">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Калории" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DayProteins}">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Белки" />
                     </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <DataGridTextColumn>
+                </DataGridTextColumn >
+                <DataGridTextColumn  Binding="{Binding DayFats}">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Жиры" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DayCarbohydrates}">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Углеводы" />
                     </DataGridTextColumn.Header>
-                </DataGridTextColumn>
+                </DataGridTextColumn >
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
                         <TextBlock Text="Удаление" />
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding ElementName=StatisticWindow, Path=DataContext.RemoveRowCommand}">
+                            <Button Command="{Binding ElementName=page, Path=DataContext.RemoveRowCommand}">
                                 <Button.Content>
                                     <iconPacks:PackIconRadixIcons Kind="Cross2" />
                                 </Button.Content>

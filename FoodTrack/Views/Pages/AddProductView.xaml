@@ -6,10 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:FoodTrack.Views.Pages"
-    xmlns:models="clr-namespace:FoodTrack.Models"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
+    xmlns:models="clr-namespace:FoodTrack.Models"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -70,13 +69,14 @@
                     mah:ParsingNumberStyle="Float"
                     mah:TextBoxHelper.Watermark="Грамм"
                     FontFamily="SamsungOne 400"
-                    Minimum="0"
+                    Minimum="1"
                     Value="{Binding GramValue}" />
                 <ComboBox
                     Grid.Row="1"
                     Grid.Column="3"
                     Margin="10,10,10,10"
-                    FontFamily="SamsungOne 400" SelectedItem="{Binding SelectedPeriod}">
+                    FontFamily="SamsungOne 400"
+                    Text="{Binding SelectedPeriod}">
                     <ComboBoxItem Content="Завтрак" IsSelected="True" />
                     <ComboBoxItem Content="Ланч" />
                     <ComboBoxItem Content="Обед" />
@@ -84,31 +84,34 @@
                     <ComboBoxItem Content="Ужин" />
                 </ComboBox>
 
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="2">
-                    <Button
-                    Margin="1,0,1,0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding RemoveDayCommand}"
-                    Content="❮"
-                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
-                    <DatePicker
-                    x:Name="DateTBResults"
-                    Grid.Row="1"
-                    Grid.Column="1"
+                <StackPanel
+                    Grid.Column="2"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontFamily="Samsung Sharp Sans"
-                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
-                    FontWeight="Normal"
-                    SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Orientation="Horizontal">
                     <Button
-                    Margin="1,0,1,0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding AddDayCommand}"
-                    Content="❯"
-                    FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                        Margin="1,0,1,0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding RemoveDayCommand}"
+                        Content="❮"
+                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                    <DatePicker
+                        x:Name="DateTBResults"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
+                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
+                        FontWeight="Normal"
+                        SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Margin="1,0,1,0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding AddDayCommand}"
+                        Content="❯"
+                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
 
                 </StackPanel>
             </Grid>
@@ -119,13 +122,15 @@
             Grid.Row="1"
             Margin="10,10,10,5"
             ItemsSource="{Binding CollectionOfProducts}"
-            SelectedItem="{Binding SelectedProduct}" 
-            >
+            SelectedItem="{Binding SelectedProduct}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock x:Name="ProductName" Text="{Binding ProductName}" FontFamily="Samsung Sharp Sans" />
+                            <TextBlock
+                                x:Name="ProductName"
+                                FontFamily="Samsung Sharp Sans"
+                                Text="{Binding ProductName}" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="SamsungOne 400" Text="Калории:" />
                                 <TextBlock

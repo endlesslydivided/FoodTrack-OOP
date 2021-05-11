@@ -37,6 +37,9 @@
     <Compile Update="Views\Pages\TodayResultsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\TodayResultView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Windows\ChangeProductModalWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\TodayResultsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\TodayResultView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\ChangeProductModalWindow.xaml">

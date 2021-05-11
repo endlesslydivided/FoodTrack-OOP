@@ -13,6 +13,10 @@ namespace FoodTrack.Models
         public DateTime ReportDate { get; set; }
         public string EatPeriod { get; set; }
         public decimal DayGram { get; set; }
+        public decimal DayCalories { get; set; }
+        public decimal DayProteins { get; set; }
+        public decimal DayFats { get; set; }
+        public decimal DayCarbohydrates { get; set; }
         public string MostCategory { get; set; }
 
         public virtual User IdReportNavigation { get; set; }

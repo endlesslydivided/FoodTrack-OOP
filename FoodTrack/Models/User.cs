@@ -24,9 +24,10 @@ namespace FoodTrack.Models
 
         [XmlIgnore]
         public bool? IsAdmin { get; set; }
-        public string UserLogin { get; set; }
 
+        public string UserLogin { get; set; }
         public byte[] UserPassword { get; set; }
+        
         [XmlIgnore]
         public string Salt { get; set; }
 

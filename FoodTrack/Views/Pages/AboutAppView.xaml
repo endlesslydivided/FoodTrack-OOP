@@ -27,7 +27,7 @@
             Margin="10,10,10,10"
             Background="{StaticResource MahApps.Brushes.Gray1}"
             CornerRadius="25">
-            <Image Margin="10,10,10,10" Source="../../Resources/foodTrack.png">
+            <Image Margin="110,61,110,61" Source="../../Resources/foodTrack.png">
                 <Image.Effect>
                     <DropShadowEffect
                         BlurRadius="25"

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace FoodTrack.Context
+namespace FoodTrack.Context 
 {
     public partial class DietManagerContext : DbContext
     {
@@ -90,7 +90,23 @@ namespace FoodTrack.Context
 
             modelBuilder.Entity<Report>(entity =>
             {
+                entity.Property(e => e.DayCalories)
+                    .HasColumnType("decimal(7, 2)")
+                    .HasDefaultValueSql("('0')");
+
+                entity.Property(e => e.DayCarbohydrates)
+                    .HasColumnType("decimal(7, 2)")
+                    .HasDefaultValueSql("('0')");
+
+                entity.Property(e => e.DayFats)
+                    .HasColumnType("decimal(7, 2)")
+                    .HasDefaultValueSql("('0')");
+
                 entity.Property(e => e.DayGram)
+                    .HasColumnType("decimal(7, 2)")
+                    .HasDefaultValueSql("('0')");
+
+                entity.Property(e => e.DayProteins)
                     .HasColumnType("decimal(7, 2)")
                     .HasDefaultValueSql("('0')");
 
