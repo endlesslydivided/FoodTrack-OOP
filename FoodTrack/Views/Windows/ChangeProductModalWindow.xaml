@@ -33,6 +33,7 @@
             mah:TextBoxHelper.Watermark="Грамм"
             FontFamily="SamsungOne 400"
             Minimum="1"
+            Maximum="1000"
             Value="{Binding GramValue}" />
         <WrapPanel
             Grid.Row="2"

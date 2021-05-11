@@ -9,9 +9,9 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="userControl"
-    d:DesignWidth="800"
     HorizontalAlignment="Center"
-    mc:Ignorable="d" >
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:WidhtHeightConverter x:Key="MyWHConverter" />
         <Converters:TwoPartConverter x:Key="MyTPConverter" />
@@ -113,7 +113,7 @@
                         <cpb:CircularProgressBar
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Percentage="95"
+                            Percentage="{Binding CaloriesPercent}"
                             SegmentColor="Green"
                             StrokeThickness="15"
                             Style="{StaticResource CPStyle}" />
@@ -128,7 +128,7 @@
                             <TextBlock
                                 x:Name="TBCcalResults"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35"
+                                Text="{Binding CaloriesEaten}"
                                 TextWrapping="Wrap" />
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
 
@@ -145,7 +145,7 @@
                             <TextBlock
                                 x:Name="TBCcalNeed"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding CaloriesNeeded}" />
 
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" ккал" />
 
@@ -175,7 +175,7 @@
                         <cpb:CircularProgressBar
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Percentage="95"
+                            Percentage="{Binding ProteinsPercent}"
                             SegmentColor="Green"
                             StrokeThickness="15"
                             Style="{StaticResource CPStyle}" />
@@ -189,7 +189,7 @@
                             <TextBlock
                                 x:Name="TBProteinsResults"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding ProteinsEaten}" />
 
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
@@ -206,7 +206,7 @@
                             <TextBlock
                                 x:Name="TBProteinsNeed"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding ProteinsNeeded}" />
 
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
@@ -235,7 +235,7 @@
                         <cpb:CircularProgressBar
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Percentage="95"
+                            Percentage="{Binding FatsPercent}"
                             SegmentColor="Green"
                             StrokeThickness="15"
                             Style="{StaticResource CPStyle}" />
@@ -250,7 +250,7 @@
                             <TextBlock
                                 x:Name="TBFatsResults"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding FatsEaten}" />
 
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
@@ -267,7 +267,7 @@
                             <TextBlock
                                 x:Name="TBFatsNeed"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding FatsNeeded}" />
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
                         </StackPanel>
@@ -295,7 +295,7 @@
                         <cpb:CircularProgressBar
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Percentage="95"
+                            Percentage="{Binding CarbohydratesPercent}"
                             SegmentColor="Green"
                             StrokeThickness="15"
                             Style="{StaticResource CPStyle}" />
@@ -310,7 +310,7 @@
                             <TextBlock
                                 x:Name="TBCarbohydratesResults"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding CarbohydratesEaten}" />
 
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
@@ -327,7 +327,7 @@
                             <TextBlock
                                 x:Name="TBCarbohydratesNeed"
                                 Style="{StaticResource TextBlocksResultsThick}"
-                                Text="35" />
+                                Text="{Binding CarbohydratesNeeded}" />
                             <TextBlock Style="{StaticResource TextBlocksResultsThick}" Text=" грамм" />
 
                         </StackPanel>
@@ -339,7 +339,7 @@
             </Grid>
         </Border>
 
-        
+
 
         <Border
             Margin="15"
@@ -365,7 +365,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="15:30 15.05.2021"
+                        Text="{Binding LastReport}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
@@ -382,7 +382,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="Мясное"
+                        Text="{Binding MostCategory}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
@@ -399,7 +399,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="35"
+                        Text="{Binding UserWeight}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -425,7 +425,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="155"
+                        Text="{Binding UserHeight}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -440,11 +440,12 @@
             </StackPanel>
 
         </Border>
-        <Border Margin="15"
+        <Border
+            Margin="15"
+            HorizontalAlignment="Center"
             Background="GhostWhite"
-            CornerRadius="25" HorizontalAlignment="Center">
-            <StackPanel Style="{StaticResource SPMarginStyle}"
-            Orientation="Horizontal" >
+            CornerRadius="25">
+            <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
                 <Button
                     Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}"
                     Margin="1,0,1,0"
@@ -461,7 +462,7 @@
                     FontFamily="Samsung Sharp Sans"
                     FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=65}"
                     FontWeight="Normal"
-                    SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    SelectedDate="{Binding DateToChoose, Mode=TwoWay}" />
                 <Button
                     Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource MyWHConverter}, ConverterParameter=25}"
                     Margin="1,0,1,0"
@@ -469,7 +470,7 @@
                     BorderBrush="Transparent"
                     Command="{Binding AddDayCommand}"
                     Content="❯"
-                    FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=30}"></Button>
+                    FontSize="{Binding ActualWidth, ElementName=userControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=30}" />
             </StackPanel>
         </Border>
     </StackPanel>

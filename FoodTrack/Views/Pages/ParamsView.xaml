@@ -125,7 +125,7 @@
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
                 Value="{Binding Calories}"
-                Maximum="300"
+                Maximum="1000"
                 Minimum="0" />
 
             <TextBlock
@@ -145,7 +145,7 @@
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
                 Value="{Binding Proteins}"
-                Maximum="300"
+                Maximum="100"
                 Minimum="0" />
 
             <TextBlock
@@ -165,7 +165,7 @@
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
                 Value="{Binding Carbohydrates}"
-                Maximum="300"
+                Maximum="100"
                 Minimum="0" />
 
             <TextBlock
@@ -185,7 +185,7 @@
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
                 Value="{Binding Fats}"
-                Maximum="300"
+                Maximum="100"
                 Minimum="0" />
 
             <TextBlock

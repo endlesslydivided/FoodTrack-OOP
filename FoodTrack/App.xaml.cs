@@ -34,11 +34,13 @@ namespace FoodTrack
                     {
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
-                        return;
                     }
-                }
+                }               
+                else
+                {
                     LogInWindow logInWindow = new LogInWindow();
                     logInWindow.Show();
+                }
             }
            
         }

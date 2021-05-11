@@ -198,10 +198,10 @@ namespace FoodTrack.ViewModels
             {
                 report.DayGram = GramValue;
 
-                report.DayCarbohydrates = SelectedProduct.CarbohydratesGram * GramValue * V;
-                report.DayCalories = SelectedProduct.CaloriesGram * GramValue * V;
-                report.DayFats= SelectedProduct.FatsGram * GramValue * V;
-                report.DayProteins = SelectedProduct.ProteinsGram * GramValue * V;
+                report.DayCarbohydrates = SelectedProduct.CarbohydratesGram * GramValue * V % 100000;
+                report.DayCalories = SelectedProduct.CaloriesGram * GramValue * V % 100000;
+                report.DayFats= SelectedProduct.FatsGram * GramValue * V % 100000;
+                report.DayProteins = SelectedProduct.ProteinsGram * GramValue * V % 100000;
 
                 report.ProductName = SelectedProduct.ProductName;
                 report.ReportDate = DateToChoose;
