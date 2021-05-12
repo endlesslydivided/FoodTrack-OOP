@@ -305,10 +305,42 @@ namespace FoodTrack.ViewModels
                     FatsEaten = Math.Round(reports.Sum(x => x.DayFats), 2) % 100000;
                     CarbohydratesEaten = Math.Round(reports.Sum(x => x.DayCarbohydrates), 2) % 100000;
 
-                    CaloriesPercent = (int)(CaloriesEaten / (CaloriesNeeded / 100));
-                    ProteinsPercent = (int)(ProteinsEaten / (ProteinsNeeded / 100));
-                    FatsPercent = (int)(FatsEaten / (FatsNeeded / 100));
-                    CarbohydratesPercent = (int)(CarbohydratesEaten / (CarbohydratesNeeded / 100));
+                    if ((int)(CaloriesEaten / (CaloriesNeeded / 100)) > 100)
+                    {
+                        CaloriesPercent = 100;
+                    }
+                    else
+                    {
+                        CaloriesPercent = (int)(CaloriesEaten / (CaloriesNeeded / 100));
+                    }
+
+                    if ((int)(ProteinsEaten / (ProteinsNeeded / 100)) > 100)
+                    {
+                        ProteinsPercent = 100;
+                    }
+                    else
+                    {
+                        ProteinsPercent = (int)(ProteinsEaten / (ProteinsNeeded / 100));
+                    }
+
+                    if ((int)(FatsEaten / (FatsNeeded / 100)) > 100)
+                    {
+                        FatsPercent = 100;
+                    }
+                    else
+                    {
+                        FatsPercent = (int)(FatsEaten / (FatsNeeded / 100));
+                    }
+
+                    if ((int)(CarbohydratesEaten / (CarbohydratesNeeded / 100)) > 100)
+                    {
+                        CarbohydratesPercent = 100;
+                    }
+                    else
+                    {
+                        CarbohydratesPercent = (int)(CarbohydratesEaten / (CarbohydratesNeeded / 100));
+                    }
+
                 }
             }
             else

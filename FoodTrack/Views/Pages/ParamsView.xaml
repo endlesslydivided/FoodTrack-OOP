@@ -63,7 +63,7 @@
                 mah:TextBoxHelper.Watermark="Вес"
                 Maximum="300"
                 Minimum="0"
-                Value ="{Binding Weight}"/>
+                Value="{Binding Weight}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -83,14 +83,14 @@
                 mah:TextBoxHelper.Watermark="Рост"
                 Maximum="300"
                 Minimum="0"
-                Value ="{Binding Height}"/>
+                Value="{Binding Height}" />
 
             <Button
                 Grid.RowSpan="2"
                 Grid.Column="2"
                 Margin="10,10,10,10"
-                Content="Добавить новую запись"
-                Command="{Binding AddParamsReportCommand}"/>
+                Command="{Binding AddParamsReportCommand}"
+                Content="Добавить новую запись" />
 
             <TextBlock
                 Grid.Row="3"
@@ -106,7 +106,7 @@
                 Margin="10,10,10,4"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Название"
-                Text="{Binding ProductName}"/>
+                Text="{Binding ProductName}" />
 
             <TextBlock
                 Grid.Row="4"
@@ -123,10 +123,10 @@
                 mah:NumericInputMode="Numbers"
                 mah:ParsingNumberStyle="Integer"
                 mah:TextBoxHelper.ClearTextButton="True"
-                mah:TextBoxHelper.Watermark="Грамм"
-                Value="{Binding Calories}"
+                mah:TextBoxHelper.Watermark="Ккал"
                 Maximum="1000"
-                Minimum="0" />
+                Minimum="0"
+                Value="{Binding Calories}" />
 
             <TextBlock
                 Grid.Row="5"
@@ -144,9 +144,9 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
-                Value="{Binding Proteins}"
                 Maximum="100"
-                Minimum="0" />
+                Minimum="0"
+                Value="{Binding Proteins}" />
 
             <TextBlock
                 Grid.Row="6"
@@ -164,9 +164,9 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
-                Value="{Binding Carbohydrates}"
                 Maximum="100"
-                Minimum="0" />
+                Minimum="0"
+                Value="{Binding Carbohydrates}" />
 
             <TextBlock
                 Grid.Row="7"
@@ -184,9 +184,9 @@
                 mah:ParsingNumberStyle="Float"
                 mah:TextBoxHelper.ClearTextButton="True"
                 mah:TextBoxHelper.Watermark="Грамм"
-                Value="{Binding Fats}"
                 Maximum="100"
-                Minimum="0" />
+                Minimum="0"
+                Value="{Binding Fats}" />
 
             <TextBlock
                 Grid.Row="8"
@@ -201,13 +201,14 @@
                 Grid.Column="1"
                 Margin="10,10,10,10"
                 ItemsSource="{Binding CategoryCollection}"
-                SelectedValue="{Binding SelectedCategory}"/>
+                SelectedValue="{Binding SelectedCategory}" />
             <Button
                 Grid.Row="3"
                 Grid.RowSpan="6"
                 Grid.Column="2"
                 Margin="10,10,10,10"
-                Content="Добавить новый продукт" Command="{Binding AddProductToCollectionCommand}" />
+                Command="{Binding AddProductToCollectionCommand}"
+                Content="Добавить новый продукт" />
 
         </Grid>
     </Border>

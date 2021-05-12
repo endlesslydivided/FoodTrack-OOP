@@ -70,6 +70,13 @@ namespace FoodTrack.ViewModels
                 NavigationType = typeof(OptionsView),
                 NavigationDestination = new Uri("../Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
             });
+            this.OptionsMenu.Add(new MenuItem()
+            {
+                Icon = new PackIconModern() { Kind = PackIconModernKind.ControlGuide },
+                Label = "Администрирование",
+                NavigationType = typeof(AdminView),
+                NavigationDestination = new Uri("../Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
+            });
 
         }
     }
