@@ -167,6 +167,7 @@ namespace FoodTrack.Context
                 entity.Property(e => e.UserPassword)
                     .IsRequired()
                     .HasMaxLength(20);
+
             });
 
             modelBuilder.Entity<UsersDatum>(entity =>

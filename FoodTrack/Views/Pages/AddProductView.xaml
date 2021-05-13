@@ -67,9 +67,9 @@
                     Margin="10,10,10,10"
                     mah:NumericInputMode="Decimal"
                     mah:ParsingNumberStyle="Float"
-                    Maximum="1000"
                     mah:TextBoxHelper.Watermark="Грамм"
                     FontFamily="SamsungOne 400"
+                    Maximum="1000"
                     Minimum="1"
                     Value="{Binding GramValue}" />
                 <ComboBox
