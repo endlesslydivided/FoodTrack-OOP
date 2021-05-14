@@ -39,7 +39,7 @@ namespace FoodTrack.ViewModels
                 UsersParamTableToShow = unit.UserParamRepository.Get();
                 UsersDatumTableToShow = unit.UserDatumRepository.Get();
                 UsersTableToShow = unit.UserRepository.Get();
-                CategoriesTableToShow = unit.FoodCategoryRepository.Get();
+                CategoriesTableToShow = unit.FoodCategoryRepository.GetWithInclude(f => f.Products, g => g.Reports);
                 ProductsTableToShow = unit.ProductRepository.Get();
                 ReportsTableToShow =unit.ReportRepository.Get();
                 CategoryCollection = unit.FoodCategoryRepository.Get().Select(x => x.CategoryName).ToArray();

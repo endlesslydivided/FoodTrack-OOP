@@ -79,12 +79,13 @@ namespace FoodTrack.Context
                     .WithMany(p => p.Products)
                     .HasPrincipalKey(p => p.CategoryName)
                     .HasForeignKey(d => d.FoodCategory)
+                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PRODUCTS_FCATEGORY");
 
                 entity.HasOne(d => d.IdAddedNavigation)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.IdAdded)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PRODUCTS_USERS");
             });
 
