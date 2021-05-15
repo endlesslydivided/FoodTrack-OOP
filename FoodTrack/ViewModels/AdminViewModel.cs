@@ -30,18 +30,16 @@ namespace FoodTrack.ViewModels
         private IEnumerable<Product> productsTableToShow;
         private IEnumerable<Report> reportsTableToShow;
 
-
-
-        public AdminViewModel()
+        public void refreshTables()
         {
-            using(UnitOfWork unit = new UnitOfWork())
+            using (UnitOfWork unit = new UnitOfWork())
             {
                 UsersParamTableToShow = unit.UserParamRepository.Get();
                 UsersDatumTableToShow = unit.UserDatumRepository.Get();
-                UsersTableToShow = unit.UserRepository.Get();
+                UsersTableToShow = unit.UserRepository.GetWithInclude(f => f.UsersData, g => g.UsersParams, l => l.Reports, k => k.Products);
                 CategoriesTableToShow = unit.FoodCategoryRepository.GetWithInclude(f => f.Products, g => g.Reports);
-                ProductsTableToShow = unit.ProductRepository.Get();
-                ReportsTableToShow =unit.ReportRepository.Get();
+                ProductsTableToShow = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports);
+                ReportsTableToShow = unit.ReportRepository.Get();
                 CategoryCollection = unit.FoodCategoryRepository.Get().Select(x => x.CategoryName).ToArray();
                 LastSelectedUserParam = new();
                 LastSelectedUsersDatum = new();
@@ -50,6 +48,11 @@ namespace FoodTrack.ViewModels
                 LastSelectedProduct = new();
                 LastSelectedReport = new();
             }
+        }
+
+        public AdminViewModel()
+        {
+                refreshTables();          
         }
         #region Properties
 
@@ -240,10 +243,9 @@ namespace FoodTrack.ViewModels
             {
                 unit.FoodCategoryRepository.Remove(LastSelectedFoodCategory);
                 unit.Save();
-                CategoriesTableToShow = unit.FoodCategoryRepository.Get();
             }
             LastSelectedFoodCategory = new();
-
+            refreshTables();
         }
 
         private bool canDeleteFoodCategory()
@@ -281,6 +283,59 @@ namespace FoodTrack.ViewModels
         }
 
 
+        #endregion
+        #region Добавить категорию продуктов
+
+        private DelegateCommand addFoodCategoryCommand;
+
+        public ICommand AddFoodCategoryCommand
+        {
+            get
+            {
+                if (addFoodCategoryCommand == null)
+                {
+                    addFoodCategoryCommand = new DelegateCommand(addFoodCategory, canAddFoodCategory);
+                }
+                return addFoodCategoryCommand;
+            }
+        }
+
+        private void addFoodCategory()
+        {
+           
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                
+                unit.FoodCategoryRepository.Create(LastSelectedFoodCategory);
+                unit.Save();
+                CategoriesTableToShow = unit.FoodCategoryRepository.Get();
+            }
+            LastSelectedFoodCategory = new();
+        }
+
+        private bool canAddFoodCategory()
+        {
+            using (UnitOfWork unit = new())
+            {
+                IEnumerable<FoodCategory> categories = unit.FoodCategoryRepository.Get(); ;
+                bool categoryExist = false;
+                foreach (FoodCategory x in categories)
+                {
+                    if (x.CategoryName == LastSelectedFoodCategory.CategoryName)
+                    {
+                        categoryExist = true; break;
+                    }
+                }           
+            if (LastSelectedFoodCategory.Id != 0 || LastSelectedFoodCategory.CategoryName == null || categoryExist)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            }
+        }
         #endregion
         #endregion
 
@@ -370,9 +425,9 @@ namespace FoodTrack.ViewModels
             {
                 unit.ReportRepository.Remove(LastSelectedReport);
                 unit.Save();
-                ReportsTableToShow = unit.ReportRepository.Get();
             }
             LastSelectedReport = new Report();
+            refreshTables();
         }
 
         private bool canDeleteReport()
@@ -436,7 +491,6 @@ namespace FoodTrack.ViewModels
             {
                 unit.ProductRepository.Update(LastSelectedProduct);
                 unit.Save();
-                ProductsTableToShow = unit.ProductRepository.Get();
             }
             LastSelectedProduct = new();
 
@@ -444,35 +498,34 @@ namespace FoodTrack.ViewModels
 
         private bool canSaveProduct()
         {
+            int productExist = 0;
+
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<Product> products = unit.ProductRepository.Get();
                 Product product = new();
-                int productExist = 0;
                 foreach (Product x in products)
                 {
                     if (x.ProductName == LastSelectedProduct.ProductName)
                     {
                         productExist++;
                     }
-                }
-
-                if (LastSelectedProduct.Id == 0 ||
-                    LastSelectedProduct.ProteinsGram <= 0 || 
-                    LastSelectedProduct.CarbohydratesGram <= 0 || 
-                    LastSelectedProduct.FatsGram <= 0 || 
-                    LastSelectedProduct.CaloriesGram <= 0 ||
-                    LastSelectedProduct.FatsGram <= 0 ||
-                    productExist >1)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                }     
             }
-
+            if (LastSelectedProduct.Id == 0 ||
+                  LastSelectedProduct.ProteinsGram <= 0 ||
+                  LastSelectedProduct.CarbohydratesGram <= 0 ||
+                  LastSelectedProduct.FatsGram <= 0 ||
+                  LastSelectedProduct.CaloriesGram <= 0 ||
+                  LastSelectedProduct.FatsGram <= 0 ||
+                  productExist > 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
         #region Удалить продукт
@@ -497,9 +550,9 @@ namespace FoodTrack.ViewModels
             {
                 unit.ProductRepository.Remove(LastSelectedProduct);
                 unit.Save();
-                ProductsTableToShow = unit.ProductRepository.Get();
             }
             LastSelectedProduct = new Product();
+            refreshTables();
         }
 
         private bool canDeleteProduct()
@@ -585,7 +638,7 @@ namespace FoodTrack.ViewModels
                 }
 
                 if (LastSelectedUser.Id == 0 ||
-                    UserExist > 1)
+                    UserExist > 1 || deserializedUser.Id == LastSelectedUser.Id)
                 {
                     return false;
                 }
@@ -619,14 +672,14 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserRepository.Remove(LastSelectedUser);
                 unit.Save();
-                UsersTableToShow = unit.UserRepository.Get();
             }
             LastSelectedUser = new User();
+            refreshTables();
         }
 
         private bool canDeleteUser()
         {
-            if (LastSelectedUser.Id == 0)
+            if (LastSelectedUser.Id == 0 || deserializedUser.Id == LastSelectedUser.Id)
             {
                 return false;
             }
@@ -707,46 +760,46 @@ namespace FoodTrack.ViewModels
 
         }
         #endregion
-        #region Удалить информацию пользователя
+        //#region Удалить информацию пользователя
 
-        private DelegateCommand deleteUsersDatumCommand;
+        //private DelegateCommand deleteUsersDatumCommand;
 
-        public ICommand DeleteUsersDatumCommand
-        {
-            get
-            {
-                if (deleteUsersDatumCommand == null)
-                {
-                    deleteUsersDatumCommand = new DelegateCommand(deleteUsersDatum, canDeleteUsersDatum);
-                }
-                return deleteUsersDatumCommand;
-            }
-        }
+        //public ICommand DeleteUsersDatumCommand
+        //{
+        //    get
+        //    {
+        //        if (deleteUsersDatumCommand == null)
+        //        {
+        //            deleteUsersDatumCommand = new DelegateCommand(deleteUsersDatum, canDeleteUsersDatum);
+        //        }
+        //        return deleteUsersDatumCommand;
+        //    }
+        //}
 
-        private void deleteUsersDatum()
-        {
-            using (UnitOfWork unit = new UnitOfWork())
-            {
-                unit.UserDatumRepository.Remove(LastSelectedUsersDatum);
-                unit.Save();
-                UsersDatumTableToShow = unit.UserDatumRepository.Get();
-            }
-            LastSelectedUsersDatum = new UsersDatum();
-        }
+        //private void deleteUsersDatum()
+        //{
+        //    using (UnitOfWork unit = new UnitOfWork())
+        //    {
+        //        unit.UserDatumRepository.Remove(LastSelectedUsersDatum);
+        //        unit.Save();
+        //    }
+        //    LastSelectedUsersDatum = new UsersDatum();
+        //    refreshTables();
+        //}
 
-        private bool canDeleteUsersDatum()
-        {
-            if (LastSelectedUsersDatum.Id == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //private bool canDeleteUsersDatum()
+        //{
+        //    if (LastSelectedUsersDatum.Id == 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
         #region Очистить поля "информация пользователя"
 
         private DelegateCommand cleanUsersDatumCommand;
@@ -842,20 +895,33 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserParamRepository.Remove(LastSelectedUserParam);
                 unit.Save();
-                UsersParamTableToShow = unit.UserParamRepository.Get();
             }
             LastSelectedUserParam = new UsersParam();
+            refreshTables();
         }
 
         private bool canDeleteUserParam()
         {
-            if (LastSelectedUserParam.Id == 0)
+            using (UnitOfWork unit = new())
+            {
+                int usersParamsNumber = 0;
+                IEnumerable<UsersParam> usersParam = unit.UserParamRepository.Get();
+                foreach (UsersParam x in usersParam)
+                {
+                    if (x.IdParams == LastSelectedUserParam.Id)
+                    {
+                        usersParamsNumber++;
+                    }
+                }
+            
+            if (LastSelectedUserParam.Id == 0 || usersParamsNumber == 1)
             {
                 return false;
             }
             else
             {
                 return true;
+            }
             }
         }
 

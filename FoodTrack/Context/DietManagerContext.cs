@@ -79,7 +79,6 @@ namespace FoodTrack.Context
                     .WithMany(p => p.Products)
                     .HasPrincipalKey(p => p.CategoryName)
                     .HasForeignKey(d => d.FoodCategory)
-                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PRODUCTS_FCATEGORY");
 
                 entity.HasOne(d => d.IdAddedNavigation)
@@ -128,7 +127,7 @@ namespace FoodTrack.Context
                 entity.HasOne(d => d.IdReportNavigation)
                     .WithMany(p => p.Reports)
                     .HasForeignKey(d => d.IdReport)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_REPORTS_USERS");
 
                 entity.HasOne(d => d.MostCategoryNavigation)
@@ -141,7 +140,7 @@ namespace FoodTrack.Context
                     .WithMany(p => p.Reports)
                     .HasPrincipalKey(p => p.ProductName)
                     .HasForeignKey(d => d.ProductName)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_REPORTS_PRODUCTS");
             });
 
@@ -182,7 +181,7 @@ namespace FoodTrack.Context
                 entity.HasOne(d => d.IdDataNavigation)
                     .WithMany(p => p.UsersData)
                     .HasForeignKey(d => d.IdData)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_USERS_DATA_USERS");
             });
 
@@ -199,7 +198,7 @@ namespace FoodTrack.Context
                 entity.HasOne(d => d.IdParamsNavigation)
                     .WithMany(p => p.UsersParams)
                     .HasForeignKey(d => d.IdParams)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_USERS_PARAMS_USERS");
             });
 
