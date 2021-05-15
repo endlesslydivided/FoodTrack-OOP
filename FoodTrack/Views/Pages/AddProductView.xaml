@@ -28,7 +28,7 @@
 
         <Border
             Margin="5,5,5,5"
-            Background="WhiteSmoke"
+            Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
             CornerRadius="15">
             <Grid>
                 <Grid.RowDefinitions>

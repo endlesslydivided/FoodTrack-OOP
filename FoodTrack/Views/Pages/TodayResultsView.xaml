@@ -60,7 +60,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="5,5,5,5">
-        <Border Background="GhostWhite" CornerRadius="25">
+        <Border Background="{DynamicResource MahApps.Brushes.ThemeBackground}" CornerRadius="25" Margin="0,10,0,10">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
@@ -339,11 +339,9 @@
             </Grid>
         </Border>
 
-
-
         <Border
-            Margin="15"
-            Background="GhostWhite"
+            Margin="0,10,0,10"
+            Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
             CornerRadius="25">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
@@ -441,9 +439,9 @@
 
         </Border>
         <Border
-            Margin="15"
+           Margin="0,10,0,10"
             HorizontalAlignment="Center"
-            Background="GhostWhite"
+            Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
             CornerRadius="25">
             <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
                 <Button

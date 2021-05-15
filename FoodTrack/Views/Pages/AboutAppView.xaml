@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <Border
             Margin="10,10,10,10"
-            Background="{StaticResource MahApps.Brushes.Gray1}"
+            Background="DimGray"
             CornerRadius="25">
             <Image Margin="110,61,110,61" Source="../../Resources/foodTrack.png">
                 <Image.Effect>
@@ -39,7 +39,8 @@
         <Border
             Grid.Row="1"
             Margin="10,10,10,10"
-            Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+
             CornerRadius="25">
             <Grid x:Name="grid" Margin="10,10,10,10">
                 <Grid.ColumnDefinitions>

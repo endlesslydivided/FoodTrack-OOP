@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ControlzEx.Theming;
 
 namespace FoodTrack.Views.Windows
 {
@@ -22,6 +23,18 @@ namespace FoodTrack.Views.Windows
     /// </summary>
     public partial class MainWindow
     {
+        public static readonly DependencyProperty ColorsProperty
+           = DependencyProperty.Register("Colors",
+                                         typeof(List<KeyValuePair<string, Color>>),
+                                         typeof(MainWindow),
+                                         new PropertyMetadata(default(List<KeyValuePair<string, Color>>)));
+
+        public List<KeyValuePair<string, Color>> Colors
+        {
+            get { return (List<KeyValuePair<string, Color>>)GetValue(ColorsProperty); }
+            set { SetValue(ColorsProperty, value); }
+        }
+
         private readonly Navigation.NavigationServiceEx navigationServiceEx;
 
         public MainWindow()
@@ -34,7 +47,16 @@ namespace FoodTrack.Views.Windows
 
             // Navigate to the home page.
             this.Loaded += (sender, args) => this.navigationServiceEx.Navigate(new Uri("../Views/Pages/TodayResultsView.xaml", UriKind.RelativeOrAbsolute));
-            
+
+            this.Colors = typeof(Colors)
+                          .GetProperties()
+                          .Where(prop => typeof(Color).IsAssignableFrom(prop.PropertyType))
+                          .Select(prop => new KeyValuePair<String, Color>(prop.Name, (Color)prop.GetValue(null)))
+                          .ToList();
+
+            var appTheme = ThemeManager.Current.DetectTheme(Application.Current);
+            ThemeManager.Current.ChangeTheme(this, appTheme);
+
         }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
@@ -57,6 +79,5 @@ namespace FoodTrack.Views.Windows
                                                                 .OfType<ViewModels.MenuItem>()
                                                                 .FirstOrDefault(x => x.NavigationDestination == e.Uri);
         }
-
     }
 }

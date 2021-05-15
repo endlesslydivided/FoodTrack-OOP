@@ -32,7 +32,7 @@
                     <Border
                         Grid.Row="1"
                         Margin="2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -53,14 +53,14 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="{Binding LastSelectedFoodCategory.Id}" />
                             <TextBlock
                                 Grid.Row="1"
@@ -68,7 +68,7 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Категория:" />
                             <TextBox
                                 Grid.Row="1"
@@ -143,7 +143,7 @@
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -167,15 +167,16 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
+                                Grid.ColumnSpan="2"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
-                                Text="{Binding LastSelectedProduct.Id}" Grid.ColumnSpan="2" />
+
+                                Text="{Binding LastSelectedProduct.Id}" />
 
                             <TextBlock
                                 Grid.Row="1"
@@ -184,7 +185,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="IdAdded:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -202,7 +203,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="9"
-                                Foreground="Black"
+
                                 Text="CaloriesGram:" />
 
                             <mah:NumericUpDown
@@ -258,7 +259,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="ProductName:" />
                             <TextBox
                                 Grid.Column="4"
@@ -277,7 +278,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="ProteinsGram:" />
                             <mah:NumericUpDown
                                 Grid.Row="1"
@@ -297,7 +298,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="FatsGram:" />
                             <mah:NumericUpDown
                                 Grid.Row="2"
@@ -316,7 +317,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-                                Foreground="Black"
+
                                 Text="CarbohydratesGram:" />
                             <mah:NumericUpDown
                                 Grid.Column="6"
@@ -345,7 +346,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-                                Foreground="Black"
+
                                 Text="FoodCategory:" />
                         </Grid>
                     </Border>
@@ -362,11 +363,11 @@
                         IsReadOnly="True"
                         ItemsSource="{Binding ReportsTableToShow}"
                         SelectedItem="{Binding LastSelectedReport}" />
-                    
+
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -390,15 +391,16 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
+                                Grid.ColumnSpan="2"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
-                                Text="{Binding LastSelectedReport.Id}" Grid.ColumnSpan="2" />
+
+                                Text="{Binding LastSelectedReport.Id}" />
 
                             <TextBlock
                                 Grid.Row="1"
@@ -407,7 +409,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="IdReport:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -424,7 +426,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="DayGram:" />
 
                             <mah:NumericUpDown
@@ -481,7 +483,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="ProductName:" />
                             <TextBox
                                 Grid.Column="4"
@@ -500,7 +502,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="ReportDate:" />
                             <DatePicker
                                 x:Name="DateTBResults"
@@ -532,7 +534,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-                                Foreground="Black"
+
                                 Text="EatPeriod:" />
                             <TextBlock
                                 Grid.Column="5"
@@ -540,7 +542,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-                                Foreground="Black"
+
                                 Text="MostCategory:" />
                             <TextBlock
                                 Grid.Column="6"
@@ -568,7 +570,7 @@
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid x:Name="grid" Margin="5">
                             <Grid.RowDefinitions>
@@ -592,14 +594,14 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="{Binding LastSelectedUser.Id}" />
 
                             <TextBlock
@@ -609,7 +611,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="13"
-                                Foreground="Black"
+
                                 Text="IsAdmin:" />
                             <CheckBox
                                 Grid.Row="1"
@@ -625,7 +627,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="{Binding ActualWidth, Converter={StaticResource FontConverter}, ConverterParameter=60, ElementName=grid, Mode=OneWay}"
-                                Foreground="Black"
+
                                 Text="UserLogin:" />
 
                             <Grid
@@ -693,7 +695,7 @@
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -716,14 +718,14 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="{Binding LastSelectedUsersDatum.Id}" />
 
                             <TextBlock
@@ -733,7 +735,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="IdData:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -751,7 +753,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="13"
-                                Foreground="Black"
+
                                 Text="FullName:" />
 
                             <Grid
@@ -798,7 +800,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
                                 Text="BirthDay:" />
                             <DatePicker
                                 Grid.Column="4"
@@ -822,11 +823,11 @@
                         IsReadOnly="True"
                         ItemsSource="{Binding UsersParamTableToShow}"
                         SelectedItem="{Binding LastSelectedUserParam}" />
-                   
+
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
-                        Background="WhiteSmoke"
+                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                         CornerRadius="15">
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -849,15 +850,16 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
+
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
+                                Grid.ColumnSpan="2"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-                                Foreground="Black"
-                                Text="{Binding LastSelectedUserParam.Id}" Grid.ColumnSpan="2" />
+
+                                Text="{Binding LastSelectedUserParam.Id}" />
 
                             <TextBlock
                                 Grid.Row="1"
@@ -866,7 +868,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-                                Foreground="Black"
+
                                 Text="IdParam:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -884,7 +886,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="11"
-                                Foreground="Black"
+
                                 Text="UserWeight:" />
 
                             <mah:NumericUpDown
@@ -940,7 +942,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="9"
-                                Foreground="Black"
+
                                 Text="ParamsDate:" />
                             <DatePicker
                                 Grid.Row="1"
@@ -956,7 +958,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-                                Foreground="Black"
+
                                 Text="UserHeight:" />
                             <mah:NumericUpDown
                                 Grid.Column="4"
