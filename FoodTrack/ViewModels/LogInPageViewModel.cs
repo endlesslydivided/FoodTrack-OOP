@@ -13,6 +13,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using FoodTrack.Hash;
 using FoodTrack.XMLSerializer;
+using System.IO;
+using FoodTrack.Options;
 
 namespace FoodTrack.ViewModels
 {
@@ -105,9 +107,20 @@ namespace FoodTrack.ViewModels
                 }
                 else if(PasswordHash.IsPasswordValid(UserPassword, int.Parse(result.First<User>().Salt), result.First<User>().UserPassword))
                 {
-                    XmlSerializeWrapper<User>.Serialize(result.First<User>(),"../lastUser.xml");                 
+
+                    User deserializedeUser = result.First();
+                    XmlSerializeWrapper<User>.Serialize(deserializedeUser, "../lastUser.xml");
+                    
+                    List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize("../appSettings.xml", FileMode.OpenOrCreate);
+                    OptionsViewModel.OptionsPack = optionsPacks.Find(x => x.OptionUserId == deserializedeUser.Id);
+
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
+
+                    OptionsViewModel.OptionsPack?.setAppAccent();
+                    OptionsViewModel.OptionsPack?.setAppTheme();
+                    OptionsViewModel.OptionsPack?.setSettings();
+
                     foreach (Window window in Application.Current.Windows)
                     {
                         if (window is LogInWindow)

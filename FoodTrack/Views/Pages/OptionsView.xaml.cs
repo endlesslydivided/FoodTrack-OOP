@@ -26,5 +26,6 @@ namespace FoodTrack.Views.Pages
             InitializeComponent();
             DataContext = new OptionsViewModel();
         }
+
     }
 }

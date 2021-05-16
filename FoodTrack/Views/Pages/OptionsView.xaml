@@ -93,7 +93,10 @@
                             VerticalAlignment="Center"
                             FontFamily="Samsung Sharp Sans"
                             Text="Показывать заставку при запуске:" />
-                        <CheckBox Grid.Column="1" Margin="2,2,2,2" />
+                        <CheckBox
+                            Grid.Column="1"
+                            Margin="2,2,2,2"
+                            IsChecked="{Binding IsShowSplash}" />
                         <TextBlock
                             Grid.Row="1"
                             Margin="1"
@@ -103,7 +106,8 @@
                         <CheckBox
                             Grid.Row="1"
                             Grid.Column="1"
-                            Margin="2,2,2,2" />
+                            Margin="2,2,2,2"
+                            IsChecked="{Binding IsStayAuthorized}" />
                     </Grid>
                 </GroupBox>
                 <GroupBox
@@ -318,10 +322,10 @@
                             Grid.Row="3"
                             Grid.ColumnSpan="2"
                             Margin="4,4,4,4"
+                            Command="{Binding SaveApplicationSettingsСommand}"
                             FontFamily="Samsung Sharp Sans">
                             <Button.Content>
                                 <Viewbox Stretch="Uniform">
-
                                     <TextBlock Text="Сохранить настройки" />
                                 </Viewbox>
                             </Button.Content>
@@ -331,10 +335,10 @@
                             Grid.Row="3"
                             Grid.ColumnSpan="2"
                             Margin="4,4,4,4"
+                            Command="{Binding SetDefaultSettingsСommand}"
                             FontFamily="Samsung Sharp Sans">
                             <Button.Content>
                                 <Viewbox Stretch="Uniform">
-
                                     <TextBlock Text="Настройки по умолчанию" />
                                 </Viewbox>
                             </Button.Content>
