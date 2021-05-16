@@ -54,7 +54,6 @@ namespace FoodTrack.ViewModels
             Application.Current?.MainWindow?.Activate();
         }
         #endregion
-
         #region Изменение акцента
 
         private DelegateCommand<object> changeAppAccentСommand;
@@ -78,56 +77,6 @@ namespace FoodTrack.ViewModels
         }
         #endregion
 
-        #endregion
-        #region Стили
-
-        private void LightAccent1AppButtonClick(object sender, RoutedEventArgs e)
-        {
-            ThemeManager.Current.ChangeTheme(Application.Current, "Light.Accent1");
-            Application.Current?.MainWindow?.Activate();
-        }
-
-        private void DarkAccent1AppButtonClick(object sender, RoutedEventArgs e)
-        {
-            ThemeManager.Current.ChangeTheme(Application.Current, "Dark.Accent1");
-            Application.Current?.MainWindow?.Activate();
-        }
-
-        private void LightAccent2AppButtonClick(object sender, RoutedEventArgs e)
-        {
-            ThemeManager.Current.ChangeTheme(Application.Current, "Light.Accent2");
-            Application.Current?.MainWindow?.Activate();
-        }
-
-        private void DarkAccent2AppButtonClick(object sender, RoutedEventArgs e)
-
-        {
-            ThemeManager.Current.ChangeTheme(Application.Current, "Dark.Accent2");
-            Application.Current?.MainWindow?.Activate();
-        }
-
-        private void AccentSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedTheme = e.AddedItems.OfType<Theme>().FirstOrDefault();
-            if (selectedTheme != null)
-            {
-                ThemeManager.Current.ChangeTheme(Application.Current, selectedTheme);
-                Application.Current?.MainWindow?.Activate();
-            }
-        }
-
-        private void ColorsSelectorOnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedColor = e.AddedItems.OfType<KeyValuePair<string, Color>?>().FirstOrDefault();
-            if (selectedColor != null)
-            {
-                var theme = ThemeManager.Current.DetectTheme(Application.Current);
-                var inverseTheme = ThemeManager.Current.GetInverseTheme(theme);
-                ThemeManager.Current.AddTheme(RuntimeThemeGenerator.Current.GenerateRuntimeTheme(inverseTheme.BaseColorScheme, selectedColor.Value.Value));
-                ThemeManager.Current.ChangeTheme(Application.Current, ThemeManager.Current.AddTheme(RuntimeThemeGenerator.Current.GenerateRuntimeTheme(theme.BaseColorScheme, selectedColor.Value.Value)));
-                Application.Current?.MainWindow?.Activate();
-            }
-        }
         #endregion
     }
 }

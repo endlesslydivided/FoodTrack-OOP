@@ -5,19 +5,19 @@ using System.Xml.Serialization;
 
 namespace FoodTrack.XMLSerializer
 {
-    public static class XmlSerializeWrapper
+    public static class XmlSerializeWrapper<T> where T : new()
     {
-        public static void Serialize (User obj, string filename)
+        public static void Serialize (T obj, string filename)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(User));
+            XmlSerializer formatter = new XmlSerializer(typeof(T));
             using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 formatter.Serialize(fs, obj);
             }
         }
-        public static User Deserialize (string filename)
+        public static T Deserialize(string filename)
         {
-            User obj = new User();
+            T obj = new T();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate);
             if (fs.Length == 0)
             {
@@ -28,7 +28,7 @@ namespace FoodTrack.XMLSerializer
             using (FileStream fstream = new FileStream(filename, FileMode.OpenOrCreate))
             {              
                 XmlSerializer formatter = new XmlSerializer(typeof(User));
-                obj = (User)formatter.Deserialize(fstream);
+                obj = (T)formatter.Deserialize(fstream);
             }
             return obj;
         }

@@ -48,18 +48,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Themes and styles\Dark.Accent1.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes and styles\Dark.Accent2.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes and styles\Light.Accent1.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes and styles\Light.Accent2.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="UI\CircularProgressBar.xaml">
       <SubType>Designer</SubType>
     </Page>

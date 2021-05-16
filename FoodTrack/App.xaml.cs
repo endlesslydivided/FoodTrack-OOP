@@ -23,7 +23,7 @@ namespace FoodTrack
             //SplashScreen splash = new SplashScreen("../Resources/foodTrackSplash.png");
             //splash.Show(autoClose: true, topMost: true);
             //splash.Close(TimeSpan.FromSeconds(4));
-            User deserializedeUser = XmlSerializeWrapper.Deserialize("../lastUser.xml");
+            User deserializedeUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml");
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<User> resultUserFound = unit.UserRepository.Get(x => x.UserLogin == deserializedeUser.UserLogin);

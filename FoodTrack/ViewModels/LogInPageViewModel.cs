@@ -105,7 +105,7 @@ namespace FoodTrack.ViewModels
                 }
                 else if(PasswordHash.IsPasswordValid(UserPassword, int.Parse(result.First<User>().Salt), result.First<User>().UserPassword))
                 {
-                    XmlSerializeWrapper.Serialize(result.First<User>(),"../lastUser.xml");                 
+                    XmlSerializeWrapper<User>.Serialize(result.First<User>(),"../lastUser.xml");                 
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     foreach (Window window in Application.Current.Windows)

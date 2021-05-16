@@ -12,7 +12,7 @@ namespace FoodTrack.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public User deserializedUser = XmlSerializeWrapper.Deserialize("../lastUser.xml");
+        public User deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml");
         public event PropertyChangedEventHandler PropertyChanged;
 
 

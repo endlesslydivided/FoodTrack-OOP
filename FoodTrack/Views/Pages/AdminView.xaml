@@ -53,14 +53,12 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedFoodCategory.Id}" />
                             <TextBlock
                                 Grid.Row="1"
@@ -68,7 +66,6 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Категория:" />
                             <TextBox
                                 Grid.Row="1"
@@ -167,7 +164,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
@@ -175,7 +171,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedProduct.Id}" />
 
                             <TextBlock
@@ -185,7 +180,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="IdAdded:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -203,7 +197,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="9"
-
                                 Text="CaloriesGram:" />
 
                             <mah:NumericUpDown
@@ -259,7 +252,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="ProductName:" />
                             <TextBox
                                 Grid.Column="4"
@@ -278,7 +270,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="ProteinsGram:" />
                             <mah:NumericUpDown
                                 Grid.Row="1"
@@ -298,7 +289,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="FatsGram:" />
                             <mah:NumericUpDown
                                 Grid.Row="2"
@@ -317,7 +307,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-
                                 Text="CarbohydratesGram:" />
                             <mah:NumericUpDown
                                 Grid.Column="6"
@@ -346,7 +335,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-
                                 Text="FoodCategory:" />
                         </Grid>
                     </Border>
@@ -391,7 +379,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
@@ -399,7 +386,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedReport.Id}" />
 
                             <TextBlock
@@ -409,7 +395,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="IdReport:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -426,7 +411,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="DayGram:" />
 
                             <mah:NumericUpDown
@@ -483,7 +467,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="ProductName:" />
                             <TextBox
                                 Grid.Column="4"
@@ -502,7 +485,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="ReportDate:" />
                             <DatePicker
                                 x:Name="DateTBResults"
@@ -534,7 +516,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-
                                 Text="EatPeriod:" />
                             <TextBlock
                                 Grid.Column="5"
@@ -542,7 +523,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-
                                 Text="MostCategory:" />
                             <TextBlock
                                 Grid.Column="6"
@@ -594,14 +574,12 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedUser.Id}" />
 
                             <TextBlock
@@ -611,7 +589,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="13"
-
                                 Text="IsAdmin:" />
                             <CheckBox
                                 Grid.Row="1"
@@ -627,7 +604,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="{Binding ActualWidth, Converter={StaticResource FontConverter}, ConverterParameter=60, ElementName=grid, Mode=OneWay}"
-
                                 Text="UserLogin:" />
 
                             <Grid
@@ -718,14 +694,12 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedUsersDatum.Id}" />
 
                             <TextBlock
@@ -735,7 +709,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="IdData:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -753,7 +726,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="13"
-
                                 Text="FullName:" />
 
                             <Grid
@@ -850,7 +822,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="Id:" />
                             <TextBlock
                                 Grid.Column="1"
@@ -858,7 +829,6 @@
                                 Margin="5"
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
-
                                 Text="{Binding LastSelectedUserParam.Id}" />
 
                             <TextBlock
@@ -868,7 +838,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="12"
-
                                 Text="IdParam:" />
                             <TextBlock
                                 Grid.Row="1"
@@ -886,7 +855,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="11"
-
                                 Text="UserWeight:" />
 
                             <mah:NumericUpDown
@@ -942,7 +910,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="9"
-
                                 Text="ParamsDate:" />
                             <DatePicker
                                 Grid.Row="1"
@@ -958,7 +925,6 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Samsung Sharp Sans"
                                 FontSize="10"
-
                                 Text="UserHeight:" />
                             <mah:NumericUpDown
                                 Grid.Column="4"

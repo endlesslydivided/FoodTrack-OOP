@@ -17,17 +17,18 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="23*" />
-                    <RowDefinition Height="24*" />
-                    <RowDefinition Height="32*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="25*" />
                     <RowDefinition Height="9*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="13*" />
-                    <ColumnDefinition Width="27*" />
+                    <ColumnDefinition Width="257*" />
+                    <ColumnDefinition Width="348*" />
+                    <ColumnDefinition Width="185*" />
                 </Grid.ColumnDefinitions>
                 <GroupBox
                     Grid.RowSpan="2"
-                    Margin="8"
+                    Margin="5,5,5,5"
                     FontFamily="Samsung Sharp Sans"
                     Header="Смена пароля">
                     <Grid>
@@ -45,9 +46,10 @@
                             FontFamily="Samsung Sharp Sans"
                             Text="Старый пароль"
                             TextAlignment="Center" />
+
                         <TextBox
                             Grid.Row="1"
-                            Margin="2"
+                            Margin="5"
                             mah:TextBoxHelper.ClearTextButton="True"
                             mah:TextBoxHelper.Watermark="Старый пароль" />
                         <TextBlock
@@ -59,20 +61,20 @@
                             TextAlignment="Center" />
                         <TextBox
                             Grid.Row="3"
-                            Margin="2"
+                            Margin="5"
                             mah:TextBoxHelper.ClearTextButton="True"
                             mah:TextBoxHelper.Watermark="Новый пароль" />
                         <Button
                             Grid.Row="4"
-                            Margin="1"
+                            Margin="5"
                             Content="Подтвердить"
                             FontFamily="Samsung Sharp Sans" />
                     </Grid>
                 </GroupBox>
-
                 <GroupBox
                     Grid.Column="1"
-                    Margin="8"
+                    Grid.ColumnSpan="2"
+                    Margin="5,5,5,5"
                     FontFamily="Samsung Sharp Sans"
                     Header="Персонализация">
                     <Grid>
@@ -107,70 +109,251 @@
                 <GroupBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="8"
+                    Grid.ColumnSpan="2"
+                    Margin="5,5,5,5"
                     FontFamily="Samsung Sharp Sans"
                     Header="Стили и темы">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="4*" />
                         </Grid.RowDefinitions>
 
                         <UniformGrid Grid.Row="0" Columns="2">
                             <Button
-                                Margin="2"
+                                Margin="0"
                                 Command="{Binding ChangeAppThemeCommand}"
                                 CommandParameter="Dark"
                                 Content="Тёмная"
                                 FontFamily="Samsung Sharp Sans" />
                             <Button
-                                Margin="2"
+                                Margin="1"
                                 Command="{Binding ChangeAppThemeCommand}"
                                 CommandParameter="Light"
                                 Content="Светлая"
                                 FontFamily="Samsung Sharp Sans" />
 
                         </UniformGrid>
+                        <UniformGrid
+                            Grid.Row="2"
+                            Margin="10,2,2,2"
+                            Columns="10"
+                            Rows="2">
+                            <UniformGrid.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.4"
+                                    ShadowDepth="1" />
+                            </UniformGrid.Effect>
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Red"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Red"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Orange"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Orange"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Yellow"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Yellow"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="GreenYellow"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Green"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Cyan"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Cyan"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Blue"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Blue"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Violet"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Violet"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Pink"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Pink"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Olive"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Olive"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Brown"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Brown"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Indigo"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Indigo"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="YellowGreen"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Lime"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Plum"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Mauve"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="LightSlateGray"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Steel"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="CornflowerBlue"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Cobalt"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Gold"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Amber"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Crimson"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Crimson"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="BurlyWood"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Taupe"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="ForestGreen"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Emerald"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
+                            <Button
+                                Margin="2,2,14,2"
+                                Background="Magenta"
+                                BorderBrush="LightGray"
+                                BorderThickness="3"
+                                Command="{Binding ChangeAppAccentСommand}"
+                                CommandParameter="Magenta"
+                                Style="{StaticResource MahApps.Styles.Button.Circle}" />
 
-                        <!--<UniformGrid Grid.Row="1"
-                             Columns="4">
-                                <Button Content="Light.Accent1"
-                            Click="LightAccent1AppButtonClick" />
-                                <Button Content="Dark.Accent1"
-                            Click="DarkAccent1AppButtonClick" />
-                                <Button Content="Light.Accent2"
-                            Click="LightAccent2AppButtonClick" />
-                                <Button Content="Dark.Accent2"
-                            Click="DarkAccent2AppButtonClick" />
-                            </UniformGrid>-->
-
-                        <!--<UniformGrid Grid.Row="2" Margin="5" Columns="2" Rows="2">
-                                <TextBlock Text="Акценты" Margin="0 0 2 0" VerticalAlignment="Center" />
-                                <TextBlock Text="Цвета" Margin="2 0 0 0" VerticalAlignment="Center" />
-
-                                <ComboBox x:Name="AccentSelector"
-                              Margin="0 0 2 0"
-                              VerticalAlignment="Center"
-                              IsSynchronizedWithCurrentItem="False"
-                              SelectionChanged="AccentSelectionChanged"
-                              DisplayMemberPath="Name"
-                              ItemsSource="{Binding Source={StaticResource Themes}}" />
-
-                                <ComboBox x:Name="ColorsSelector"
-                              Margin="2 0 0 0"
-                              VerticalAlignment="Center"
-                              SelectionChanged="ColorsSelectorOnSelectionChanged"
-                              DisplayMemberPath="Key"
-                              ItemsSource="{Binding Colors}" />
-                            </UniformGrid>-->
+                        </UniformGrid>
                     </Grid>
                 </GroupBox>
+                <GroupBox
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="5,10,5,10">
+                    <UniformGrid Columns="1" Rows="2">
+                        <Button
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="4,4,4,4"
+                            FontFamily="Samsung Sharp Sans">
+                            <Button.Content>
+                                <Viewbox Stretch="Uniform">
 
+                                    <TextBlock Text="Сохранить настройки" />
+                                </Viewbox>
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="4,4,4,4"
+                            FontFamily="Samsung Sharp Sans">
+                            <Button.Content>
+                                <Viewbox Stretch="Uniform">
+
+                                    <TextBlock Text="Настройки по умолчанию" />
+                                </Viewbox>
+                            </Button.Content>
+                        </Button>
+                    </UniformGrid>
+                </GroupBox>
+                <GroupBox
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="10,10,10,10">
+                    <TextBlock
+                        FontFamily="Samsung Sharp Sans"
+                        Text="Человек должен употреблять в день примерно 2.5 литра чистой воды! "
+                        TextWrapping="Wrap" />
+                </GroupBox>
                 <Button
                     Grid.Row="3"
-                    Grid.ColumnSpan="2"
-                    Margin="4"
+                    Grid.ColumnSpan="3"
+                    Margin="4,4,4,4"
                     Content="Выйти из аккаунта"
                     FontFamily="Samsung Sharp Sans" />
             </Grid>
