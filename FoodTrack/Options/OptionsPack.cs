@@ -45,12 +45,6 @@ namespace FoodTrack.Options
             Application.Current?.MainWindow?.Activate();
         }
 
-        public void setSettings()
-        {
-            IsSplashScreenShown = this.IsSplashScreenShown;
-            IsStayAuthorized = this.IsStayAuthorized;
-        }
-
 
         #endregion
     }

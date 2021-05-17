@@ -46,9 +46,13 @@ namespace FoodTrack
 
                         currentUserSettings.setAppTheme();
                         currentUserSettings.setAppAccent();
-                        currentUserSettings.setSettings();
 
                         OptionsViewModel.OptionsPack = currentUserSettings;
+                    }
+                    else
+                    {
+                        LogInWindow logInWindow = new LogInWindow();
+                        logInWindow.Show();
                     }
                 }               
                 else

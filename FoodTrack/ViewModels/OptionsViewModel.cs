@@ -1,22 +1,51 @@
 ﻿using ControlzEx.Theming;
 using FoodTrack.Commands;
+using FoodTrack.Context.UnitOfWork;
+using FoodTrack.Hash;
+using FoodTrack.Models;
 using FoodTrack.Options;
 using FoodTrack.XMLSerializer;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace FoodTrack.ViewModels
 {
     class OptionsViewModel : BaseViewModel
     {
+        private string textMessage;
+        public string[] messages = {
+            "Взрослому человеку нужно примерно 8 стаканов жидкости в день." +
+            " В это количество входят все напитки и жидкие продукты (например, супы)." +
+            " Но лучше заменить крепкий чай и кофе на чистую воду. ",
+
+            "Сытный сбалансированный приём пищи с утра обеспечит вас бодростью и силами до обеда.",
+
+            "Постарайтесь перед сном выдержать хотя бы два часа без еды. " +
+            "Распределите приёмы пищи по дню так, чтобы не было перерыва больше 3-4 часов.",
+
+            "Взрослому человеку, чтобы быть здоровым, нужно спать минимум 7-8 часов в сутки." +
+            " Мы можем некоторое время работать на износ и бодрствовать по 20 часов, но в итоге это приведёт к проблемам и плохому самочувствию.",
+
+            "Если у вас явный недостаток или избыток массы — постарайтесь это исправить." +
+            " И то, и другое отрицательно влияет на здоровье опорной и сердечно-сосудистой систем.",
+
+            "Тщательно мойте руки перед едой, после туалета или улицы." +
+            " Душ следует принимать ежедневно, а чистить зубы — минимум дважды в день.",
+
+            "Нет смысла пытаться сразу обзавестись всеми этими привычками." +
+                " Лучше начинать постепенно, чтобы они не вызывали напряжения и прочно вошли в вашу жизнь.",
+
+            "Регулярно проходите медосмотры. Так можно вовремя заметить заболевания, когда их проще всего вылечить." +
+            " Лучше всего делать это хотя бы раз в год.",
+
+            "Жесткие диеты не несут в себе пользу для здоровья!"};
+        private string oldPassword;
+        private string newPassword;
 
 
         public OptionsViewModel()
@@ -25,12 +54,43 @@ namespace FoodTrack.ViewModels
             {
                 OptionsPack = new();
             }
+            Random random = new();
+            TextMessage = messages[random.Next(0, messages.Length)];
+
         }
 
         #region Properties
 
         public static OptionsPack OptionsPack { get; set; }
 
+        public string OldPassword
+        {
+            get { return oldPassword; }
+            set
+            {
+                oldPassword = value;
+                OnPropertyChanged("OldPassword");
+            }
+        }
+        public string NewPassword
+        {
+            get { return newPassword; }
+            set
+            {
+                newPassword = value;
+                OnPropertyChanged("NewPassword");
+            }
+        }
+
+        public string TextMessage
+        {
+            get { return textMessage; }
+            set
+            {
+                textMessage = value;
+                OnPropertyChanged("TextMessage");
+            }
+        }
         public bool IsShowSplash
         {
             get { return OptionsPack.IsSplashScreenShown; }
@@ -122,6 +182,7 @@ namespace FoodTrack.ViewModels
             optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id));
             optionsPacks.Add(OptionsPack);
             XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
+            TextMessage = "Настройки сохранены!";
         }
         #endregion
         #region Установка настроек по умолчанию
@@ -147,20 +208,69 @@ namespace FoodTrack.ViewModels
             OptionsPack.CurrentAppTheme = "Light";
             OptionsPack.CurrentAppAccent = "ForestGreen";
 
+
             List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize("../appSettings.xml", FileMode.OpenOrCreate);
             optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id));
             optionsPacks.Add(OptionsPack);
             XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
 
-            OptionsPack?.setAppAccent();
-
-            OptionsPack?.setAppTheme();
-
-
+            ThemeManager.Current.ChangeThemeColorScheme(Application.Current, OptionsPack.CurrentAppAccent);
+            ThemeManager.Current.ChangeThemeBaseColor(Application.Current, OptionsPack.CurrentAppTheme);
+            Application.Current?.MainWindow?.Activate();
+            TextMessage = "Установлены настройки по умолчанию! Перезагрузите приложение для обновления цветовой палитры.";
         }
         #endregion
-        #endregion
+
+        #region Изменение пароля
+
+        private DelegateCommand changePasswordCommand;
+
+        public ICommand ChangePasswordCommand
+        {
+            get
+            {
+                if (changePasswordCommand == null)
+                {
+                    changePasswordCommand = new DelegateCommand(changePassword);
+                }
+                return changePasswordCommand;
+            }
+        }
+
+        private void changePassword()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                IEnumerable<User> result = unit.UserRepository.Get(x => x.Id == deserializedUser.Id);
+                User user = result?.First();
+                if (NewPassword == null || OldPassword == null)
+                {
+                    TextMessage = "Пустые поля!";
+                }
+                else if (PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).Equals(user.UserPassword) || Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
+                {
+                    user.Salt = PasswordHash.GenerateSaltForPassword().ToString();
+                    user.UserPassword = PasswordHash.ComputePasswordHash(NewPassword, int.Parse(user.Salt));
+                    unit.UserRepository.Update(user);
+                    unit.Save();
+                    TextMessage = "Смена пароля прошла успешно!";
+                    OldPassword = default;
+                    NewPassword = default;
+                }            
+                else if(!PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).SequenceEqual(user.UserPassword))
+                {
+                    TextMessage = "Неверный старый пароль!";
+                }
+                else if (!Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
+                {
+                    TextMessage = "Неверный новый пароль! Можно вводить латинские символы и цифры. Длина пароля: 8-20 символов.";
+                }
+            }
+            }
     }
-    
+        #endregion
+        #endregion
 }
+
+
 

@@ -119,7 +119,6 @@ namespace FoodTrack.ViewModels
 
                     OptionsViewModel.OptionsPack?.setAppAccent();
                     OptionsViewModel.OptionsPack?.setAppTheme();
-                    OptionsViewModel.OptionsPack?.setSettings();
 
                     foreach (Window window in Application.Current.Windows)
                     {

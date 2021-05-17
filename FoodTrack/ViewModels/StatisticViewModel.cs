@@ -38,8 +38,18 @@ namespace FoodTrack.ViewModels
 
                 StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
                 IEnumerable<Report> report = unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
+                List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateTime.Today.Date.Date.Equals(x.ReportDate.Date));
 
-                if(report.Count() != 0)
+                if (mostReportCategory.Capacity != 0)
+                {
+                    MostCategory = mostReportCategory.GroupBy(i => i.MostCategory).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First();
+                }
+                else
+                {
+                    MostCategory = "---";
+                }
+
+                if (report.Count() != 0)
                 {
                     LastReportDate = report.Last().ReportDate.ToString();
                 }

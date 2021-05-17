@@ -56,8 +56,7 @@
             Grid.ColumnSpan="2"
             Margin="10,10,10,10"
             BannerOpacity="0"
-            BannerText=""
-            >
+            BannerText="">
             <mah:FlipView.Items>
                 <Grid Margin="10">
                     <charts:CartesianChart
@@ -106,6 +105,7 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="8"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding LastReportDate}"
@@ -118,14 +118,14 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="Основная категория потреблённых продуктов сегодня: "
+                        Text="Основная категория потреблённых продуктов: "
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
-                        Text="Мясное"
+                        Text="{Binding MostCategory}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 

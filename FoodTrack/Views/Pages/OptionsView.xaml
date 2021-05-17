@@ -51,7 +51,8 @@
                             Grid.Row="1"
                             Margin="5"
                             mah:TextBoxHelper.ClearTextButton="True"
-                            mah:TextBoxHelper.Watermark="Старый пароль" />
+                            mah:TextBoxHelper.Watermark="Старый пароль"
+                            Text="{Binding OldPassword}" />
                         <TextBlock
                             Grid.Row="2"
                             Margin="5"
@@ -63,12 +64,13 @@
                             Grid.Row="3"
                             Margin="5"
                             mah:TextBoxHelper.ClearTextButton="True"
-                            mah:TextBoxHelper.Watermark="Новый пароль" />
+                            mah:TextBoxHelper.Watermark="Новый пароль"
+                            Text="{Binding NewPassword}" />
                         <Button
                             Grid.Row="4"
                             Margin="5"
                             Content="Подтвердить"
-                            FontFamily="Samsung Sharp Sans" />
+                            FontFamily="Samsung Sharp Sans" Command="{Binding ChangePasswordCommand}" />
                     </Grid>
                 </GroupBox>
                 <GroupBox
@@ -351,7 +353,7 @@
                     Margin="10,10,10,10">
                     <TextBlock
                         FontFamily="Samsung Sharp Sans"
-                        Text="Человек должен употреблять в день примерно 2.5 литра чистой воды! "
+                        Text="{Binding TextMessage}"
                         TextWrapping="Wrap" />
                 </GroupBox>
                 <Button

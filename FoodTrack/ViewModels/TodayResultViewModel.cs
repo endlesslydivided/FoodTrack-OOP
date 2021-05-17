@@ -38,7 +38,6 @@ namespace FoodTrack.ViewModels
         public TodayResultViewModel()
         {
             DateToChoose = DateTime.Today.Date;
-            refreshStatistic();
         }
 
         #region Properties
@@ -161,6 +160,7 @@ namespace FoodTrack.ViewModels
             {
                 dateToChoose = value;
                 OnPropertyChanged("DateToChoose");
+                refreshStatistic();
             }
         }
         public string LastReport
@@ -262,7 +262,7 @@ namespace FoodTrack.ViewModels
                     UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateToChoose.Date)).FirstOrDefault();
                     UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id ).FirstOrDefault();
                     List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
-                    List<Report> todayResport = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateTime.Today.Date.Equals(x.ReportDate.Date));
+                    List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Date.Date.Equals(x.ReportDate.Date));
                     List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
@@ -274,9 +274,9 @@ namespace FoodTrack.ViewModels
                         LastReport = "---";
                     }
 
-                    if (todayResport.Capacity != 0)
+                    if (mostReportCategory.Capacity != 0)
                     {
-                        MostCategory = todayResport.GroupBy(i => i.MostCategory).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First();
+                        MostCategory = mostReportCategory.GroupBy(i => i.MostCategory).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First();
                     }
                     else
                     {
@@ -350,7 +350,6 @@ namespace FoodTrack.ViewModels
                     UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateTime.Today.Date)).FirstOrDefault();
                     UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id).FirstOrDefault();
                     List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
-                    List<Report> todayResport = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateTime.Today.Date.Equals(x.ReportDate.Date));
                     List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
@@ -361,9 +360,7 @@ namespace FoodTrack.ViewModels
                     {
                         LastReport = "---";
                     }
-
                         MostCategory = "---";
-
                     if (userParam != null)
                     {
                         CaloriesNeeded = Math.Round((10M * userParam.UserWeight) + (6.25M * userParam.UserHeight) - (5 * (DateTime.Now.Year - usersDatum.Birthday.Year)) + 78);
