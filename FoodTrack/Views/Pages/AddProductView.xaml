@@ -11,6 +11,7 @@
     xmlns:models="clr-namespace:FoodTrack.Models"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    x:Name="UC"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:FontConverter x:Key="FontConverter" />
@@ -95,7 +96,7 @@
                         BorderBrush="Transparent"
                         Command="{Binding RemoveDayCommand}"
                         Content="❮"
-                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                        FontSize="{Binding ActualHeight, ElementName=UC, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
                     <DatePicker
                         x:Name="DateTBResults"
                         Grid.Row="1"
@@ -103,7 +104,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
-                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
+                        FontSize="{Binding ActualHeight, ElementName=UC, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=29}"
                         FontWeight="Normal"
                         SelectedDate="{Binding DateToChoose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
@@ -112,7 +113,7 @@
                         BorderBrush="Transparent"
                         Command="{Binding AddDayCommand}"
                         Content="❯"
-                        FontSize="{Binding ActualHeight, ElementName=UserControl, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
+                        FontSize="{Binding ActualHeight, ElementName=UC, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=25}" />
 
                 </StackPanel>
             </Grid>

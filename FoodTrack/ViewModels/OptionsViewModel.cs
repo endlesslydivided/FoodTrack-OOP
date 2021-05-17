@@ -203,8 +203,8 @@ namespace FoodTrack.ViewModels
 
         private void setDefaultSettings()
         {
-            OptionsPack.IsSplashScreenShown = true;
-            OptionsPack.IsStayAuthorized = true;
+            IsShowSplash = true;
+            IsStayAuthorized = true;
             OptionsPack.CurrentAppTheme = "Light";
             OptionsPack.CurrentAppAccent = "ForestGreen";
 

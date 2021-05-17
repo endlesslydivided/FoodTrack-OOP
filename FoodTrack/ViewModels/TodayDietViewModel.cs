@@ -60,6 +60,7 @@ namespace FoodTrack.ViewModels
             {
                 dateToChoose = value;
                 OnPropertyChanged("DateToChoose");
+                refreshTable();
             }
         }
 
@@ -231,7 +232,6 @@ namespace FoodTrack.ViewModels
         private void addDay()
         {
             DateToChoose = DateToChoose.AddDays(1);
-            refreshTable();
         }
 
         #endregion
@@ -254,7 +254,6 @@ namespace FoodTrack.ViewModels
         private void removeDay()
         {
             DateToChoose = DateToChoose.AddDays(-1);
-            refreshTable();
         }
 
         #endregion
@@ -289,7 +288,6 @@ namespace FoodTrack.ViewModels
         }
 
         #endregion
-
 
         #region Открыть окно изменения продукта
 

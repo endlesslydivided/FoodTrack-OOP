@@ -359,6 +359,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
+                        FontFamily="Samsung Sharp Sans"
                         Text="Последнее изменение списка потреблённых продуктов: "
                         TextWrapping="Wrap" />
                     <TextBlock
@@ -377,7 +378,8 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Основная категория потреблённых продуктов: "
-                        TextWrapping="Wrap" />
+                        TextWrapping="Wrap"
+                        FontFamily="Samsung Sharp Sans"/>
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -393,6 +395,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
+                        FontFamily="Samsung Sharp Sans"
                         Text="Ваш вес: "
                         TextWrapping="Wrap" />
                     <TextBlock
@@ -419,6 +422,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
+                        FontFamily="Samsung Sharp Sans"
                         Text="Ваш рост: "
                         TextWrapping="Wrap" />
                     <TextBlock

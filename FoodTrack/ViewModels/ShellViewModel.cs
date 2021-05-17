@@ -1,4 +1,6 @@
-﻿using FoodTrack.Views.Pages;
+﻿using FoodTrack.Context.UnitOfWork;
+using FoodTrack.Models;
+using FoodTrack.Views.Pages;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
@@ -70,14 +72,24 @@ namespace FoodTrack.ViewModels
                 NavigationType = typeof(OptionsView),
                 NavigationDestination = new Uri("../Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
             });
-            this.OptionsMenu.Add(new MenuItem()
-            {
-                Icon = new PackIconModern() { Kind = PackIconModernKind.ControlGuide },
-                Label = "Администрирование",
-                NavigationType = typeof(AdminView),
-                NavigationDestination = new Uri("../Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
-            });
 
+            bool? isAdmin = false;
+
+            using (UnitOfWork unit = new())
+            {
+                isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+            }
+
+            if ((bool)isAdmin)
+                {
+                this.OptionsMenu.Add(new MenuItem()
+                {
+                    Icon = new PackIconModern() { Kind = PackIconModernKind.ControlGuide },
+                    Label = "Администрирование",
+                    NavigationType = typeof(AdminView),
+                    NavigationDestination = new Uri("../Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
+                });
+                };
         }
     }
 }

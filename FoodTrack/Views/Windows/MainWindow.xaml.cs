@@ -24,7 +24,6 @@ namespace FoodTrack.Views.Windows
     public partial class MainWindow
     {
        
-
         private readonly Navigation.NavigationServiceEx navigationServiceEx;
 
         public MainWindow()

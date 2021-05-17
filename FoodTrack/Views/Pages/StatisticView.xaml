@@ -90,32 +90,34 @@
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
             <StackPanel
-                Margin="0,10,0,10"
+                Margin="0,3,0,3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                <WrapPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Последнее изменение списка потреблённых продуктов: "
                         TextWrapping="Wrap" />
+
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontSize="8"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding LastReportDate}"
                         TextWrapping="Wrap" />
-                </StackPanel>
+                </WrapPanel>
 
-                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                <WrapPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Основная категория потреблённых продуктов: "
@@ -127,12 +129,13 @@
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding MostCategory}"
                         TextWrapping="Wrap" />
-                </StackPanel>
+                </WrapPanel>
 
-                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Ваш вес: "
@@ -155,10 +158,11 @@
 
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Style="{StaticResource SPMarginStyle}">
+                <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Ваш рост: "
