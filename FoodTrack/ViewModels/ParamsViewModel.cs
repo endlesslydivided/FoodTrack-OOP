@@ -17,13 +17,20 @@ namespace FoodTrack.ViewModels
         private List<string> categoryCollection;
         private decimal weight;
         private int height;
+        private IEnumerable<Product> productsCollection;
+        private bool nameTBEnabled;
 
-        private Product product;
+        private Product product = new();
+
 
         public ParamsViewModel()
         {
-            product = new Product();
-            ProductName = default;
+            ProductName = "";
+            Fats = 1;
+            Proteins = 1;
+            Carbohydrates = 1;
+            Calories = 1;
+            nameTBEnabled = true;
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable categories = unit.FoodCategoryRepository.Get();
@@ -32,12 +39,14 @@ namespace FoodTrack.ViewModels
                 {
                     CategoryCollection.Add(x.CategoryName);
                 }
+                List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
+                ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
             }
             SelectedCategory = categoryCollection.First();
         }
 
         #region Properties
-
+        
         public List<string> CategoryCollection
         {
             get { return categoryCollection; }
@@ -47,7 +56,15 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("CategoryCollection");
             }
         }
-
+        public bool NameTBEnabled
+        {
+            get { return nameTBEnabled; }
+            set
+            {
+                nameTBEnabled = value;
+                OnPropertyChanged("NameTBEnabled");
+            }
+        }
         public string SelectedCategory
         {
             get { return product.FoodCategory; }
@@ -120,6 +137,34 @@ namespace FoodTrack.ViewModels
                 OnPropertyChanged("Calories");
             }
         }
+        public IEnumerable<Product> ProductsCollection
+        {
+            get { return productsCollection; }
+            set
+            {
+                productsCollection = value;
+                OnPropertyChanged("ProductsCollection");
+            }
+        }
+        public Product LastSelected
+        {
+            get { return product; }
+            set
+            {
+                product = value;
+                if (value != null)
+                {
+                    ProductName = value.ProductName;
+                    Fats = value.FatsGram;
+                    Proteins = value.ProteinsGram;
+                    Carbohydrates = value.CarbohydratesGram;
+                    Calories = value.CaloriesGram;
+                    SelectedCategory = value.FoodCategory;
+                }
+                OnPropertyChanged("LastSelected");
+            }
+        }
+
 
         #endregion
 
@@ -207,12 +252,34 @@ namespace FoodTrack.ViewModels
 
                 unit.ProductRepository.Create(product);
                 unit.Save();
+                ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+               
             }
+            LastSelected = new();
+            ProductName = "";
+            Fats = 1;
+            Proteins = 1;
+            Carbohydrates = 1;
+            Calories = 1;
         }
 
         private bool canAddProductToCollection()
         {
-            if (ProductName == "" || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "")
+            bool productExist = false;
+
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                List<Product> productsList = unit.ProductRepository.Get().ToList();
+                foreach (Product x in productsList)
+                {
+                    if (x.ProductName.ToLower() == LastSelected.ProductName.ToLower())
+                    {
+                        productExist = true;
+                        break;
+                    }
+                }
+            }
+            if (ProductName == "" || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "" || productExist || LastSelected.Id != 0)
             {
                 return false;
             }
@@ -224,8 +291,146 @@ namespace FoodTrack.ViewModels
 
         #endregion
 
+        #region Удалить запись в таблице продуктов
+
+        private DelegateCommand deleteProductRowCommand;
+
+        public ICommand DeleteProductRowCommand
+        {
+            get
+            {
+                if (deleteProductRowCommand == null)
+                {
+                    deleteProductRowCommand = new DelegateCommand(deleteProductRow);
+                }
+                return deleteProductRowCommand;
+            }
+        }
+
+
+        private void deleteProductRow()
+        {
+            if (LastSelected != null)
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    Product toDelete = unit.ProductRepository.Get(x => x.ProductName == LastSelected.ProductName).First();
+                    unit.ProductRepository.Remove(toDelete);
+                    unit.Save();
+
+                    ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);               
+                }
+                LastSelected = new();
+                ProductName = "";
+                Fats = 1;
+                Proteins = 1;
+                Carbohydrates = 1;
+                Calories = 1;
+            };
+        }
 
         #endregion
 
+        #region Изменить запись в таблице продуктов
+
+        private DelegateCommand editProductCommand;
+
+        public ICommand EditProductCommand
+        {
+            get
+            {
+                if (editProductCommand == null)
+                {
+                    editProductCommand = new DelegateCommand(editProduct,canEditProduct);
+                }
+                return editProductCommand;
+            }
+        }
+
+
+        private void editProduct()
+        {
+            if (LastSelected != null)
+            {
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+
+                    unit.ProductRepository.Update(LastSelected);
+                    unit.Save();
+
+                    ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                }
+                LastSelected = new();
+                ProductName = "";
+                Fats = 1;
+                Proteins = 1;
+                Carbohydrates = 1;
+                Calories = 1;
+                SelectedCategory = "";
+                NameTBEnabled = true;
+            };
+        }
+
+        private bool canEditProduct()
+        {
+            int productExist = 0;
+
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                List<Product> productsList = unit.ProductRepository.Get().ToList();
+                foreach (Product x in productsList)
+                {
+                    if (x.ProductName.ToLower() == ProductName.ToLower())
+                    {
+                        productExist++;
+                    }
+                }
+            }
+            if (ProductName == "" || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "" || productExist == 0 || LastSelected.Id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                NameTBEnabled = false;
+                return true;
+            }
+        }
+
+
+        #endregion
+
+        #region Изменить запись в таблице продуктов
+
+        private DelegateCommand сlearProductCommand;
+
+        public ICommand ClearProductCommand
+        {
+            get
+            {
+                if (сlearProductCommand == null)
+                {
+                    сlearProductCommand = new DelegateCommand(сlearProduct);
+                }
+                return сlearProductCommand;
+            }
+        }
+
+
+        private void сlearProduct()
+        {
+                LastSelected = new();
+                ProductName = "";
+                Fats = 1;
+                Proteins = 1;
+                Carbohydrates = 1;
+                Calories = 1;
+                SelectedCategory = "";
+                NameTBEnabled = true;
+        }
+        #endregion
+
+        #endregion
     }
 }
+

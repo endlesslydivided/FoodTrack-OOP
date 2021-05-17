@@ -37,9 +37,12 @@ namespace FoodTrack.ViewModels
             usersParam.ParamsDate = DateTime.Now;
             usersDatum.Birthday = DateTime.Now;
 
-            UserLastname = default;
-            UserSurname = default;
-            UserName = default;
+            UserLastname = "";
+            UserSurname = "";
+            UserName = "";
+
+            UserWeight = 10;
+            UserHeight = 50;
         }
 
 

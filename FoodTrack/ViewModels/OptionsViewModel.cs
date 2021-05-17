@@ -4,6 +4,7 @@ using FoodTrack.Context.UnitOfWork;
 using FoodTrack.Hash;
 using FoodTrack.Models;
 using FoodTrack.Options;
+using FoodTrack.Views.Windows;
 using FoodTrack.XMLSerializer;
 using System;
 using System.Collections.Generic;
@@ -267,9 +268,39 @@ namespace FoodTrack.ViewModels
                 }
             }
             }
+        #endregion
+
+        #region Выход из аккаунта
+
+        private DelegateCommand exitCommand;
+
+        public ICommand ExitCommand
+        {
+            get
+            {
+                if (exitCommand == null)
+                {
+                    exitCommand = new DelegateCommand(exit);
+                }
+                return exitCommand;
+            }
+        }
+
+        private void exit()
+        {
+            User deserializedeUser = new();
+            XmlSerializeWrapper<User>.Serialize(deserializedeUser, "../lastUser.xml");
+
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive && x.Name == "MainAppWindow");
+
+            window.Close();
+
+            LogInWindow logInWindow = new();
+            logInWindow.Show();
+        }
+        #endregion
+        #endregion
     }
-        #endregion
-        #endregion
 }
 
 

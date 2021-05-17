@@ -77,7 +77,10 @@ namespace FoodTrack.ViewModels
 
             using (UnitOfWork unit = new())
             {
-                isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+                if (deserializedUser.Id != 0)
+                {
+                    isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+                }
             }
 
             if ((bool)isAdmin)

@@ -62,19 +62,6 @@
             <GradientStop x:Name="Green2" Offset="0.8" Color="#96e6a1" />
         </LinearGradientBrush>
     </Window.Background>
-    <mah:MetroWindow.LeftWindowCommands>
-        <mah:WindowCommands>
-            <Grid>
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconModern
-                        Width="22"
-                        Height="22"
-                        VerticalAlignment="Center"
-                        Kind="FoodApple" />
-                </StackPanel>
-            </Grid>
-        </mah:WindowCommands>
-    </mah:MetroWindow.LeftWindowCommands>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Grid>
@@ -118,13 +105,10 @@
         <TextBlock
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Width="341"
-            Height="64"
-            Margin="10,0,10,0"
-            VerticalAlignment="Center"
+            Margin="5" 
             DataContext="{Binding SelectedViewModel}"
             FontFamily="Samsung One 400"
-            FontSize="11"
+            FontSize="14"
             Foreground="White"
             Text="{Binding Message}"
             TextAlignment="Center"

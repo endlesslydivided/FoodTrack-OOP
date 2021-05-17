@@ -259,15 +259,15 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateToChoose.Date)).FirstOrDefault();
-                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id ).FirstOrDefault();
+                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateToChoose.Date)).LastOrDefault();
+                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id ).LastOrDefault();
                     List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
                     List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Date.Date.Equals(x.ReportDate.Date));
                     List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
                     {
-                        LastReport = lastReports.First().ReportDate.ToString();
+                        LastReport = lastReports.Last().ReportDate.ToString();
                     }
                     else
                     {
@@ -291,7 +291,7 @@ namespace FoodTrack.ViewModels
                     }
                     else
                     {
-                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id ).FirstOrDefault();                       
+                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id ).LastOrDefault();                       
                         CaloriesNeeded = Math.Round((10M * userParamChanged.UserWeight) + (6.25M * userParamChanged.UserHeight) - (5 * (DateTime.Now.Year - usersDatum.Birthday.Year)) + 78);
                         UserWeight = userParamChanged.UserWeight;
                         UserHeight = userParamChanged.UserHeight;
@@ -299,6 +299,23 @@ namespace FoodTrack.ViewModels
                     ProteinsNeeded = Math.Round(CaloriesNeeded * 0.3M / 4);
                     FatsNeeded = Math.Round(CaloriesNeeded * 0.2M / 9);
                     CarbohydratesNeeded = Math.Round(CaloriesNeeded * 0.5M / 4);
+
+                    if(ProteinsNeeded <= 1)
+                    {
+                        ProteinsNeeded = 1;
+                    }
+                    if (FatsNeeded <= 1)
+                    {
+                        FatsNeeded = 1;
+                    }
+                    if (CarbohydratesNeeded <= 1)
+                    {
+                        CarbohydratesNeeded = 1;
+                    }
+                    if (CaloriesNeeded <= 1)
+                    {
+                        CaloriesNeeded = 1;
+                    }
 
                     CaloriesEaten = Math.Round(reports.Sum(x => x.DayCalories), 2) % 100000;
                     ProteinsEaten = Math.Round(reports.Sum(x => x.DayProteins), 2) % 100000;
@@ -347,14 +364,14 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateTime.Today.Date)).FirstOrDefault();
-                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id).FirstOrDefault();
+                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateTime.Today.Date)).LastOrDefault();
+                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id).LastOrDefault();
                     List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
                     List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
                     {
-                        LastReport = lastReports.First().ReportDate.ToString();
+                        LastReport = lastReports.Last().ReportDate.ToString();
                     }
                     else
                     {
@@ -369,7 +386,7 @@ namespace FoodTrack.ViewModels
                     }
                     else
                     {
-                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id).FirstOrDefault();
+                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id).LastOrDefault();
                         CaloriesNeeded = Math.Round((10M * userParamChanged.UserWeight) + (6.25M * userParamChanged.UserHeight) - (5 * (DateTime.Now.Year - usersDatum.Birthday.Year)) + 78);
                         UserWeight = userParamChanged.UserWeight;
                         UserHeight = userParamChanged.UserHeight;
@@ -377,6 +394,23 @@ namespace FoodTrack.ViewModels
                     ProteinsNeeded = Math.Round(CaloriesNeeded * 0.3M / 4);
                     FatsNeeded = Math.Round(CaloriesNeeded * 0.2M / 9);
                     CarbohydratesNeeded = Math.Round(CaloriesNeeded * 0.5M / 4);
+
+                    if (ProteinsNeeded <= 1)
+                    {
+                        ProteinsNeeded = 1;
+                    }
+                    if (FatsNeeded <= 1)
+                    {
+                        FatsNeeded = 1;
+                    }
+                    if (CarbohydratesNeeded <= 1)
+                    {
+                        CarbohydratesNeeded = 1;
+                    }
+                    if (CaloriesNeeded <= 1)
+                    {
+                        CaloriesNeeded = 1;
+                    }
 
                     CaloriesEaten = Math.Round(reports.Sum(x => x.DayCalories), 2) % 100000;
                     ProteinsEaten = Math.Round(reports.Sum(x => x.DayProteins), 2) % 100000;

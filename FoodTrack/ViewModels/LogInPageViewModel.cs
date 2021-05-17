@@ -20,9 +20,9 @@ namespace FoodTrack.ViewModels
 {
     public class LogInPageViewModel : BaseViewModel
     {
-        public User User = new User();
-        public string userPassword;
-        public string message;
+        private User User = new User();
+        private string userPassword;
+        private string message;
 
         #region Properties
 

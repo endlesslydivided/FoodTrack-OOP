@@ -360,7 +360,7 @@
                     Grid.Row="3"
                     Grid.ColumnSpan="3"
                     Margin="4,4,4,4"
-                    Content="Выйти из аккаунта"
+                    Content="Выйти из аккаунта" Command="{Binding ExitCommand}"
                     FontFamily="Samsung Sharp Sans" />
             </Grid>
         </Border>

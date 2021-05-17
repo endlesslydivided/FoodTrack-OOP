@@ -51,7 +51,7 @@ namespace FoodTrack.Commands
         #region Public Methods
 
         /// <summary>
-        ///     Method to determine if the command can be executed
+        ///     Метод, определяющий, является ли команда доступной к исполнению
         /// </summary>
         public bool CanExecute()
         {
@@ -63,7 +63,7 @@ namespace FoodTrack.Commands
         }
 
         /// <summary>
-        ///     Execution of the command
+        ///     Выполнение команды
         /// </summary>
         public void Execute()
         {
@@ -74,7 +74,7 @@ namespace FoodTrack.Commands
         }
 
         /// <summary>
-        ///     Property to enable or disable CommandManager's automatic requery on this command
+        ///     Свойство, используемое для разрешения автоматического запроса управляющего командами
         /// </summary>
         public bool IsAutomaticRequeryDisabled
         {
@@ -100,7 +100,7 @@ namespace FoodTrack.Commands
         }
 
         /// <summary>
-        ///     Raises the CanExecuteChaged event
+        ///     Поднимает CanExecuteChaged события
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
@@ -108,7 +108,7 @@ namespace FoodTrack.Commands
         }
 
         /// <summary>
-        ///     Protected virtual method to raise CanExecuteChanged event
+        ///     Защищённый виртуальный метод для поднятия CanExecuteChanged события
         /// </summary>
         protected virtual void OnCanExecuteChanged()
         {
@@ -120,7 +120,7 @@ namespace FoodTrack.Commands
         #region ICommand Members
 
         /// <summary>
-        ///     ICommand.CanExecuteChanged implementation
+        ///     ICommand.CanExecuteChanged выполнение
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
