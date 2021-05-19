@@ -20,25 +20,75 @@ namespace FoodTrack.ViewModels
         private Product selectedProduct;
         private DateTime dateToChoose;
 
+        private string stateOfSearch;
         private Report report;
+        private bool foodCategoryCheck;
+
+        private string selectedCategory;
+
+        public string[] foodCategories;
 
         public AddProductViewModel()
         {
             report = new Report();
             report.IdReport = deserializedUser.Id;
-            SearchText = default;
+            SearchText = "";
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable products = unit.ProductRepository.Get();
                 CollectionOfProducts = products;
+                FoodCategories = unit.FoodCategoryRepository.Get().Select(x=>x.CategoryName).ToArray();
             }
             DateToChoose = DateTime.Now;
             GramValue = default;
             SelectedProduct = default;
             SelectedPeriod = "Завтрак";
+            StateOfSearch = "All";
+            FoodCategoryCheck = false;
         }
 
         #region Properties
+
+        public string SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                selectedCategory = value;
+                OnPropertyChanged("SelectedCategory");
+            }
+        }
+
+        public string[] FoodCategories
+        {
+            get { return foodCategories; }
+            set
+            {
+                foodCategories = value;
+                OnPropertyChanged("FoodCategories");
+            }
+        }
+
+
+        public bool FoodCategoryCheck
+        {
+            get { return foodCategoryCheck; }
+            set
+            {
+                foodCategoryCheck = value;
+                OnPropertyChanged("FoodCategoryCheck");
+            }
+        }
+
+        public string StateOfSearch
+        {
+            get { return stateOfSearch; }
+            set
+            {
+                stateOfSearch = value;
+                OnPropertyChanged("GramValue");
+            }
+        }
 
         public decimal GramValue
         {
@@ -123,18 +173,36 @@ namespace FoodTrack.ViewModels
 
         private void showUserProducts()
         {
+            StateOfSearch = "User";
             using (UnitOfWork unit = new UnitOfWork())
-            { 
-                if (SearchText != "")
+            {
+                if (FoodCategoryCheck)
                 {
-                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName,"%" + SearchText +"$"));
-                    CollectionOfProducts = products;
+                    if (SearchText != "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
+                        CollectionOfProducts = products;
 
+                    }
+                    else if (SearchText == "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                        CollectionOfProducts = products;
+                    }
                 }
-                else if(SearchText == "")
+                else
                 {
-                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-                    CollectionOfProducts = products;
+                    if (SearchText != "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ));
+                        CollectionOfProducts = products;
+
+                    }
+                    else if (SearchText == "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                        CollectionOfProducts = products;
+                    }
                 }
             }
         }
@@ -158,18 +226,36 @@ namespace FoodTrack.ViewModels
 
         private void showAllProducts()
         {
+            StateOfSearch = "All";
             using (UnitOfWork unit = new UnitOfWork())
             {
-                if (SearchText != "")
+                if (FoodCategoryCheck)
                 {
-                    IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "%" + SearchText + "$"));
-                    CollectionOfProducts = products;
+                    if (SearchText != "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
+                        CollectionOfProducts = products;
 
+                    }
+                    else if (SearchText == "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get();
+                        CollectionOfProducts = products;
+                    }
                 }
-                else if (SearchText == "")
+                else
                 {
-                    IEnumerable products = unit.ProductRepository.Get();
-                    CollectionOfProducts = products;
+                    if (SearchText != "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ));
+                        CollectionOfProducts = products;
+
+                    }
+                    else if (SearchText == "")
+                    {
+                        IEnumerable products = unit.ProductRepository.Get();
+                        CollectionOfProducts = products;
+                    }
                 }
             }
         }
@@ -272,6 +358,96 @@ namespace FoodTrack.ViewModels
         private void removeDay()
         {
             DateToChoose = DateToChoose.AddDays(-1);
+        }
+
+        #endregion
+
+        #region Поиск
+
+        private DelegateCommand searchCommand;
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (searchCommand == null)
+                {
+                    searchCommand = new DelegateCommand(search);
+                }
+                return searchCommand;
+            }
+        }
+
+        private void search()
+        {
+            using (UnitOfWork unit = new UnitOfWork())
+            {
+                if (SearchText != null)
+                {
+                    if (StateOfSearch == "All")
+                    {
+                        if (FoodCategoryCheck)
+                        {
+                            if (SearchText != "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
+                                CollectionOfProducts = products;
+
+                            }
+                            else if (SearchText == "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get();
+                                CollectionOfProducts = products;
+                            }
+                        }
+                        else
+                        {
+                            if (SearchText != "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ));
+                                CollectionOfProducts = products;
+
+                            }
+                            else if (SearchText == "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get();
+                                CollectionOfProducts = products;
+                            }
+                        }
+                    }
+                    else if(StateOfSearch == "User")
+                    {
+                        if (FoodCategoryCheck)
+                        {
+                            if (SearchText != "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
+                                CollectionOfProducts = products;
+
+                            }
+                            else if (SearchText == "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                                CollectionOfProducts = products;
+                            }
+                        }
+                        else
+                        {
+                            if (SearchText != "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ));
+                                CollectionOfProducts = products;
+
+                            }
+                            else if (SearchText == "")
+                            {
+                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                                CollectionOfProducts = products;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         #endregion

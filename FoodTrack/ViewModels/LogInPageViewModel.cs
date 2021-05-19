@@ -98,19 +98,20 @@ namespace FoodTrack.ViewModels
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
-                IEnumerable<User> result = uow.UserRepository.Get(x => x.UserLogin == User.UserLogin);
-
-                if(result.Count() == 0)
+                List<User> result = uow.UserRepository.Get(x => x.UserLogin == User.UserLogin).ToList();
+                
+                if (result.Count() == 0)
                 {
                     Message = "Логин или пароль неверный!";
                     return;
                 }
                 else if(PasswordHash.IsPasswordValid(UserPassword, int.Parse(result.First<User>().Salt), result.First<User>().UserPassword))
                 {
-
                     User deserializedeUser = result.First();
                     XmlSerializeWrapper<User>.Serialize(deserializedeUser, "../lastUser.xml");
-                    
+
+                    deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
+
                     List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize("../appSettings.xml", FileMode.OpenOrCreate);
                     OptionsViewModel.OptionsPack = optionsPacks.Find(x => x.OptionUserId == deserializedeUser.Id);
 
@@ -119,6 +120,14 @@ namespace FoodTrack.ViewModels
 
                     OptionsViewModel.OptionsPack?.setAppAccent();
                     OptionsViewModel.OptionsPack?.setAppTheme();
+
+                    OptionsPack optionsPackUser = optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id);
+
+                    if (optionsPackUser == null)
+                    {
+                        optionsPacks.Add(new OptionsPack());
+                        XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
+                    }
 
                     foreach (Window window in Application.Current.Windows)
                     {

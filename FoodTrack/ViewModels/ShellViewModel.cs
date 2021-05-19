@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FoodTrack.ViewModels
 {
@@ -22,6 +23,8 @@ namespace FoodTrack.ViewModels
 
         public ShellViewModel()
         {
+            Menu.Clear();
+            OptionsMenu.Clear();
             // Строим меню
             this.Menu.Add(new MenuItem()
             {
@@ -78,8 +81,14 @@ namespace FoodTrack.ViewModels
             using (UnitOfWork unit = new())
             {
                 if (deserializedUser.Id != 0)
-                {
-                    isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+                {   if (unit.UserRepository.FindById(deserializedUser.Id) != null)
+                    {
+                        isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Приложение завершило свою работу в связи с неполадками при подключении к базе данных. Попробуйте запустить приложение снова.","Ошибка");
+                    }
                 }
             }
 

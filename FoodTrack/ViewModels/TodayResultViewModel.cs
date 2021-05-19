@@ -1,8 +1,10 @@
 ﻿using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
 using FoodTrack.Models;
+using FoodTrack.XMLSerializer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,7 @@ namespace FoodTrack.ViewModels
         public TodayResultViewModel()
         {
             DateToChoose = DateTime.Today.Date;
+            deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
         }
 
         #region Properties

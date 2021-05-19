@@ -252,8 +252,9 @@ namespace FoodTrack.ViewModels
 
                 unit.ProductRepository.Create(product);
                 unit.Save();
-                ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-               
+
+                List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
+                ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
             }
             LastSelected = new();
             ProductName = "";
@@ -314,11 +315,12 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    Product toDelete = unit.ProductRepository.Get(x => x.ProductName == LastSelected.ProductName).First();
+                    Product toDelete = unit.ProductRepository.GetWithInclude(x => x.ProductName == LastSelected.ProductName, a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).First();
                     unit.ProductRepository.Remove(toDelete);
                     unit.Save();
 
-                    ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);               
+                    List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
+                    ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
                 }
                 LastSelected = new();
                 ProductName = "";
@@ -358,7 +360,8 @@ namespace FoodTrack.ViewModels
                     unit.ProductRepository.Update(LastSelected);
                     unit.Save();
 
-                    ProductsCollection = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                    List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
+                    ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
                 }
                 LastSelected = new();
                 ProductName = "";

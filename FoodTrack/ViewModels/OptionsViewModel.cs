@@ -57,7 +57,8 @@ namespace FoodTrack.ViewModels
             }
             Random random = new();
             TextMessage = messages[random.Next(0, messages.Length)];
-
+            NewPassword = "";
+            OldPassword = "";
         }
 
         #region Properties
@@ -244,19 +245,19 @@ namespace FoodTrack.ViewModels
             {
                 IEnumerable<User> result = unit.UserRepository.Get(x => x.Id == deserializedUser.Id);
                 User user = result?.First();
-                if (NewPassword == null || OldPassword == null)
+                if (NewPassword == "" || OldPassword == "")
                 {
                     TextMessage = "Пустые поля!";
                 }
-                else if (PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).Equals(user.UserPassword) || Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
+                else if (PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).Equals(user.UserPassword) && Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
                 {
                     user.Salt = PasswordHash.GenerateSaltForPassword().ToString();
                     user.UserPassword = PasswordHash.ComputePasswordHash(NewPassword, int.Parse(user.Salt));
                     unit.UserRepository.Update(user);
                     unit.Save();
                     TextMessage = "Смена пароля прошла успешно!";
-                    OldPassword = default;
-                    NewPassword = default;
+                    OldPassword = "";
+                    NewPassword = "";
                 }            
                 else if(!PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).SequenceEqual(user.UserPassword))
                 {
@@ -267,7 +268,7 @@ namespace FoodTrack.ViewModels
                     TextMessage = "Неверный новый пароль! Можно вводить латинские символы и цифры. Длина пароля: 8-20 символов.";
                 }
             }
-            }
+        }
         #endregion
 
         #region Выход из аккаунта
@@ -293,10 +294,11 @@ namespace FoodTrack.ViewModels
 
             var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive && x.Name == "MainAppWindow");
 
+            LogInWindow logInWindow = new LogInWindow();
+            logInWindow.Show();
+
             window.Close();
 
-            LogInWindow logInWindow = new();
-            logInWindow.Show();
         }
         #endregion
         #endregion

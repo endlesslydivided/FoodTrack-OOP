@@ -90,7 +90,7 @@
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
             <StackPanel
-                Margin="0,3,0,3"
+                Margin="0,3,0,3" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
@@ -100,6 +100,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Последнее изменение списка потреблённых продуктов: "
                         TextWrapping="Wrap" />
@@ -110,6 +111,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding LastReportDate}"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                 </WrapPanel>
 
@@ -119,6 +121,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Основная категория потреблённых продуктов: "
                         TextWrapping="Wrap" />
@@ -126,6 +129,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontWeight="Normal"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding MostCategory}"
                         TextWrapping="Wrap" />
@@ -139,6 +143,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Ваш вес: "
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -146,6 +151,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding Weight}"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -153,6 +159,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text=" кг"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
 
 
@@ -161,6 +168,7 @@
                 <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
                         FontWeight="Normal"
@@ -173,6 +181,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding Height}"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -180,6 +189,7 @@
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text=" см"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
