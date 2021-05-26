@@ -17,7 +17,7 @@
         <mah:FlipView
             Margin="10"
             BannerOpacity="0"
-            SelectedIndex="4">
+            SelectedIndex="0">
             <mah:FlipViewItem>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -28,7 +28,12 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding CategoriesTableToShow}"
-                        SelectedItem="{Binding LastSelectedFoodCategory}" />
+                        SelectedItem="{Binding LastSelectedFoodCategory}" AutoGenerateColumns="False" >
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=CategoryName}" Header="CategoryName"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Border
                         Grid.Row="1"
                         Margin="2"
@@ -136,7 +141,18 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding ProductsTableToShow}"
-                        SelectedItem="{Binding LastSelectedProduct}" />
+                        SelectedItem="{Binding LastSelectedProduct}" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=IdAdded}" Header="IdAdded"/>
+                            <DataGridTextColumn Binding="{Binding Path=ProductName}" Header="ProductName"/>
+                            <DataGridTextColumn Binding="{Binding Path=CaloriesGram}" Header="CaloriesGram"/>
+                            <DataGridTextColumn Binding="{Binding Path=ProteinsGram}" Header="ProteinsGram"/>
+                            <DataGridTextColumn Binding="{Binding Path=FatsGram}" Header="FatsGram"/>
+                            <DataGridTextColumn Binding="{Binding Path=CarbohydratesGram}" Header="CarbohydratesGram"/>
+                            <DataGridTextColumn Binding="{Binding Path=FoodCategory}" Header="FoodCategory"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
@@ -350,7 +366,22 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding ReportsTableToShow}"
-                        SelectedItem="{Binding LastSelectedReport}" />
+                        SelectedItem="{Binding LastSelectedReport}" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=IdReport}" Header="IdReport"/>
+                            <DataGridTextColumn Binding="{Binding Path=ProductName}" Header="ProductName"/>
+                            <DataGridTextColumn Binding="{Binding Path=ReportDate}" Header="ReportDate"/>
+                            <DataGridTextColumn Binding="{Binding Path=EatPeriod}" Header="EatPeriod"/>
+                            <DataGridTextColumn Binding="{Binding Path=DayGram}" Header="DayGram"/>
+                            <DataGridTextColumn Binding="{Binding Path=DayCalories}" Header="DayCalories"/>
+                            <DataGridTextColumn Binding="{Binding Path=DayProteins}" Header="DayProteins"/>
+                            <DataGridTextColumn Binding="{Binding Path=DayFats}" Header="DayFats"/>
+                            <DataGridTextColumn Binding="{Binding Path=DayCarbohydrates}" Header="DayCarbohydrates"/>
+                            <DataGridTextColumn Binding="{Binding Path=MostCategory}" Header="MostCategory"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                     <Border
                         Grid.Row="1"
@@ -546,7 +577,13 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding UsersTableToShow}"
-                        SelectedItem="{Binding LastSelectedUser}" />
+                        SelectedItem="{Binding LastSelectedUser}" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=IsAdmin}" Header="IsAdmin"/>
+                            <DataGridTextColumn Binding="{Binding Path=UserLogin}" Header="UserLogin"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
@@ -667,7 +704,14 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding UsersDatumTableToShow}"
-                        SelectedItem="{Binding LastSelectedUsersDatum}" />
+                        SelectedItem="{Binding LastSelectedUsersDatum}" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=IdData}" Header="IdData"/>
+                            <DataGridTextColumn Binding="{Binding Path=FullName}" Header="FullName"/>
+                            <DataGridTextColumn Binding="{Binding Path=Birthday}" Header="Birthday"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"
@@ -794,8 +838,15 @@
                         Margin="10,10,10,10"
                         IsReadOnly="True"
                         ItemsSource="{Binding UsersParamTableToShow}"
-                        SelectedItem="{Binding LastSelectedUserParam}" />
-
+                        SelectedItem="{Binding LastSelectedUserParam}" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding Path=IdParams}" Header="IdParams"/>
+                            <DataGridTextColumn Binding="{Binding Path=ParamsDate}" Header="ParamsDate"/>
+                            <DataGridTextColumn Binding="{Binding Path=UserWeight}" Header="UserWeight"/>
+                            <DataGridTextColumn Binding="{Binding Path=UserHeight}" Header="UserHeight"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Border
                         Grid.Row="1"
                         Margin="2,2,2,2"

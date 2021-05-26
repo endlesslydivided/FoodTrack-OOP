@@ -51,6 +51,8 @@ namespace FoodTrack.ViewModels
 
         public OptionsViewModel()
         {
+            try
+            { 
             if (OptionsPack == null)
             {
                 OptionsPack = new();
@@ -59,6 +61,11 @@ namespace FoodTrack.ViewModels
             TextMessage = messages[random.Next(0, messages.Length)];
             NewPassword = "";
             OldPassword = "";
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #region Properties
@@ -134,9 +141,16 @@ namespace FoodTrack.ViewModels
 
         private void changeAppTheme(object sender)
         {
+            try
+            { 
             ThemeManager.Current.ChangeThemeBaseColor(Application.Current, sender.ToString());
             Application.Current?.MainWindow?.Activate();
             OptionsPack.CurrentAppTheme = sender.ToString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
         #endregion
         #region Изменение акцента
@@ -157,9 +171,16 @@ namespace FoodTrack.ViewModels
 
         private void changeAppAccent(object sender)
         {
+            try
+            { 
             ThemeManager.Current.ChangeThemeColorScheme(Application.Current, sender.ToString());
             Application.Current?.MainWindow?.Activate();
             OptionsPack.CurrentAppAccent = sender.ToString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
         #endregion
         #region Сохранение настроек
@@ -180,11 +201,18 @@ namespace FoodTrack.ViewModels
 
         private void saveApplicationSettings()
         {
+            try
+            { 
             List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize( "../appSettings.xml", FileMode.OpenOrCreate);
             optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id));
             optionsPacks.Add(OptionsPack);
             XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
             TextMessage = "Настройки сохранены!";
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
         #endregion
         #region Установка настроек по умолчанию
@@ -205,6 +233,8 @@ namespace FoodTrack.ViewModels
 
         private void setDefaultSettings()
         {
+            try
+            { 
             IsShowSplash = true;
             IsStayAuthorized = true;
             OptionsPack.CurrentAppTheme = "Light";
@@ -220,6 +250,11 @@ namespace FoodTrack.ViewModels
             ThemeManager.Current.ChangeThemeBaseColor(Application.Current, OptionsPack.CurrentAppTheme);
             Application.Current?.MainWindow?.Activate();
             TextMessage = "Установлены настройки по умолчанию! Перезагрузите приложение для обновления цветовой палитры.";
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
         #endregion
 
@@ -241,6 +276,8 @@ namespace FoodTrack.ViewModels
 
         private void changePassword()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<User> result = unit.UserRepository.Get(x => x.Id == deserializedUser.Id);
@@ -249,7 +286,7 @@ namespace FoodTrack.ViewModels
                 {
                     TextMessage = "Пустые поля!";
                 }
-                else if (PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).Equals(user.UserPassword) && Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
+                else if (PasswordHash.ComputePasswordHash(OldPassword, int.Parse(user.Salt)).SequenceEqual(user.UserPassword) && Regex.IsMatch(NewPassword, "^([a-z]|[A-Z]|[0-9]){8,20}$"))
                 {
                     user.Salt = PasswordHash.GenerateSaltForPassword().ToString();
                     user.UserPassword = PasswordHash.ComputePasswordHash(NewPassword, int.Parse(user.Salt));
@@ -267,6 +304,15 @@ namespace FoodTrack.ViewModels
                 {
                     TextMessage = "Неверный новый пароль! Можно вводить латинские символы и цифры. Длина пароля: 8-20 символов.";
                 }
+                else 
+                {
+                    TextMessage = "Пароль не может быть изменён на самого себя!";
+                }
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
         #endregion
@@ -289,6 +335,8 @@ namespace FoodTrack.ViewModels
 
         private void exit()
         {
+            try
+            { 
             User deserializedeUser = new();
             XmlSerializeWrapper<User>.Serialize(deserializedeUser, "../lastUser.xml");
 
@@ -298,6 +346,11 @@ namespace FoodTrack.ViewModels
             logInWindow.Show();
 
             window.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
         #endregion

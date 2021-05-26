@@ -28,28 +28,42 @@ namespace FoodTrack.Views.Windows
 
         public MainWindow()
         {
+            try
+            { 
             this.InitializeComponent();
-
             this.navigationServiceEx = new Navigation.NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
 
             // Navigate to the home page.
             this.Loaded += (sender, args) => this.navigationServiceEx.Navigate(new Uri("../Views/Pages/TodayResultsView.xaml", UriKind.RelativeOrAbsolute));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
         {
+            try
+            { 
             if (e.InvokedItem is ViewModels.MenuItem menuItem && menuItem.IsNavigation)
             {
                 this.navigationServiceEx.Navigate(menuItem.NavigationDestination);
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
         private void NavigationServiceEx_OnNavigated(object sender, NavigationEventArgs e)
         {
-            // select the menu item
+            try
+            { 
             this.HamburgerMenuControl.SelectedItem = this.HamburgerMenuControl
                                                          .Items
                                                          .OfType<ViewModels.MenuItem>()
@@ -58,6 +72,11 @@ namespace FoodTrack.Views.Windows
                                                                 .OptionsItems
                                                                 .OfType<ViewModels.MenuItem>()
                                                                 .FirstOrDefault(x => x.NavigationDestination == e.Uri);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
     }
 }

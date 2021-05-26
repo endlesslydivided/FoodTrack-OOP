@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using FoodTrack.Models;
+using System.Windows;
 
 namespace FoodTrack.ViewModels
 {
@@ -30,6 +31,8 @@ namespace FoodTrack.ViewModels
 
         public AddProductViewModel()
         {
+            try
+            { 
             report = new Report();
             report.IdReport = deserializedUser.Id;
             SearchText = "";
@@ -45,7 +48,12 @@ namespace FoodTrack.ViewModels
             SelectedPeriod = "Завтрак";
             StateOfSearch = "All";
             FoodCategoryCheck = false;
-        }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
+}
 
         #region Properties
 
@@ -56,6 +64,7 @@ namespace FoodTrack.ViewModels
             {
                 selectedCategory = value;
                 OnPropertyChanged("SelectedCategory");
+                findProducts();
             }
         }
 
@@ -173,37 +182,44 @@ namespace FoodTrack.ViewModels
 
         private void showUserProducts()
         {
-            StateOfSearch = "User";
-            using (UnitOfWork unit = new UnitOfWork())
+            try
             {
-                if (FoodCategoryCheck)
+                StateOfSearch = "User";
+                using (UnitOfWork unit = new UnitOfWork())
                 {
-                    if (SearchText != "")
+                    if (FoodCategoryCheck)
                     {
-                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
-                        CollectionOfProducts = products;
+                        if (SearchText != "")
+                        {
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
+                            CollectionOfProducts = products;
 
+                        }
+                        else if (SearchText == "")
+                        {
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && x.FoodCategory == SelectedCategory);
+                            CollectionOfProducts = products;
+                        }
                     }
-                    else if (SearchText == "")
+                    else
                     {
-                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-                        CollectionOfProducts = products;
+                        if (SearchText != "")
+                        {
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
+                            CollectionOfProducts = products;
+
+                        }
+                        else if (SearchText == "")
+                        {
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                            CollectionOfProducts = products;
+                        }
                     }
                 }
-                else
-                {
-                    if (SearchText != "")
-                    {
-                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ));
-                        CollectionOfProducts = products;
-
-                    }
-                    else if (SearchText == "")
-                    {
-                        IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-                        CollectionOfProducts = products;
-                    }
-                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
@@ -226,6 +242,8 @@ namespace FoodTrack.ViewModels
 
         private void showAllProducts()
         {
+            try
+            { 
             StateOfSearch = "All";
             using (UnitOfWork unit = new UnitOfWork())
             {
@@ -239,7 +257,7 @@ namespace FoodTrack.ViewModels
                     }
                     else if (SearchText == "")
                     {
-                        IEnumerable products = unit.ProductRepository.Get();
+                        IEnumerable products = unit.ProductRepository.Get(x => x.FoodCategory == SelectedCategory);
                         CollectionOfProducts = products;
                     }
                 }
@@ -258,7 +276,12 @@ namespace FoodTrack.ViewModels
                     }
                 }
             }
-        }
+             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
+}
 
         #endregion
 
@@ -280,38 +303,53 @@ namespace FoodTrack.ViewModels
 
         private void addProduct()
         {
-            using (UnitOfWork unit = new UnitOfWork())
+            try
             {
-                report.DayGram = GramValue;
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    report.DayGram = GramValue;
 
-                report.DayCarbohydrates = SelectedProduct.CarbohydratesGram * GramValue * V % 100000;
-                report.DayCalories = SelectedProduct.CaloriesGram * GramValue * V % 100000;
-                report.DayFats= SelectedProduct.FatsGram * GramValue * V % 100000;
-                report.DayProteins = SelectedProduct.ProteinsGram * GramValue * V % 100000;
+                    report.DayCarbohydrates = SelectedProduct.CarbohydratesGram * GramValue * V % 100000;
+                    report.DayCalories = SelectedProduct.CaloriesGram * GramValue * V % 100000;
+                    report.DayFats = SelectedProduct.FatsGram * GramValue * V % 100000;
+                    report.DayProteins = SelectedProduct.ProteinsGram * GramValue * V % 100000;
 
-                report.ProductName = SelectedProduct.ProductName;
-                report.ReportDate = DateToChoose;
-                report.MostCategory = SelectedProduct.FoodCategory;
-                
-                unit.ReportRepository.Create(report);
-                unit.Save();
+                    report.ProductName = SelectedProduct.ProductName;
+                    report.ReportDate = DateToChoose;
+                    report.MostCategory = SelectedProduct.FoodCategory;
 
-                report = new Report();
-                report.IdReport = deserializedUser.Id;
-                GramValue = default;
-                SelectedProduct = default;
+                    unit.ReportRepository.Create(report);
+                    unit.Save();
+
+                    report = new Report();
+                    report.IdReport = deserializedUser.Id;
+                    GramValue = default;
+                    SelectedProduct = default;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
         private bool canAddProduct()
         {
-            if (SelectedProduct == null || GramValue == 0 || DateToChoose.Date.CompareTo(DateTime.Now.Date) > 0 )
+            try
             {
-                return false;
+                if (SelectedProduct == null || GramValue == 0 || DateToChoose.Date.CompareTo(DateTime.Now.Date) > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch (Exception exception)
             {
-                return true;
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -335,7 +373,14 @@ namespace FoodTrack.ViewModels
 
         private void addDay()
         {
-            DateToChoose = DateToChoose.AddDays(1);
+            try
+            {
+                DateToChoose = DateToChoose.AddDays(1);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -357,7 +402,14 @@ namespace FoodTrack.ViewModels
 
         private void removeDay()
         {
-            DateToChoose = DateToChoose.AddDays(-1);
+            try
+            {
+                DateToChoose = DateToChoose.AddDays(-1);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -380,78 +432,94 @@ namespace FoodTrack.ViewModels
 
         private void search()
         {
-            using (UnitOfWork unit = new UnitOfWork())
+                findProducts();
+        }
+
+
+        #endregion
+
+
+        #region Public methods
+
+        public void findProducts()
+        {
+            try
             {
-                if (SearchText != null)
+                using (UnitOfWork unit = new UnitOfWork())
                 {
-                    if (StateOfSearch == "All")
+                    if (SearchText != null)
                     {
-                        if (FoodCategoryCheck)
+                        if (StateOfSearch == "All")
                         {
-                            if (SearchText != "")
+                            if (FoodCategoryCheck)
                             {
-                                IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
-                                CollectionOfProducts = products;
+                                if (SearchText != "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
+                                    CollectionOfProducts = products;
 
+                                }
+                                else if (SearchText == "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.FoodCategory == SelectedCategory);
+                                    CollectionOfProducts = products;
+                                }
                             }
-                            else if (SearchText == "")
+                            else
                             {
-                                IEnumerable products = unit.ProductRepository.Get();
-                                CollectionOfProducts = products;
+                                if (SearchText != "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText));
+                                    CollectionOfProducts = products;
+
+                                }
+                                else if (SearchText == "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get();
+                                    CollectionOfProducts = products;
+                                }
                             }
                         }
-                        else
+                        else if (StateOfSearch == "User")
                         {
-                            if (SearchText != "")
+                            if (FoodCategoryCheck)
                             {
-                                IEnumerable products = unit.ProductRepository.Get(x => Regex.IsMatch(x.ProductName, "^" + SearchText ));
-                                CollectionOfProducts = products;
+                                if (SearchText != "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
+                                    CollectionOfProducts = products;
 
+                                }
+                                else if (SearchText == "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && x.FoodCategory == SelectedCategory);
+                                    CollectionOfProducts = products;
+                                }
                             }
-                            else if (SearchText == "")
+                            else
                             {
-                                IEnumerable products = unit.ProductRepository.Get();
-                                CollectionOfProducts = products;
-                            }
-                        }
-                    }
-                    else if(StateOfSearch == "User")
-                    {
-                        if (FoodCategoryCheck)
-                        {
-                            if (SearchText != "")
-                            {
-                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ) && x.FoodCategory == SelectedCategory);
-                                CollectionOfProducts = products;
+                                if (SearchText != "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
+                                    CollectionOfProducts = products;
 
-                            }
-                            else if (SearchText == "")
-                            {
-                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-                                CollectionOfProducts = products;
-                            }
-                        }
-                        else
-                        {
-                            if (SearchText != "")
-                            {
-                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText ));
-                                CollectionOfProducts = products;
-
-                            }
-                            else if (SearchText == "")
-                            {
-                                IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
-                                CollectionOfProducts = products;
+                                }
+                                else if (SearchText == "")
+                                {
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                                    CollectionOfProducts = products;
+                                }
                             }
                         }
                     }
                 }
             }
+            catch(Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
-
         #endregion
-
         #endregion
     }
 }

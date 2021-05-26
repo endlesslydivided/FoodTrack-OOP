@@ -29,7 +29,7 @@ namespace FoodTrack
             if (currentUserSettings?.IsSplashScreenShown ?? true)
             {
                 SplashScreen splash = new SplashScreen("../Resources/foodTrackSplash.png");
-                splash.Show(autoClose: true, topMost: true);
+                splash.Show(autoClose: true, topMost: false);
                 splash.Close(TimeSpan.FromSeconds(1));
             }
             using (UnitOfWork unit = new UnitOfWork())

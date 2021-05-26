@@ -23,6 +23,8 @@ namespace FoodTrack.ViewModels
 
         public ShellViewModel()
         {
+            try
+            { 
             Menu.Clear();
             OptionsMenu.Clear();
             // Строим меню
@@ -102,6 +104,12 @@ namespace FoodTrack.ViewModels
                     NavigationDestination = new Uri("../Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
                 });
                 };
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
+
     }
 }

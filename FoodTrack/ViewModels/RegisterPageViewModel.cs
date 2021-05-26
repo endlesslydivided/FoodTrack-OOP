@@ -30,6 +30,8 @@ namespace FoodTrack.ViewModels
 
         public RegisterPageViewModel()
         {
+            try
+            { 
             UpdateViewCommand = new UpdateViewCommand(this);
             Message = "Придумайте логин(от 5 до 20 символов) и пароль(от 8 до 20 символов). Логин и пароль могут содержать латинские символы и цифры";
             usersDatum = new UsersDatum();
@@ -43,6 +45,11 @@ namespace FoodTrack.ViewModels
 
             UserWeight = 10;
             UserHeight = 50;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
 
@@ -159,6 +166,8 @@ namespace FoodTrack.ViewModels
 
         private void Register()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<User> result = unit.UserRepository.Get(x => x.UserLogin == UserLogin);
@@ -194,10 +203,17 @@ namespace FoodTrack.ViewModels
                      UpdateViewCommand.Execute("LogInPage");
                 }
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool CanRegister()
         {
+            try
+            { 
            if(UserLogin == "" || UserPassword == "" || UserWeight == 0 || UserHeight == 0 || UserName == "" || UserLastname == "" || UserSurname == "")
            {
                 return false;
@@ -218,6 +234,12 @@ namespace FoodTrack.ViewModels
            {
                 return true;
            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
+            }
         }
 
         #endregion 

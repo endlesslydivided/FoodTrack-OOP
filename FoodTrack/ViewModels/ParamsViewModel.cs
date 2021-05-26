@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FoodTrack.ViewModels
@@ -25,6 +26,8 @@ namespace FoodTrack.ViewModels
 
         public ParamsViewModel()
         {
+            try
+            { 
             ProductName = "";
             Fats = 1;
             Proteins = 1;
@@ -42,7 +45,15 @@ namespace FoodTrack.ViewModels
                 List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
                 ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
             }
-            SelectedCategory = categoryCollection.First();
+            if (categoryCollection != null)
+            {
+                SelectedCategory = categoryCollection.First();
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #region Properties
@@ -245,6 +256,8 @@ namespace FoodTrack.ViewModels
 
         private void addProductToCollection()
         {    
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 product.IdAdded = deserializedUser.Id;
@@ -262,10 +275,17 @@ namespace FoodTrack.ViewModels
             Proteins = 1;
             Carbohydrates = 1;
             Calories = 1;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool canAddProductToCollection()
         {
+            try
+            { 
             bool productExist = false;
 
             using (UnitOfWork unit = new UnitOfWork())
@@ -287,6 +307,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -311,6 +337,8 @@ namespace FoodTrack.ViewModels
 
         private void deleteProductRow()
         {
+            try
+            { 
             if (LastSelected != null)
             {
                 using (UnitOfWork unit = new UnitOfWork())
@@ -329,6 +357,11 @@ namespace FoodTrack.ViewModels
                 Carbohydrates = 1;
                 Calories = 1;
             };
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -352,6 +385,8 @@ namespace FoodTrack.ViewModels
 
         private void editProduct()
         {
+            try
+            { 
             if (LastSelected != null)
             {
                 using (UnitOfWork unit = new UnitOfWork())
@@ -372,10 +407,17 @@ namespace FoodTrack.ViewModels
                 SelectedCategory = "";
                 NameTBEnabled = true;
             };
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool canEditProduct()
         {
+            try
+            { 
             int productExist = 0;
 
             using (UnitOfWork unit = new UnitOfWork())
@@ -397,6 +439,12 @@ namespace FoodTrack.ViewModels
             {
                 NameTBEnabled = false;
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -422,6 +470,8 @@ namespace FoodTrack.ViewModels
 
         private void сlearProduct()
         {
+            try 
+            { 
                 LastSelected = new();
                 ProductName = "";
                 Fats = 1;
@@ -430,6 +480,11 @@ namespace FoodTrack.ViewModels
                 Calories = 1;
                 SelectedCategory = "";
                 NameTBEnabled = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
         #endregion
 

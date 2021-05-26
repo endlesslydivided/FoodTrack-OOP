@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -32,8 +33,11 @@ namespace FoodTrack.ViewModels
 
         public StatisticViewModel()
         {
+            try
+                { 
             using(UnitOfWork unit = new UnitOfWork())
             {
+                
                 LastSelected = default;
 
                 StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
@@ -94,6 +98,11 @@ namespace FoodTrack.ViewModels
                     Height = 0;
                     Weight = 0;
                 }                
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
         
@@ -200,6 +209,8 @@ namespace FoodTrack.ViewModels
 
         private void deleteWeightRow()
         {
+            try
+            { 
             if (LastSelected != null)
             {
                 using (UnitOfWork unit = new UnitOfWork())
@@ -232,18 +243,29 @@ namespace FoodTrack.ViewModels
                     Stroke = Brushes.Coral,
                     Fill = Brushes.Transparent
                 });
-
-
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
         private bool canDeleteWeightRow()
         {
+            try
+            { 
             if(StatisticCollection.Count() >1)
             {
                 return true;
             }
             else
             {
+                return false;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
                 return false;
             }
         }

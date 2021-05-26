@@ -13,6 +13,8 @@ namespace FoodTrack.Converters
     {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
             {
+            try
+            { 
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
 
@@ -22,6 +24,11 @@ namespace FoodTrack.Converters
                 double paramD = double.Parse(param, provider);
                 double returned = System.Convert.ToDouble(value) / paramD;
                 return returned;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
             return 1;
             }
@@ -36,6 +43,8 @@ namespace FoodTrack.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            try
+            { 
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
 
@@ -50,6 +59,11 @@ namespace FoodTrack.Converters
                 }
                 return returned;
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             return 1;
         }
 
@@ -63,6 +77,8 @@ namespace FoodTrack.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            try
+            { 
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
 
@@ -75,9 +91,14 @@ namespace FoodTrack.Converters
                 return returned;
             }
             return ((int)value + ",6").ToString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return "0,0";
+            }
 
-
-        }
+}
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -89,6 +110,8 @@ namespace FoodTrack.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            try
+            { 
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
 
@@ -102,12 +125,18 @@ namespace FoodTrack.Converters
                 return returned;
             }
             return ((int)value + "," + value).ToString();
-
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return "0,0";
+            }
 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+
             return DependencyProperty.UnsetValue;
         }
     }

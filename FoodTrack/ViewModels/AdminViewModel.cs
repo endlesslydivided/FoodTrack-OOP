@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FoodTrack.ViewModels
@@ -32,6 +33,8 @@ namespace FoodTrack.ViewModels
 
         public void refreshTables()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 UsersParamTableToShow = unit.UserParamRepository.Get();
@@ -47,6 +50,11 @@ namespace FoodTrack.ViewModels
                 LastSelectedFoodCategory = new();
                 LastSelectedProduct = new();
                 LastSelectedReport = new();
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
@@ -200,6 +208,8 @@ namespace FoodTrack.ViewModels
 
         private void saveFoodCategory()
         {
+            try
+            { 
             using(UnitOfWork unit = new UnitOfWork())
             {
                 unit.FoodCategoryRepository.Update(LastSelectedFoodCategory);
@@ -207,10 +217,17 @@ namespace FoodTrack.ViewModels
                 CategoriesTableToShow = unit.FoodCategoryRepository.Get();
             }
             LastSelectedFoodCategory = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool canSaveFoodCategory()
         {
+            try
+            { 
             if(LastSelectedFoodCategory.Id == 0 || LastSelectedFoodCategory.CategoryName == null)
             {
                 return false;
@@ -218,6 +235,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
         #endregion
@@ -239,17 +262,26 @@ namespace FoodTrack.ViewModels
 
         private void deleteFoodCategory()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.FoodCategoryRepository.Remove(LastSelectedFoodCategory);
                 unit.Save();
             }
             LastSelectedFoodCategory = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             refreshTables();
         }
 
         private bool canDeleteFoodCategory()
         {
+            try
+            { 
             if (LastSelectedFoodCategory.Id == 0)
             {
                 return false;
@@ -257,6 +289,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -279,7 +317,14 @@ namespace FoodTrack.ViewModels
 
         private void cleanFoodCategory()
         {
+            try
+            { 
             LastSelectedFoodCategory = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
 
@@ -302,7 +347,8 @@ namespace FoodTrack.ViewModels
 
         private void addFoodCategory()
         {
-           
+            try 
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 
@@ -311,10 +357,17 @@ namespace FoodTrack.ViewModels
                 CategoriesTableToShow = unit.FoodCategoryRepository.Get();
             }
             LastSelectedFoodCategory = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool canAddFoodCategory()
         {
+            try
+            { 
             using (UnitOfWork unit = new())
             {
                 IEnumerable<FoodCategory> categories = unit.FoodCategoryRepository.Get(); ;
@@ -334,6 +387,12 @@ namespace FoodTrack.ViewModels
             {
                 return true;
             }
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
         #endregion
@@ -358,6 +417,8 @@ namespace FoodTrack.ViewModels
 
         private void saveReport()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 Product product = unit.ProductRepository.Get(x => x.ProductName == LastSelectedReport.ProductName).FirstOrDefault();
@@ -372,11 +433,18 @@ namespace FoodTrack.ViewModels
                 ReportsTableToShow = unit.ReportRepository.Get();
             }
             LastSelectedReport = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private bool canSaveReport()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<Product> products = unit.ProductRepository.Get();
@@ -400,7 +468,13 @@ namespace FoodTrack.ViewModels
                     return true;
                 }
             }
-            
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
+            }
+
         }
         #endregion
         #region Удалить продуктовый отчёт
@@ -421,17 +495,26 @@ namespace FoodTrack.ViewModels
 
         private void deleteReport()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.ReportRepository.Remove(LastSelectedReport);
                 unit.Save();
             }
             LastSelectedReport = new Report();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             refreshTables();
         }
 
         private bool canDeleteReport()
         {
+            try
+            { 
             if (LastSelectedReport.Id == 0)
             {
                 return false;
@@ -439,6 +522,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -487,19 +576,27 @@ namespace FoodTrack.ViewModels
 
         private void saveProduct()
         {
-            using (UnitOfWork unit = new UnitOfWork())
+            try
             {
-                unit.ProductRepository.Update(LastSelectedProduct);
-                unit.Save();
+                using (UnitOfWork unit = new UnitOfWork())
+                {
+                    unit.ProductRepository.Update(LastSelectedProduct);
+                    unit.Save();
+                }
+                LastSelectedProduct = new();
             }
-            LastSelectedProduct = new();
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private bool canSaveProduct()
         {
+            try
+            { 
             int productExist = 0;
-
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<Product> products = unit.ProductRepository.Get();
@@ -526,6 +623,12 @@ namespace FoodTrack.ViewModels
             {
                 return true;
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
+            }
         }
         #endregion
         #region Удалить продукт
@@ -546,17 +649,26 @@ namespace FoodTrack.ViewModels
 
         private void deleteProduct()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.ProductRepository.Remove(LastSelectedProduct);
                 unit.Save();
             }
             LastSelectedProduct = new Product();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             refreshTables();
         }
 
         private bool canDeleteProduct()
         {
+            try
+            { 
             if (LastSelectedProduct.Id == 0)
             {
                 return false;
@@ -564,6 +676,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -586,7 +704,14 @@ namespace FoodTrack.ViewModels
 
         private void cleanProduct()
         {
-            LastSelectedProduct = new();
+            try
+            {
+                LastSelectedProduct = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
 
@@ -612,6 +737,8 @@ namespace FoodTrack.ViewModels
 
         private void saveUser()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.UserRepository.Update(LastSelectedUser);
@@ -619,11 +746,18 @@ namespace FoodTrack.ViewModels
                 UsersTableToShow = unit.UserRepository.Get();
             }
             LastSelectedUser = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private bool canSaveUser()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 IEnumerable<User> Users = unit.UserRepository.Get();
@@ -647,6 +781,12 @@ namespace FoodTrack.ViewModels
                     return true;
                 }
             }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
+            }
 
         }
         #endregion
@@ -668,17 +808,26 @@ namespace FoodTrack.ViewModels
 
         private void deleteUser()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.UserRepository.Remove(LastSelectedUser);
                 unit.Save();
             }
             LastSelectedUser = new User();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             refreshTables();
         }
 
         private bool canDeleteUser()
         {
+            try
+            { 
             if (LastSelectedUser.Id == 0 || deserializedUser.Id == LastSelectedUser.Id)
             {
                 return false;
@@ -686,6 +835,12 @@ namespace FoodTrack.ViewModels
             else
             {
                 return true;
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -708,7 +863,14 @@ namespace FoodTrack.ViewModels
 
         private void cleanUser()
         {
+            try
+            { 
             LastSelectedUser = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
 
@@ -734,6 +896,8 @@ namespace FoodTrack.ViewModels
 
         private void saveUsersDatum()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.UserDatumRepository.Update(LastSelectedUsersDatum);
@@ -741,11 +905,18 @@ namespace FoodTrack.ViewModels
                 UsersDatumTableToShow = unit.UserDatumRepository.Get();
             }
             LastSelectedUsersDatum = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private bool canSaveUsersDatum()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 if (LastSelectedUsersDatum.Id == 0 || LastSelectedUsersDatum.Birthday.Date.CompareTo(DateTime.Now.Date) == 1 || !Regex.IsMatch(LastSelectedUsersDatum.FullName, "^([А-Я]{1}[а-я]{1,99}){3}$"))
@@ -756,6 +927,12 @@ namespace FoodTrack.ViewModels
                 {
                     return true;
                 }
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
 
         }
@@ -818,8 +995,15 @@ namespace FoodTrack.ViewModels
 
         private void cleanUsersDatum()
         {
-            LastSelectedUsersDatum = new();
-        }
+            try
+            {
+                LastSelectedUsersDatum = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
+}
 
 
         #endregion
@@ -844,6 +1028,8 @@ namespace FoodTrack.ViewModels
 
         private void saveUserParam()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.UserParamRepository.Update(LastSelectedUserParam);
@@ -851,11 +1037,18 @@ namespace FoodTrack.ViewModels
                 UsersParamTableToShow = unit.UserParamRepository.Get();
             }
             LastSelectedUserParam = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
 
         }
 
         private bool canSaveUserParam()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 if (LastSelectedUserParam.Id == 0 ||
@@ -869,6 +1062,12 @@ namespace FoodTrack.ViewModels
                 {
                     return true;
                 }
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
 
         }
@@ -891,17 +1090,26 @@ namespace FoodTrack.ViewModels
 
         private void deleteUserParam()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 unit.UserParamRepository.Remove(LastSelectedUserParam);
                 unit.Save();
             }
             LastSelectedUserParam = new UsersParam();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             refreshTables();
         }
 
         private bool canDeleteUserParam()
         {
+            try
+            { 
             using (UnitOfWork unit = new())
             {
                 int usersParamsNumber = 0;
@@ -922,6 +1130,12 @@ namespace FoodTrack.ViewModels
             {
                 return true;
             }
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                return false;
             }
         }
 
@@ -944,7 +1158,14 @@ namespace FoodTrack.ViewModels
 
         private void cleanUserParam()
         {
+            try
+            { 
             LastSelectedUserParam = new();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
 

@@ -72,8 +72,15 @@ namespace FoodTrack.ViewModels
 
         public LogInPageViewModel()
         {
+            try
+            { 
             UpdateViewCommand = new UpdateViewCommand(this);
             Message = "Введите свой логин и пароль";
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -96,6 +103,8 @@ namespace FoodTrack.ViewModels
 
         private void LogIn()
         {
+            try
+            { 
             using(UnitOfWork uow = new UnitOfWork())
             {
                 List<User> result = uow.UserRepository.Get(x => x.UserLogin == User.UserLogin).ToList();
@@ -143,6 +152,11 @@ namespace FoodTrack.ViewModels
                     Message = "Логин или пароль неверный!";
                     return;
                 }             
+            }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 

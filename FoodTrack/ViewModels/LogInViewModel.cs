@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FoodTrack.ViewModels
@@ -26,7 +27,14 @@ namespace FoodTrack.ViewModels
 
         public LogInViewModel()
         {
+            try
+            { 
             UpdateViewCommand = new UpdateViewCommand(this);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
     }

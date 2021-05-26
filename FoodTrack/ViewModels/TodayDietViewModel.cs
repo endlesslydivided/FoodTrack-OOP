@@ -23,7 +23,14 @@ namespace FoodTrack.ViewModels
 
         public TodayDietViewModel()
         {
+            try
+            { 
             DateToChoose = DateTime.Today;
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
             tableChangeToBreakfast();
         }
 
@@ -60,7 +67,14 @@ namespace FoodTrack.ViewModels
             {
                 dateToChoose = value;
                 OnPropertyChanged("DateToChoose");
+                try
+                { 
                 refreshTable();
+                }
+                catch (Exception exception)
+                {
+                    System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+                }
             }
         }
 
@@ -87,12 +101,18 @@ namespace FoodTrack.ViewModels
 
         private void tableChangeToBreakfast()
         {
+            try { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Завтрак");
                 TableToShow = reports;
                 LastSelectedTable = "Завтрак";
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
 
         }
@@ -116,12 +136,19 @@ namespace FoodTrack.ViewModels
 
         private void tableChangeToLunch()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ланч");
                 TableToShow = reports;
                 LastSelectedTable = "Ланч";
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
@@ -144,12 +171,19 @@ namespace FoodTrack.ViewModels
 
         private void tableChangeToDinner()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Обед");
                 TableToShow = reports;
                 LastSelectedTable = "Обед";
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
 
         }
@@ -173,12 +207,19 @@ namespace FoodTrack.ViewModels
 
         private void tableChangeToSnack()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Полдник");
                 TableToShow = reports;
                 LastSelectedTable = "Полдинк";
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
 
         }
@@ -202,12 +243,19 @@ namespace FoodTrack.ViewModels
 
         private void tableChangeToSupper()
         {
+            try
+            { 
             using (UnitOfWork unit = new UnitOfWork())
             {
                 User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ужин");
                 TableToShow = reports;
                 LastSelectedTable = "Ужин";
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
@@ -231,7 +279,14 @@ namespace FoodTrack.ViewModels
 
         private void addDay()
         {
+            try
+            { 
             DateToChoose = DateToChoose.AddDays(1);
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -253,7 +308,14 @@ namespace FoodTrack.ViewModels
 
         private void removeDay()
         {
+            try
+            { 
             DateToChoose = DateToChoose.AddDays(-1);
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -276,6 +338,8 @@ namespace FoodTrack.ViewModels
 
         private void removeRow()
         {
+            try
+            { 
             if (LastSelected != null)
             {
                 using (UnitOfWork unit = new UnitOfWork())
@@ -284,6 +348,11 @@ namespace FoodTrack.ViewModels
                     unit.Save();
                 }
                 refreshTable();
+            }
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
         }
 
@@ -307,12 +376,18 @@ namespace FoodTrack.ViewModels
 
         private void openChangeProductWindow()
         {
+            try
+            { 
             ChangeProductModalWindow window = new(LastSelected);
             if(window.ShowDialog() == true)
             {
                 refreshTable();
             }
-
+            }
+            catch (Exception exception)
+            {
+                System.Windows.MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         private bool canOpenChangeProductWindow()

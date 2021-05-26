@@ -33,14 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\BackGroundLogIn.webm" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\back.avi">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\back.gif" />
     <Resource Include="Resources\backPurple.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FoodTrack.ViewModels
@@ -39,8 +40,15 @@ namespace FoodTrack.ViewModels
 
         public TodayResultViewModel()
         {
+            try
+            { 
             DateToChoose = DateTime.Today.Date;
             deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #region Properties
@@ -225,8 +233,15 @@ namespace FoodTrack.ViewModels
 
         private void addDay()
         {
+            try
+            { 
             DateToChoose = DateToChoose.AddDays(1);
             refreshStatistic();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
@@ -248,8 +263,15 @@ namespace FoodTrack.ViewModels
 
         private void removeDay()
         {
+            try
+            { 
             DateToChoose = DateToChoose.AddDays(-1);
             refreshStatistic();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
+            }
         }
 
         #endregion
