@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using Xceed.Wpf.Toolkit;
 using FoodTrack.Views.Windows;
+using FoodTrack.DeserializedUserNamespace;
 
 namespace FoodTrack.ViewModels
 {
@@ -104,7 +105,7 @@ namespace FoodTrack.ViewModels
             try { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Завтрак");
                 TableToShow = reports;
                 LastSelectedTable = "Завтрак";
@@ -140,7 +141,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ланч");
                 TableToShow = reports;
                 LastSelectedTable = "Ланч";
@@ -175,7 +176,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Обед");
                 TableToShow = reports;
                 LastSelectedTable = "Обед";
@@ -211,7 +212,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Полдник");
                 TableToShow = reports;
                 LastSelectedTable = "Полдинк";
@@ -247,7 +248,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == "Ужин");
                 TableToShow = reports;
                 LastSelectedTable = "Ужин";
@@ -411,7 +412,7 @@ namespace FoodTrack.ViewModels
         {
             using (UnitOfWork unit = new UnitOfWork())
             {
-                User foundUser = unit.UserRepository.Get(x => x.UserLogin == deserializedUser.UserLogin).First<User>();
+                User foundUser = unit.UserRepository.Get(x => x.UserLogin == DeserializedUser.deserializedUser.UserLogin).First<User>();
                 IEnumerable<Report> reports = unit.ReportRepository.Get(x => x.ReportDate.Date.Equals(DateToChoose.Date) && x.IdReport == foundUser.Id && x.EatPeriod == LastSelectedTable);              
                 TableToShow = reports;
             }

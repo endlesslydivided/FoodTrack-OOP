@@ -1,5 +1,6 @@
 ﻿using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -40,9 +41,9 @@ namespace FoodTrack.ViewModels
                 
                 LastSelected = default;
 
-                StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
-                IEnumerable<Report> report = unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
-                List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateTime.Today.Date.Date.Equals(x.ReportDate.Date));
+                StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id);
+                IEnumerable<Report> report = unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id);
+                List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id && DateTime.Today.Date.Date.Equals(x.ReportDate.Date));
 
                 if (mostReportCategory.Capacity != 0)
                 {
@@ -215,11 +216,11 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    UsersParam toDelete = unit.UserParamRepository.Get(x => x.ParamsDate == lastSelected.ParamsDate && x.IdParams == deserializedUser.Id).First();
+                    UsersParam toDelete = unit.UserParamRepository.Get(x => x.ParamsDate == lastSelected.ParamsDate && x.IdParams == DeserializedUser.deserializedUser.Id).First();
                     unit.UserParamRepository.Remove(toDelete);
                     unit.Save();
 
-                    StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id);
+                    StatisticCollection = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id);
                 }
 
                 SeriesCollection.Clear();

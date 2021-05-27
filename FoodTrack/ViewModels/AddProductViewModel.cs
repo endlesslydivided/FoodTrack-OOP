@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using FoodTrack.Models;
 using System.Windows;
+using FoodTrack.DeserializedUserNamespace;
 
 namespace FoodTrack.ViewModels
 {
@@ -20,6 +21,7 @@ namespace FoodTrack.ViewModels
         private IEnumerable collectionOfProducts;
         private Product selectedProduct;
         private DateTime dateToChoose;
+        public string lastChoosenCategory;
 
         private string stateOfSearch;
         private Report report;
@@ -34,7 +36,7 @@ namespace FoodTrack.ViewModels
             try
             { 
             report = new Report();
-            report.IdReport = deserializedUser.Id;
+            report.IdReport = DeserializedUser.deserializedUser.Id;
             SearchText = "";
             using (UnitOfWork unit = new UnitOfWork())
             {
@@ -46,6 +48,7 @@ namespace FoodTrack.ViewModels
             GramValue = default;
             SelectedProduct = default;
             SelectedPeriod = "Завтрак";
+            lastChoosenCategory = "Завтрак";
             StateOfSearch = "All";
             FoodCategoryCheck = false;
             }
@@ -155,6 +158,7 @@ namespace FoodTrack.ViewModels
             get { return report.EatPeriod; }
             set
             {
+                lastChoosenCategory = value;
                 report.EatPeriod = value;
                 OnPropertyChanged("SelectedPeriod");
             }
@@ -191,13 +195,13 @@ namespace FoodTrack.ViewModels
                     {
                         if (SearchText != "")
                         {
-                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
                             CollectionOfProducts = products;
 
                         }
                         else if (SearchText == "")
                         {
-                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && x.FoodCategory == SelectedCategory);
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && x.FoodCategory == SelectedCategory);
                             CollectionOfProducts = products;
                         }
                     }
@@ -205,13 +209,13 @@ namespace FoodTrack.ViewModels
                     {
                         if (SearchText != "")
                         {
-                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
                             CollectionOfProducts = products;
 
                         }
                         else if (SearchText == "")
                         {
-                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                            IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
                             CollectionOfProducts = products;
                         }
                     }
@@ -322,9 +326,12 @@ namespace FoodTrack.ViewModels
                     unit.Save();
 
                     report = new Report();
-                    report.IdReport = deserializedUser.Id;
+                    report.IdReport = DeserializedUser.deserializedUser.Id;
                     GramValue = default;
                     SelectedProduct = default;
+                    SelectedPeriod = lastChoosenCategory;
+                    StateOfSearch = "All";
+                    FoodCategoryCheck = false;
                 }
             }
             catch (Exception exception)
@@ -486,13 +493,13 @@ namespace FoodTrack.ViewModels
                             {
                                 if (SearchText != "")
                                 {
-                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText) && x.FoodCategory == SelectedCategory);
                                     CollectionOfProducts = products;
 
                                 }
                                 else if (SearchText == "")
                                 {
-                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && x.FoodCategory == SelectedCategory);
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && x.FoodCategory == SelectedCategory);
                                     CollectionOfProducts = products;
                                 }
                             }
@@ -500,13 +507,13 @@ namespace FoodTrack.ViewModels
                             {
                                 if (SearchText != "")
                                 {
-                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id && Regex.IsMatch(x.ProductName, "^" + SearchText));
                                     CollectionOfProducts = products;
 
                                 }
                                 else if (SearchText == "")
                                 {
-                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == deserializedUser.Id);
+                                    IEnumerable products = unit.ProductRepository.Get(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
                                     CollectionOfProducts = products;
                                 }
                             }

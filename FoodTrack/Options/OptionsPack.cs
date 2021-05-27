@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Theming;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using FoodTrack.ViewModels;
 using System;
@@ -20,7 +21,7 @@ namespace FoodTrack.Options
             CurrentAppAccent = "ForestGreen";
             CurrentAppTheme = "Light";
 
-            OptionUserId = BaseViewModel.deserializedUser.Id;
+            OptionUserId = DeserializedUser.deserializedUser.Id;
         }
 
         public int OptionUserId { get; set; }

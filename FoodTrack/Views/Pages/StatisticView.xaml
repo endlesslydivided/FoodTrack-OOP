@@ -51,36 +51,26 @@
             <RowDefinition Height="7*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <mah:FlipView
-            x:Name="FlipView1st"
-            Grid.ColumnSpan="2"
-            Margin="10,10,10,10"
-            BannerOpacity="0"
-            BannerText="">
-            <mah:FlipView.Items>
-                <Grid Margin="10">
-                    <charts:CartesianChart
-                        Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+        <Grid Grid.ColumnSpan="2" Margin="10,10,10,10">
+            <charts:CartesianChart
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                LegendLocation="Right"
+                Series="{Binding SeriesCollection}">
+                <charts:CartesianChart.AxisY>
+                    <charts:Axis
+                        Title="Кг"
                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
-                        LegendLocation="Right"
-                        Series="{Binding SeriesCollection}">
-                        <charts:CartesianChart.AxisY>
-                            <charts:Axis
-                                Title="Кг"
-                                Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
-                                LabelFormatter="{Binding YFormatter}" />
-                        </charts:CartesianChart.AxisY>
-                        <charts:CartesianChart.AxisX>
-                            <charts:Axis
-                                Title="Дата"
-                                Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
-                                Labels="{Binding Labels}" />
-                        </charts:CartesianChart.AxisX>
-                    </charts:CartesianChart>
-                </Grid>
-            </mah:FlipView.Items>
-        </mah:FlipView>
-
+                        LabelFormatter="{Binding YFormatter}" />
+                </charts:CartesianChart.AxisY>
+                <charts:CartesianChart.AxisX>
+                    <charts:Axis
+                        Title="Дата"
+                        Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                        Labels="{Binding Labels}" />
+                </charts:CartesianChart.AxisX>
+            </charts:CartesianChart>
+        </Grid>
         <Border
             Grid.Row="1"
             Margin="5"
@@ -90,7 +80,7 @@
                 <DropShadowEffect BlurRadius="15" Opacity="0.15" />
             </Border.Effect>
             <StackPanel
-                Margin="0,3,0,3" 
+                Margin="0,3,0,3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
@@ -99,8 +89,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
-                        FontWeight="Normal"
                         FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Последнее изменение списка потреблённых продуктов: "
                         TextWrapping="Wrap" />
@@ -108,10 +98,10 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding LastReportDate}"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                 </WrapPanel>
 
@@ -120,16 +110,16 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
-                        FontWeight="Normal"
                         FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Основная категория потреблённых продуктов: "
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontWeight="Normal"
                         FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding MostCategory}"
                         TextWrapping="Wrap" />
@@ -140,26 +130,26 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Ваш вес: "
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding Weight}"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text=" кг"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
 
 
@@ -168,9 +158,9 @@
                 <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         HorizontalAlignment="Center"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         VerticalAlignment="Center"
                         FontFamily="Samsung Sharp Sans"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="Ваш рост: "
@@ -178,18 +168,18 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text="{Binding Height}"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         FontWeight="Normal"
                         Style="{StaticResource TextBlocksResultsThick}"
                         Text=" см"
-                        FontSize="{Binding Path=ActualWidth, Mode=OneWay, Converter={StaticResource FontConverter}, ConverterParameter=55, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
@@ -208,12 +198,12 @@
             ItemsSource="{Binding StatisticCollection}"
             SelectedItem="{Binding LastSelected}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ParamsDate}" FontFamily="SamsungOne 400">
+                <DataGridTextColumn Binding="{Binding ParamsDate,StringFormat='dd.MM.yyyy hh:mm'}" FontFamily="SamsungOne 400">
                     <DataGridTextColumn.Header>
-                        <TextBlock Text="Дата" />
+                        <TextBlock Text="Дата"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding UserWeight}" FontFamily="SamsungOne 400">
+                <DataGridTextColumn Binding="{Binding UserWeight}"  FontFamily="SamsungOne 400">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Вес" />
                     </DataGridTextColumn.Header>

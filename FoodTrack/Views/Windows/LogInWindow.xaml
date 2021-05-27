@@ -107,7 +107,7 @@
             Grid.ColumnSpan="2"
             Margin="5" 
             DataContext="{Binding SelectedViewModel}"
-            FontFamily="Samsung One 400"
+            FontFamily="Samsung Sharp Sans"
             FontSize="14"
             Foreground="White"
             Text="{Binding Message}"

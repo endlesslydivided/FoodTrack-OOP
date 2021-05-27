@@ -7,6 +7,19 @@ namespace FoodTrack.Models
 {
     public partial class Report
     {
+        public Report()
+        {
+            Id = 0;
+            IdReport = 0;
+            ProductName = "";
+            ReportDate = DateTime.Today.Date;
+            EatPeriod = "Завтрак";
+            DayGram = 0;
+            DayCalories = 0;
+            DayCarbohydrates = 0;
+            DayFats = 0;
+            MostCategory = "";
+        }
         public int Id { get; set; }
         public int IdReport { get; set; }
         public string ProductName { get; set; }

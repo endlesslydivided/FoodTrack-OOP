@@ -1,5 +1,6 @@
 ﻿using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using FoodTrack.XMLSerializer;
 using System;
@@ -43,7 +44,6 @@ namespace FoodTrack.ViewModels
             try
             { 
             DateToChoose = DateTime.Today.Date;
-            deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
             }
             catch (Exception exception)
             {
@@ -284,11 +284,11 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateToChoose.Date)).LastOrDefault();
-                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id ).LastOrDefault();
-                    List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
-                    List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Date.Date.Equals(x.ReportDate.Date));
-                    List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
+                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id && x.ParamsDate.Date.Equals(DateToChoose.Date)).LastOrDefault();
+                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == DeserializedUser.deserializedUser.Id ).LastOrDefault();
+                    List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
+                    List<Report> mostReportCategory = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id && DateToChoose.Date.Date.Equals(x.ReportDate.Date));
+                    List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
                     {
@@ -316,7 +316,7 @@ namespace FoodTrack.ViewModels
                     }
                     else
                     {
-                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id ).LastOrDefault();                       
+                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id ).LastOrDefault();                       
                         CaloriesNeeded = Math.Round((10M * userParamChanged.UserWeight) + (6.25M * userParamChanged.UserHeight) - (5 * (DateTime.Now.Year - usersDatum.Birthday.Year)) + 78);
                         UserWeight = userParamChanged.UserWeight;
                         UserHeight = userParamChanged.UserHeight;
@@ -389,10 +389,10 @@ namespace FoodTrack.ViewModels
             {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id && x.ParamsDate.Date.Equals(DateTime.Today.Date)).LastOrDefault();
-                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == deserializedUser.Id).LastOrDefault();
-                    List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
-                    List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == deserializedUser.Id);
+                    UsersParam userParam = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id && x.ParamsDate.Date.Equals(DateTime.Today.Date)).LastOrDefault();
+                    UsersDatum usersDatum = unit.UserDatumRepository.Get(x => x.IdData == DeserializedUser.deserializedUser.Id).LastOrDefault();
+                    List<Report> reports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id && DateToChoose.Equals(x.ReportDate.Date));
+                    List<Report> lastReports = (List<Report>)unit.ReportRepository.Get(x => x.IdReport == DeserializedUser.deserializedUser.Id);
 
                     if (lastReports.Capacity != 0)
                     {
@@ -411,7 +411,7 @@ namespace FoodTrack.ViewModels
                     }
                     else
                     {
-                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == deserializedUser.Id).LastOrDefault();
+                        UsersParam userParamChanged = unit.UserParamRepository.Get(x => x.IdParams == DeserializedUser.deserializedUser.Id).LastOrDefault();
                         CaloriesNeeded = Math.Round((10M * userParamChanged.UserWeight) + (6.25M * userParamChanged.UserHeight) - (5 * (DateTime.Now.Year - usersDatum.Birthday.Year)) + 78);
                         UserWeight = userParamChanged.UserWeight;
                         UserHeight = userParamChanged.UserHeight;

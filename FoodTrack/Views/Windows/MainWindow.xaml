@@ -23,7 +23,7 @@
 
     <controls:MetroWindow.Resources>
         <DataTemplate x:Key="MenuItemTemplate">
-            <Grid Height="48">
+            <Grid Height="40">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerMenu}}, Path=CompactPaneLength, Mode=OneWay}" />
                     <ColumnDefinition />
@@ -50,7 +50,7 @@
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
                 <SplineDoubleKeyFrame KeyTime="00:00:00" Value="200" />
                 <SplineDoubleKeyFrame
-                    KeySpline="0.1, 0.9, 0.2, 1"
+                    KeySpline="0.1,0.9, 0.2, 1"
                     KeyTime="00:00:00.300"
                     Value="0" />
             </DoubleAnimationUsingKeyFrames>

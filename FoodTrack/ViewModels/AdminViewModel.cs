@@ -1,5 +1,6 @@
 ﻿using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using System;
 using System.Collections.Generic;
@@ -214,7 +215,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.FoodCategoryRepository.Update(LastSelectedFoodCategory);
                 unit.Save();
-                CategoriesTableToShow = unit.FoodCategoryRepository.Get();
+                refreshTables();
             }
             LastSelectedFoodCategory = new();
             }
@@ -430,7 +431,7 @@ namespace FoodTrack.ViewModels
 
                 unit.ReportRepository.Update(LastSelectedReport);
                 unit.Save();
-                ReportsTableToShow = unit.ReportRepository.Get();
+               refreshTables();
             }
             LastSelectedReport = new();
             }
@@ -582,6 +583,7 @@ namespace FoodTrack.ViewModels
                 {
                     unit.ProductRepository.Update(LastSelectedProduct);
                     unit.Save();
+                    
                 }
                 LastSelectedProduct = new();
             }
@@ -589,7 +591,7 @@ namespace FoodTrack.ViewModels
             {
                 MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
-
+            refreshTables();
         }
 
         private bool canSaveProduct()
@@ -655,6 +657,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.ProductRepository.Remove(LastSelectedProduct);
                 unit.Save();
+                refreshTables();
             }
             LastSelectedProduct = new Product();
             }
@@ -743,7 +746,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserRepository.Update(LastSelectedUser);
                 unit.Save();
-                UsersTableToShow = unit.UserRepository.Get();
+                refreshTables();
             }
             LastSelectedUser = new();
             }
@@ -751,7 +754,6 @@ namespace FoodTrack.ViewModels
             {
                 MessageBox.Show("Сообщение ошибки: " + exception.Message, "Произошла ошибка");
             }
-
         }
 
         private bool canSaveUser()
@@ -772,7 +774,7 @@ namespace FoodTrack.ViewModels
                 }
 
                 if (LastSelectedUser.Id == 0 ||
-                    UserExist > 1 || deserializedUser.Id == LastSelectedUser.Id)
+                    UserExist > 1 || DeserializedUser.deserializedUser.Id == LastSelectedUser.Id)
                 {
                     return false;
                 }
@@ -814,6 +816,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserRepository.Remove(LastSelectedUser);
                 unit.Save();
+                UsersTableToShow = unit.UserRepository.Get();
             }
             LastSelectedUser = new User();
             }
@@ -828,7 +831,7 @@ namespace FoodTrack.ViewModels
         {
             try
             { 
-            if (LastSelectedUser.Id == 0 || deserializedUser.Id == LastSelectedUser.Id)
+            if (LastSelectedUser.Id == 0 || DeserializedUser.deserializedUser.Id == LastSelectedUser.Id)
             {
                 return false;
             }
@@ -902,7 +905,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserDatumRepository.Update(LastSelectedUsersDatum);
                 unit.Save();
-                UsersDatumTableToShow = unit.UserDatumRepository.Get();
+                refreshTables();
             }
             LastSelectedUsersDatum = new();
             }
@@ -919,7 +922,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                if (LastSelectedUsersDatum.Id == 0 || LastSelectedUsersDatum.Birthday.Date.CompareTo(DateTime.Now.Date) == 1 || !Regex.IsMatch(LastSelectedUsersDatum.FullName, "^([А-Я]{1}[а-я]{1,99}){3}$"))
+                if (LastSelectedUsersDatum.Id == 0 || LastSelectedUsersDatum.Birthday.Date.CompareTo(DateTime.Now.Date) == 1 || !Regex.IsMatch(LastSelectedUsersDatum.FullName, @"^([А-Я]{1}[а-я]{1,99})\s{1}([А-Я]{1}[а-я]{1,99})\s{1}([А-Я]{1}[а-я]{1,99})$"))
                 {
                     return false;
                 }
@@ -937,46 +940,6 @@ namespace FoodTrack.ViewModels
 
         }
         #endregion
-        //#region Удалить информацию пользователя
-
-        //private DelegateCommand deleteUsersDatumCommand;
-
-        //public ICommand DeleteUsersDatumCommand
-        //{
-        //    get
-        //    {
-        //        if (deleteUsersDatumCommand == null)
-        //        {
-        //            deleteUsersDatumCommand = new DelegateCommand(deleteUsersDatum, canDeleteUsersDatum);
-        //        }
-        //        return deleteUsersDatumCommand;
-        //    }
-        //}
-
-        //private void deleteUsersDatum()
-        //{
-        //    using (UnitOfWork unit = new UnitOfWork())
-        //    {
-        //        unit.UserDatumRepository.Remove(LastSelectedUsersDatum);
-        //        unit.Save();
-        //    }
-        //    LastSelectedUsersDatum = new UsersDatum();
-        //    refreshTables();
-        //}
-
-        //private bool canDeleteUsersDatum()
-        //{
-        //    if (LastSelectedUsersDatum.Id == 0)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
-
-        //#endregion
         #region Очистить поля "информация пользователя"
 
         private DelegateCommand cleanUsersDatumCommand;
@@ -1034,7 +997,7 @@ namespace FoodTrack.ViewModels
             {
                 unit.UserParamRepository.Update(LastSelectedUserParam);
                 unit.Save();
-                UsersParamTableToShow = unit.UserParamRepository.Get();
+                refreshTables();
             }
             LastSelectedUserParam = new();
             }

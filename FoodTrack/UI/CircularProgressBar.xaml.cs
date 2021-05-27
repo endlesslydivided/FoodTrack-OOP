@@ -75,23 +75,18 @@ namespace FoodTrack.UI
             set { SetValue(TextOpacityProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Percentage.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PercentageProperty =
             DependencyProperty.Register("Percentage", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(65d, new PropertyChangedCallback(OnPercentageChanged)));
 
-        // Using a DependencyProperty as the backing store for StrokeThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeThicknessProperty =
             DependencyProperty.Register("StrokeThickness", typeof(int), typeof(CircularProgressBar), new PropertyMetadata(5, new PropertyChangedCallback(OnThicknessChanged)));
 
-        // Using a DependencyProperty as the backing store for SegmentColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SegmentColorProperty =
             DependencyProperty.Register("SegmentColor", typeof(Brush), typeof(CircularProgressBar), new PropertyMetadata(new SolidColorBrush(Colors.Red), new PropertyChangedCallback(OnColorChanged)));
 
-        // Using a DependencyProperty as the backing store for Radius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.Register("Radius", typeof(int), typeof(CircularProgressBar), new PropertyMetadata(25, new PropertyChangedCallback(OnPropertyChanged)));
 
-        // Using a DependencyProperty as the backing store for Angle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AngleProperty =
             DependencyProperty.Register("Angle", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(120d, new PropertyChangedCallback(OnPropertyChanged)));
 
@@ -178,7 +173,6 @@ DependencyProperty.Register("FontSize", typeof(double), typeof(CircularProgressB
 
         private Point ComputeCartesianCoordinate(double angle, double radius)
         {
-            // convert to radians
             double angleRad = (Math.PI / 180.0) * (angle - 90);
 
             double x = radius * Math.Cos(angleRad);

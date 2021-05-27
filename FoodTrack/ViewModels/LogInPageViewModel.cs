@@ -15,6 +15,7 @@ using FoodTrack.Hash;
 using FoodTrack.XMLSerializer;
 using System.IO;
 using FoodTrack.Options;
+using FoodTrack.DeserializedUserNamespace;
 
 namespace FoodTrack.ViewModels
 {
@@ -119,7 +120,7 @@ namespace FoodTrack.ViewModels
                     User deserializedeUser = result.First();
                     XmlSerializeWrapper<User>.Serialize(deserializedeUser, "../lastUser.xml");
 
-                    deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
+                    DeserializedUser.deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
 
                     List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize("../appSettings.xml", FileMode.OpenOrCreate);
                     OptionsViewModel.OptionsPack = optionsPacks.Find(x => x.OptionUserId == deserializedeUser.Id);
@@ -130,7 +131,7 @@ namespace FoodTrack.ViewModels
                     OptionsViewModel.OptionsPack?.setAppAccent();
                     OptionsViewModel.OptionsPack?.setAppTheme();
 
-                    OptionsPack optionsPackUser = optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id);
+                    OptionsPack optionsPackUser = optionsPacks.Find(x => x.OptionUserId == DeserializedUser.deserializedUser.Id);
 
                     if (optionsPackUser == null)
                     {

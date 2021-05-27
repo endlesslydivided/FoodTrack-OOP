@@ -1,5 +1,6 @@
 ﻿using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using System;
 using System.Collections;
@@ -43,7 +44,7 @@ namespace FoodTrack.ViewModels
                     CategoryCollection.Add(x.CategoryName);
                 }
                 List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
-                ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
+                ProductsCollection = products.FindAll(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
             }
             if (categoryCollection != null)
             {
@@ -215,7 +216,7 @@ namespace FoodTrack.ViewModels
                     usersParam.ParamsDate = DateTime.Now;
                     usersParam.UserHeight = Height;
                     usersParam.UserWeight = Weight;
-                    usersParam.IdParams = deserializedUser.Id;
+                    usersParam.IdParams = DeserializedUser.deserializedUser.Id;
                     unit.UserParamRepository.Create(usersParam);
                     unit.Save();
                     Height = default;
@@ -260,14 +261,14 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                product.IdAdded = deserializedUser.Id;
+                product.IdAdded = DeserializedUser.deserializedUser.Id;
                 product.FoodCategory = SelectedCategory;
 
                 unit.ProductRepository.Create(product);
                 unit.Save();
 
                 List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
-                ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
+                ProductsCollection = products.FindAll(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
             }
             LastSelected = new();
             ProductName = "";
@@ -300,7 +301,7 @@ namespace FoodTrack.ViewModels
                     }
                 }
             }
-            if (ProductName == "" || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "" || productExist || LastSelected.Id != 0)
+            if (ProductName == "" || !Regex.IsMatch(ProductName, "^([А-Я]|[а-я]|[A-Z]|[a-z]|[0-9]){1,199}$") || Calories == 0 || Proteins == 0 || Fats == 0 || Carbohydrates == 0 || SelectedCategory == "" || productExist || LastSelected.Id != 0)
             {
                 return false;
             }
@@ -348,7 +349,7 @@ namespace FoodTrack.ViewModels
                     unit.Save();
 
                     List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
-                    ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
+                    ProductsCollection = products.FindAll(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
                 }
                 LastSelected = new();
                 ProductName = "";
@@ -396,7 +397,7 @@ namespace FoodTrack.ViewModels
                     unit.Save();
 
                     List<Product> products = unit.ProductRepository.GetWithInclude(a => a.FoodCategoryNavigation, b => b.IdAddedNavigation, c => c.Reports).ToList();
-                    ProductsCollection = products.FindAll(x => x.IdAdded == deserializedUser.Id);
+                    ProductsCollection = products.FindAll(x => x.IdAdded == DeserializedUser.deserializedUser.Id);
                 }
                 LastSelected = new();
                 ProductName = "";

@@ -41,20 +41,22 @@
                 Stroke="{Binding SegmentColor, ElementName=userControl}"
                 StrokeThickness="{Binding StrokeThickness, ElementName=userControl}">
                 <Path.Effect>
-                    <DropShadowEffect Color="Black"  Direction="-90" RenderingBias="Quality" ShadowDepth="2" ></DropShadowEffect>
+                    <DropShadowEffect
+                        Direction="-90"
+                        RenderingBias="Quality"
+                        ShadowDepth="2"
+                        Color="Black" />
                 </Path.Effect>
                 <Path.Data>
                     <PathGeometry>
-                          
+
                         <PathGeometry.Figures>
                             <PathFigureCollection>
                                 <PathFigure x:Name="pathFigure2">
-                                 
+
                                     <PathFigure.Segments>
                                         <PathSegmentCollection>
-                                            <ArcSegment x:Name="arcSegment2" SweepDirection="Clockwise">
-                                                
-                                            </ArcSegment>
+                                            <ArcSegment x:Name="arcSegment2" SweepDirection="Clockwise" />
                                         </PathSegmentCollection>
                                     </PathFigure.Segments>
                                 </PathFigure>
@@ -68,8 +70,8 @@
             x:Name="Percents"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Horizontal"
-            Opacity="{Binding TextOpacity, ElementName=userControl}">
+            Opacity="{Binding TextOpacity, ElementName=userControl}"
+            Orientation="Horizontal">
             <TextBlock FontSize="{Binding FontSize, ElementName=userControl}" Text="{Binding Percentage, ElementName=userControl}" />
             <TextBlock FontSize="{Binding FontSize, ElementName=userControl}" Text=" %" />
         </StackPanel>

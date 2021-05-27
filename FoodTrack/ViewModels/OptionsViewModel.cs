@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using FoodTrack.Commands;
 using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Hash;
 using FoodTrack.Models;
 using FoodTrack.Options;
@@ -204,7 +205,7 @@ namespace FoodTrack.ViewModels
             try
             { 
             List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize( "../appSettings.xml", FileMode.OpenOrCreate);
-            optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id));
+            optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == DeserializedUser.deserializedUser.Id));
             optionsPacks.Add(OptionsPack);
             XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
             TextMessage = "Настройки сохранены!";
@@ -242,7 +243,7 @@ namespace FoodTrack.ViewModels
 
 
             List<OptionsPack> optionsPacks = XmlSerializeWrapper<List<OptionsPack>>.Deserialize("../appSettings.xml", FileMode.OpenOrCreate);
-            optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == deserializedUser.Id));
+            optionsPacks.Remove(optionsPacks.Find(x => x.OptionUserId == DeserializedUser.deserializedUser.Id));
             optionsPacks.Add(OptionsPack);
             XmlSerializeWrapper<List<OptionsPack>>.Serialize(optionsPacks, "../appSettings.xml");
 
@@ -280,7 +281,7 @@ namespace FoodTrack.ViewModels
             { 
             using (UnitOfWork unit = new UnitOfWork())
             {
-                IEnumerable<User> result = unit.UserRepository.Get(x => x.Id == deserializedUser.Id);
+                IEnumerable<User> result = unit.UserRepository.Get(x => x.Id == DeserializedUser.deserializedUser.Id);
                 User user = result?.First();
                 if (NewPassword == "" || OldPassword == "")
                 {

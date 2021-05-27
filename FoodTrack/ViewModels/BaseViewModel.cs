@@ -14,9 +14,7 @@ namespace FoodTrack.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public static User deserializedUser = XmlSerializeWrapper<User>.Deserialize("../lastUser.xml", FileMode.OpenOrCreate);
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         protected void OnPropertyChanged(string propertyName)
         {

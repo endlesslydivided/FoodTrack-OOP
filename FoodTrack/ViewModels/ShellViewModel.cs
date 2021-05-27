@@ -1,4 +1,5 @@
 ﻿using FoodTrack.Context.UnitOfWork;
+using FoodTrack.DeserializedUserNamespace;
 using FoodTrack.Models;
 using FoodTrack.Views.Pages;
 using MahApps.Metro.IconPacks;
@@ -47,7 +48,7 @@ namespace FoodTrack.ViewModels
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.PlusSolid },
                 Label = "Добавить продукт",
                 NavigationType = typeof(AddProductView),
-                NavigationDestination = new Uri("../Views/Pages/AddProductView.xaml", UriKind.RelativeOrAbsolute)
+                NavigationDestination = new Uri("Views/Pages/AddProductView.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new MenuItem()
             {
@@ -65,27 +66,28 @@ namespace FoodTrack.ViewModels
             });
             this.OptionsMenu.Add(new MenuItem()
             {
+                Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolsSolid },
+                Label = "Настройки",
+                NavigationType = typeof(OptionsView),
+                NavigationDestination = new Uri("Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
+            });
+
+            this.OptionsMenu.Add(new MenuItem()
+            {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.InfoCircleSolid },
                 Label = "О приложении",
                 NavigationType = typeof(AboutAppView),
                 NavigationDestination = new Uri("Views/Pages/AboutAppView.xaml", UriKind.RelativeOrAbsolute)
             });
-            this.OptionsMenu.Add(new MenuItem()
-            {
-                Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolsSolid },
-                Label = "Настройки",
-                NavigationType = typeof(OptionsView),
-                NavigationDestination = new Uri("../Views/Pages/OptionsView.xaml", UriKind.RelativeOrAbsolute)
-            });
-
+            
             bool? isAdmin = false;
 
             using (UnitOfWork unit = new())
             {
-                if (deserializedUser.Id != 0)
-                {   if (unit.UserRepository.FindById(deserializedUser.Id) != null)
+                if (DeserializedUser.deserializedUser.Id != 0)
+                {   if (unit.UserRepository.FindById(DeserializedUser.deserializedUser.Id) != null)
                     {
-                        isAdmin = unit.UserRepository.FindById(deserializedUser.Id).IsAdmin;
+                        isAdmin = unit.UserRepository.FindById(DeserializedUser.deserializedUser.Id).IsAdmin;
                     }
                     else
                     {
@@ -101,7 +103,7 @@ namespace FoodTrack.ViewModels
                     Icon = new PackIconModern() { Kind = PackIconModernKind.ControlGuide },
                     Label = "Администрирование",
                     NavigationType = typeof(AdminView),
-                    NavigationDestination = new Uri("../Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
+                    NavigationDestination = new Uri("Views/Pages/AdminView.xaml", UriKind.RelativeOrAbsolute)
                 });
                 };
             }

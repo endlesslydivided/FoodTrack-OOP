@@ -14,10 +14,10 @@ namespace FoodTrack.Models
             Reports = new HashSet<Report>();
             UsersData = new HashSet<UsersDatum>();
             UsersParams = new HashSet<UsersParam>();
-            Id = default;
-            IsAdmin = default;
+            Id = 0;
+            IsAdmin = false;
             Salt = default;
-            UserLogin = default;
+            UserLogin = "";
         }
 
         public int Id { get; set; }
