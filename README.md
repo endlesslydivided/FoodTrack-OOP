@@ -77,4 +77,4 @@
 
 ### <p align="center"><a  href="https://github.com/endlesslydivided/FoodTrack-OOP-Course_project/blob/main/Scripts%2C%20documentation%20and%20materials/README(ENG).md"> English version of README. </a> </p>
 
-✔️ Оценка проекта: 9 баллов.
+### ✔️ Оценка проекта: 9 баллов.
