@@ -15,7 +15,7 @@
 
 ### Key Features:
 * Development language: C #
-* Used technologies: WPF, SQL, Entity Net Core.
+* Used technologies: WPF, SQL, Entity Framework Core.
 ### Short description:
 This is a project, the main goal of which was to study the process of developing a desktop application using a database. The project implements the MVVM architectural pattern. The database creation script is attached to the project.
 
