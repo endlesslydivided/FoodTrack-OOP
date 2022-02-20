@@ -73,4 +73,3 @@ This is a project, the main goal of which was to study the process of developing
 <p> The user is given the opportunity to change the password, set the theme and color palette of the application, as well as change some other settings.</p>
 
 <p> Also, the application has the ability to administer when you enter the application under a specific username and password.</p>
-### ✔️ Project evaluation: 9 points
